@@ -1,0 +1,27 @@
+body
+{
+	background-color:green;
+	color: white;
+}
+.divReadable
+{
+	width: 650px;
+	margin-left: auto;
+    margin-right: auto;
+}
+.txtCenter
+{
+	text-align: center;
+}
+h1
+{
+    font-size: 500%;
+}
+#SignUp
+{
+	color: black;
+}
+#Login
+{
+	color: black;
+}
