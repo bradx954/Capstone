@@ -1,23 +1,16 @@
 <?php
 //I, Brad Baago, 000306223 certify that this material is my original work. No other person's work has been used without due acknowledgement.
-class UsersAuth extends Model {
+class UserAuth extends Model { 
 	private   $DBO;
 	private   $DBH;
 	
-	private $DB_users =  '' ; 
+	private $DB_users =  ''; 
 
-	private $member_area = 'main.php';  
-	private $login_page = 'main.php?c=login';   
-	private $logout_page = "main.php?c=login";
+	public $login_page = 'index.php?c=home';   
+	private $logout_page = "index.php?c=home";
 	private $error_page = 'errorpage';
 
-	private $admin_page = "main.php?c=admin";
-	private $gold_page = "main.php?c=helpdesk";
-	private $silver_page = "main.php?c=supervisors";
-	private $bronze_page = "main.php?c=staff";
-
-
-	private $username;
+	private $email;
 	private $password;
 	private $values;
 	private $admin;  
@@ -36,24 +29,24 @@ class UsersAuth extends Model {
     * @return string
     * @desc Login handling
     */
-    public function login() {
+    public function login($email, $password) {
         
         //User is already logged in if SESSION variables are good. 
         if ($this->validSessionExists() == true):
-            $this->redirect($this->member_area);
+            return 'Already logged in.';
        endif;
 	   
 	   //First time users don't get an error message.... 
-	   if ($_SERVER['REQUEST_METHOD'] == 'GET') return;
+	   //if ($_SERVER['REQUEST_METHOD'] == 'GET') return;
         
         //Check login form for well formedness.....if bad, send error message
-        if ($this->formHasValidCharacters() == false):
-                return "Invalid characters in form fields! Only letters,numbers, 3-15 chars in length.";
+        if ($this->formHasValidCharacters($email, $password) == false):
+                return "Invalid Form!";
         endif;
         
         // verify if form's data coresponds to database's data
 		if ($this->userIsInDatabase() == false):
-			return 'Invalid  username/password. ';
+			return 'Invalid username/password. ';
 		else :
 				//We're in!
 				//Don't let people who's accounts are frozen in.
@@ -61,29 +54,13 @@ class UsersAuth extends Model {
 				// ex: admin goes to admin, gold goes to help desk etc....
 				
 				$this->writeSession();
-				if($_SESSION['auth']['freezeaccount'] == "Y")
+				if($_SESSION['auth']['active'] == 0)
 				{
 					$_SESSION = array();
         				session_destroy();
 					return 'Account is suspended';
 				}
-				switch($_SESSION['auth']['accesslevel'])
-				{
-					case "admin":
-						$this->redirect($this->admin_page);
-					break;
-					case "gold":
-						$this->redirect($this->gold_page);
-					break;
-					case "silver":
-						$this->redirect($this->silver_page);
-					break;
-					case "bronze":
-						$this->redirect($this->bronze_page);
-					break;
-					default:
-						$this->redirect($this->member_area);
-				}
+				return 'Login Success';
 	   endif;
     }
 	
@@ -100,15 +77,6 @@ class UsersAuth extends Model {
 	if(isset($_GET['c']) && isset($_SESSION['auth'])){
 		$controller = $_GET['c'];
 		$access = $_SESSION['auth']['accesslevel'];
-		 $config['acl'] = array('home' 			=> 		array('public' => true,		'bronze'=>true,	'silver'=>true,	'gold'=>true, 	'admin' => true),
-					'staff' 			=> 		array('public' => false,	'bronze'=>true,	'silver'=>true,	'gold'=>false, 	'admin' => true),
-					'supervisors' 		=> 		array('public' => false,	'bronze'=>false,'silver'=>true,	'gold'=>false, 	'admin' => true),
-					'helpdesk' 			=> 		array('public' => false,	'bronze'=>false,'silver'=>false,'gold'=>true, 	'admin' => true),
-					'admin' 			=> 		array('public' => false,	'bronze'=>false,'silver'=>false,'gold'=>false, 	'admin' => true),
-					'login' 			=> 		array('public' => true,		'bronze'=>true,	'silver'=>true,	'gold'=>true, 	'admin' => true),
-					'logout' 			=> 		array('public' => true,		'bronze'=>true,	'silver'=>true,	'gold'=>true, 	'admin' => true),
-					'register' 			=> 		array('public' => true,		'bronze'=>true,	'silver'=>true,	'gold'=>true, 	'admin' => true) 
- 					);
 		 if($config['acl'][$controller][$access] == true){return 'true';}
 		else{return 'Access Level Error: You do not have sufficient priveleges to access this resource.';}}
 		//Access Control List checking goes here..
@@ -143,15 +111,12 @@ class UsersAuth extends Model {
     * @return void
     * @desc Verify if login form fields were filled out correctly
     */
-	public function formHasValidCharacters() {
-	 
-		//check form values for strange characters and length (3-12 characters).
-		if(strlen($_POST['username']) < 3 || strlen($_POST['username']) > 12){ return false;}
-		if(strlen($_POST['password']) < 3 || strlen($_POST['password']) > 12){ return false;}
+	public function formHasValidCharacters($email, $password) 
+	{
 		 //If both values have values at this point, then basic requirements met
-        if ( empty($_POST['username']) == false && empty($_POST['password']) == false):
-				$this->username = $_POST['username'];
-				$this->password = $_POST['password'];
+        if ( empty($email) == false && empty($password) == false):
+				$this->email = $email;
+				$this->password = $password;
 				return true;
         else:
             	return false;
@@ -164,16 +129,30 @@ class UsersAuth extends Model {
 	*/
 	public function userIsInDatabase() 
 	{
-		$sql = "SELECT * FROM usersAuth WHERE username = '".$this->username."' AND password = '".$this->password."';";
-		$rs = NULL;
+		$sql = "SELECT salt FROM CS_Users WHERE email = :email";
 		try 
 		{
-			$rs = $this->DBH->query($sql);
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':email' => $this->email));
 			$value = $rs->fetchAll(); 
 		}
 		catch (PDOException $e)
 		{
-			$this->DBO->showErrorPage("Error loging in.",$e );							
+			return 'Database Error: '.$e.' Please contact brad.baago@linux.com';						
+		}
+		$salt = $value[0][0];
+		$this->password = hash("md5", hash("md5", $this->password) + $salt);
+		$sql = "SELECT * FROM CS_Users WHERE email = :email AND password = :password;";
+		$rs = NULL;
+		try 
+		{
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':email' => $this->email, ':password' => $this->password));
+			$value = $rs->fetchAll(); 
+		}
+		catch (PDOException $e)
+		{
+			return 'Database Error: '.$e.' Please contact brad.baago@linux.com';						
 		}
 		if(isset($value[0]))
 		{
@@ -201,10 +180,10 @@ class UsersAuth extends Model {
     */
     public function writeSession() 
     {
-	$_SESSION['auth']['username'] = $this->values[1];
+	$_SESSION['auth']['email'] = $this->values[3];
 	$_SESSION['auth']['ipAddress'] = $_SERVER['REMOTE_ADDR'];
-	$_SESSION['auth']['accesslevel'] = $this->values[4];
-	$_SESSION['auth']['freezeaccount'] = $this->values[3];
+	$_SESSION['auth']['accesslevel'] = $this->values[11];
+	$_SESSION['auth']['active'] = $this->values[9];
 	$_SESSION['auth']['logintime'] = date("Y-m-d h:m:s",time());
      }
 	
@@ -213,7 +192,7 @@ class UsersAuth extends Model {
     * @desc Username getter, not necessary 
     */
 	public function getUsername() {
-		return $_SESSION['auth']['username'];
+		return $_SESSION['auth']['email'];
     }
 	
 }
