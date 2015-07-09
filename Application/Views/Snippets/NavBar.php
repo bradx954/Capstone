@@ -9,9 +9,11 @@
 			</button>
 			<a class='navbar-brand' href='index.php'>Storacloud</a>
 		</div>
-		<div class='nav navbar-nav navbar-right' id='bs-example-navbar-collapse-1'>
-			<ul class='nav navbar-nav'>
+        <div class='nav navbar-nav navbar-right' id='standard'>
             <li class='active'><a href='index.php?c=home'>Home</a></li>
+        </div>
+		<div class='nav navbar-nav navbar-right' id='mobile'>
+			<ul class='nav navbar-nav'>
 			<li class='dropdown' id='dropdown'>
 				<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><?php echo $_SESSION['auth']['email']; ?></a>
 				<ul class='dropdown-menu'>
