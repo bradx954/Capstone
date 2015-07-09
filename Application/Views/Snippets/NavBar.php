@@ -11,7 +11,7 @@
 		</div>
         <div class='nav navbar-nav' id='standard'>
             <li class='active'><a href='index.php?c=home'>Home</a></li>
-            <li><a href='index.php?c=files'>Files</a></li>
+            <li><a href='#'>Files</a></li>
         </div>
         <div class='nav navbar-nav navbar-right' id='standard'>
 			<li><a><?php echo $_SESSION['auth']['email']; ?></a></li>
