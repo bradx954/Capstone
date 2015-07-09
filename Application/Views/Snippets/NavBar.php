@@ -11,7 +11,8 @@
 		</div>
 		<div class='nav navbar-nav navbar-right' id='bs-example-navbar-collapse-1'>
 			<ul class='nav navbar-nav'>
-			<li class='dropdown'>
+            <li class='active'><a href='index.php?c=home'>Home</a></li>
+			<li class='dropdown' id='dropdown'>
 				<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><?php echo $_SESSION['auth']['email']; ?></a>
 				<ul class='dropdown-menu'>
 				<li><a href='#'>Files</a></li>
