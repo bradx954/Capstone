@@ -11,9 +11,11 @@
 		</div>
         <div class='nav navbar-nav' id='standard'>
             <li class='active'><a href='index.php?c=home'>Home</a></li>
+            <li><a href='index.php?c=files'>Files</a></li>
         </div>
         <div class='nav navbar-nav navbar-right' id='standard'>
 			<li><a><?php echo $_SESSION['auth']['email']; ?></a></li>
+            <li><a href='#'>Settings</a></li>
             <li><a href='index.php?c=home&m=logout'>Logout</a></li>
 		</div>
 		<div class='nav navbar-nav navbar-right' id='mobile'>
@@ -21,6 +23,7 @@
 			<li class='dropdown' id='dropdown'>
 				<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><?php echo $_SESSION['auth']['email']; ?></a>
 				<ul class='dropdown-menu'>
+                <li class='active'><a href='index.php?c=home'>Home</a></li>
 				<li><a href='#'>Files</a></li>
 				<li><a href='#'>Settings</a></li>
 				<li><a href='index.php?c=home&m=logout'>Logout</a></li>
