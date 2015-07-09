@@ -13,7 +13,7 @@
             <li class='active'><a href='index.php?c=home'>Home</a></li>
         </div>
         <div class='nav navbar-nav navbar-right' id='standard'>
-			<li><?php echo $_SESSION['auth']['email']; ?></li>
+			<li><a><?php echo $_SESSION['auth']['email']; ?></a></li>
             <li><a href='index.php?c=home&m=logout'>Logout</a></li>
 		</div>
 		<div class='nav navbar-nav navbar-right' id='mobile'>
