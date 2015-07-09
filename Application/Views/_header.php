@@ -24,7 +24,7 @@
 					<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 						<ul class='nav navbar-nav'>
 						<li class='dropdown'>
-							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><button class='btn btn-primary navbar-btn'>".$_SESSION['auth']['email']."</button></a>
+							<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".$_SESSION['auth']['email']."</a>
 							<ul class='dropdown-menu'>
 							<li><a href='#'>Files</a></li>
 							<li><a href='#'>Settings</a></li>
