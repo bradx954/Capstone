@@ -9,7 +9,7 @@
 			</button>
 			<a class='navbar-brand' href='index.php'>Storacloud</a>
 		</div>
-        <div class='nav navbar-nav navbar-right' id='standard'>
+        <div class='nav navbar-nav' id='standard'>
             <li class='active'><a href='index.php?c=home'>Home</a></li>
         </div>
 		<div class='nav navbar-nav navbar-right' id='mobile'>
