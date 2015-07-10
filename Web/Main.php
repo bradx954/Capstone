@@ -96,4 +96,8 @@ if($controllerObj->isAllowed() == true)
 	     trigger_error("Non-existent  method has been called: $controllerName, $methodName");
     endif;
 }
+else
+{
+    require_once 'Library/Error/AccessDenied.php';
+}
 ?>
