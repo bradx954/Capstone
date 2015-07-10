@@ -12,7 +12,7 @@ class Controller
 	}
     function isAllowed()
     {
-        if(isset($_GET['c'])){$controller = $_GET['c'];}
+        /*if(isset($_GET['c'])){$controller = $_GET['c'];}
         else
         {
             return true;
@@ -24,7 +24,8 @@ class Controller
         else
         {
             return true;
-        }
+        }*/
+        return true;
     }
 }
 ?>
