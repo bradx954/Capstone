@@ -11,7 +11,7 @@ class Admin extends Controller
 		$this->MUserAuth = new UserAuth();
         if($this->MUserAuth->loggedin() == false)
         {
-            throw new AccessDeniedException();
+            throw new NotFoundException();
         }
 	}
 	function index()

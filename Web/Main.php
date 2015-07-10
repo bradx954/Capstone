@@ -89,7 +89,7 @@ try
 {
     $controllerObj = new $controllerName;
 }
-catch(AccessDeniedException $e)
+catch(NotFoundException $e)
 {
     $controllerObj = new Home;
 }
