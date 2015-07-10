@@ -1,2 +1,3 @@
 <h1>Admin Zone</h1>
-<?php echo print_r($GLOBALS['config']);?>
+<pre><?php echo print_r($GLOBALS['config']);?></pre>
+<pre><?php echo print_r($_SESSION);?></pre>
