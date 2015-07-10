@@ -7,6 +7,7 @@ class Home extends Controller
 	{
 		parent::__construct(); 
 		$this->M_Users = new Users();
+        $this->Allowed=true;
 	}
 	function index()
 	{
