@@ -72,7 +72,7 @@ class UserAuth extends Model {
         
          //Users who are not logged in are redirected out
         if ($this->validSessionExists() == false):
-			//return false;
+			return false;
          endif;  
 	if(isset($_GET['c']) && isset($_SESSION['auth'])){
 		$controller = $_GET['c'];

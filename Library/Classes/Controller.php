@@ -12,14 +12,19 @@ class Controller
 	}
     function isAllowed()
     {
-        //if($config['acl'][$controller]['public'] == false)
-        //{
-         //   return $this->Allowed;
-        //}
-        //else
-        //{
+        if(isset($_GET['c'])){$controller = $_GET['c'];}
+        else
+        {
             return true;
-        //}
+        }
+        if($config['acl'][$controller]['public'] == false)
+        {
+            return $this->Allowed;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 ?>
