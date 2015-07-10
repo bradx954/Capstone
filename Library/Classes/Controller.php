@@ -12,7 +12,14 @@ class Controller
 	}
     function isAllowed()
     {
-        return $this->Allowed;
+        if($config['acl'][$controller]['public'] == false)
+        {
+            return $this->Allowed;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 ?>
