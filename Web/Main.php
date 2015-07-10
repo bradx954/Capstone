@@ -85,19 +85,15 @@ $controllerName = ucfirst($controllerName);
 session_start();
 
 //Instantiate controller class. Shouldn't fail, since we checked in auto_load
-try
+$controllerObj = new $controllerName;
+//Check if access to controller is allowed.
+if($controllerObj->isAllowed() == true)
 {
-    $controllerObj = new $controllerName;
+    //call controller and method 
+    if ((int)method_exists($controllerObj, $methodName)):
+	     echo call_user_func(array($controllerObj,$methodName));
+    else:
+	     trigger_error("Non-existent  method has been called: $controllerName, $methodName");
+    endif;
 }
-catch(NotFoundException $e)
-{
-    $controllerObj = new Home;
-}
-
-//call controller and method 
-if ((int)method_exists($controllerObj, $methodName)):
-	 echo call_user_func(array($controllerObj,$methodName));
-else:
-	 trigger_error("Non-existent  method has been called: $controllerName, $methodName");
-endif;
 ?>
