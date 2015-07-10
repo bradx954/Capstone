@@ -3,12 +3,10 @@
 class Home extends Controller 
 {
 	private $M_Users;
-	private $M_UserAuth;
 	function __construct() 
 	{
 		parent::__construct(); 
 		$this->M_Users = new Users();
-		$this->MUserAuth = new UserAuth();
 	}
 	function index()
 	{
