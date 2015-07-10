@@ -98,6 +98,6 @@ if($controllerObj->isAllowed() == true)
 }
 else
 {
-    require_once 'Library/Error/AccessDenied.php';
+    require_once ROOT.'/Library/Error/AccessDenied.php';
 }
 ?>
