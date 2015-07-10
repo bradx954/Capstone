@@ -13,7 +13,7 @@
             <div class='nav navbar-nav'>
                 <li <?php if($TPL['page'] == 'home'){echo "class='active'";}?>><a href='index.php?c=home'>Home</a></li>
                 <li <?php if($TPL['page'] == 'files'){echo "class='active'";}?>><a href='#'>Files</a></li>
-                <?php if($GLOBALS['config']['acl']['admin'][$_SESSION['accesslevel']] == true){echo "<li "; if($TPL['page'] == 'admin'){echo "class='active'";echo }"><a href='#'>Files</a></li>";} ?>
+                <?php if($GLOBALS['config']['acl']['admin'][$_SESSION['accesslevel']] == true){echo "<li "; if($TPL['page'] == 'admin'){echo "class='active'";}echo"><a href='#'>Files</a></li>";} ?>
             </div>
             <div class='nav navbar-nav navbar-right'>
 			    <li><a><?php echo $_SESSION['auth']['email']; ?></a></li>
