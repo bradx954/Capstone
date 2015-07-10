@@ -9,7 +9,7 @@ class Admin extends Controller
 		parent::__construct(); 
 		$this->M_Users = new Users();
 		$this->MUserAuth = new UserAuth();
-        if($this->MUserAuth->loggedin() == false){exit();}
+        //if($this->MUserAuth->loggedin() == false){exit();}
 	}
 	function index()
 	{
