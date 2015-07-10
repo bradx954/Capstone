@@ -10,8 +10,8 @@
 			<a class='navbar-brand' href='index.php'>Storacloud</a>
 		</div>
         <div class='nav navbar-nav'>
-            <li class='active'><a href='index.php?c=home'>Home</a></li>
-            <li><a href='#'>Files</a></li>
+            <li <?php if($TPL['page'] == 'home'){echo "class='active'";}?>><a href='index.php?c=home'>Home</a></li>
+            <li <?php if($TPL['files'] == 'home'){echo "class='active'";}?>><a href='#'>Files</a></li>
         </div>
         <div class='nav navbar-nav navbar-right'>
 			<li><a><?php echo $_SESSION['auth']['email']; ?></a></li>
