@@ -3,7 +3,6 @@
 class Admin extends Controller 
 {
 	private $M_Users;
-	private $M_UserAuth;
 
 	function __construct() 
 	{
@@ -14,9 +13,5 @@ class Admin extends Controller
 	{
 		$this->view->render('admin',$TPL);
 	}
-    function isAllowed()
-    {
-        return $this->Allowed;
-    }
 }
 ?>
