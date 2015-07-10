@@ -77,8 +77,8 @@ class UserAuth extends Model {
 	if(isset($_GET['c']) && isset($_SESSION['auth'])){
 		$controller = $_GET['c'];
 		$access = $_SESSION['auth']['accesslevel'];
-		 if($GLOBALS['config']['acl'][$controller][$access] == true){return 'true';}
-		else{return 'false';}}
+		 if($GLOBALS['config']['acl'][$controller][$access] == true){return true;}
+		else{return false;}}
 		//Access Control List checking goes here..
 		//Does user have sufficient permissions to access page?
 		//Ex. Can a bronze level access the Admin page?   
