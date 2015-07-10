@@ -78,7 +78,7 @@ class UserAuth extends Model {
 		$controller = $_GET['c'];
 		$access = $_SESSION['auth']['accesslevel'];
 		 if($config['acl'][$controller][$access] == true){return 'true';}
-		else{return 'Access Level Error: You do not have sufficient priveleges to access this resource.';}}
+		else{return 'false';}}
 		//Access Control List checking goes here..
 		//Does user have sufficient permissions to access page?
 		//Ex. Can a bronze level access the Admin page?   
