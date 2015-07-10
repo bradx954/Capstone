@@ -1,5 +1,3 @@
-<script src='Web/JS/jquery-1.11.3.min.js'></script>
-<script src='Web/bootstrap-3.3.5-dist/js/bootstrap.js'></script>
 <div class='divReadable'>
 <h1 class='txtCenter'>StoraCloud</h1>
 <img src='Web/Images/Logo.png'>
