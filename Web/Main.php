@@ -85,7 +85,14 @@ $controllerName = ucfirst($controllerName);
 session_start();
 
 //Instantiate controller class. Shouldn't fail, since we checked in auto_load
-$controllerObj = new $controllerName; 
+try
+{
+    $controllerObj = new $controllerName;
+}
+catch(AccessDeniedException $e)
+{
+    $controllerObj = new Home;
+}
 
 //call controller and method 
 if ((int)method_exists($controllerObj, $methodName)):
