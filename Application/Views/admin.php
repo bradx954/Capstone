@@ -1,6 +1,6 @@
-<div class="table-responsive"style="color:black; background-color:white;">
+<div class="table-responsive"style="background-color:white;">
     <table class='table table-striped table-bordered table-hover'>
-    <tr>
+    <tr style="color: black;">
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
@@ -13,7 +13,7 @@
     <?php
         foreach($TPL['users'] as $user)
         {
-            echo "<tr>";
+            echo "<tr style='color: black;'>";
                 echo "<td>".$user['id']."</td>";
                 echo "<td>".$user['firstname']."</td>";
                 echo "<td>".$user['lastname']."</td>";
