@@ -1,5 +1,5 @@
-<div class="table-responsive"style="background-color:white;">
-    <table class='table table-striped table-bordered table-hover'>
+<div class="table-responsive">
+    <table class='table table-striped table-bordered table-hover' style="background-color:white;">
     <tr style="color: black;">
         <th>ID</th>
         <th>First Name</th>
