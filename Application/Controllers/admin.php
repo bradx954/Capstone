@@ -11,6 +11,7 @@ class Admin extends Controller
 	}
 	function index()
 	{
+        $TPL['users'] = $this->M_Users->getUsers();
 		$this->view->render('admin',$TPL);
 	}
 }
