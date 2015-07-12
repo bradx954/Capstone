@@ -25,5 +25,5 @@
             echo "</tr>";
         }
     ?>
-    </table>
+    </table> 
 </div>
