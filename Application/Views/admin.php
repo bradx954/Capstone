@@ -1,4 +1,3 @@
-<h1>TEST!!!!!!</h1>
 <div class="table-responsive"  id='UserTable'>
     <table class='table table-striped table-bordered table-hover'>
     <tr>
