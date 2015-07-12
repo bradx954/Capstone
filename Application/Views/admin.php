@@ -1,4 +1,4 @@
-<div class="table-responsive"  id='UserTable'>
+<div class="table-responsive"style="color:black; background-color:white;">
     <table class='table table-striped table-bordered table-hover'>
     <tr>
         <th>ID</th>
