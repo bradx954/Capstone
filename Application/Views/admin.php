@@ -63,7 +63,7 @@ $( document ).ready(function()
     {
         var byteSplit = $(this).html().split(' ');
         $(this).html('');
-        $(this).after('<input type="number" name="bytes" class="form-control" maxlength="3" style="width: 20px;"><select class="form-control" size="2"><option value="B">B</option><option value="KB">KB</option><option value="MB">MB</option><option value="GB">GB</option></select>'); 
+        $(this).after('<input type="number" name="bytes" class="form-control" maxlength="3" style="width: 50px;"><select class="form-control"><option value="B">B</option><option value="KB">KB</option><option value="MB">MB</option><option value="GB">GB</option></select>'); 
     });
 });
 </script>
