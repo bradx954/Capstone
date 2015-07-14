@@ -15,19 +15,19 @@ function getByteString(bytes)
     switch(divided)
     {
         case 0:
-        return bytes;
+        return bytes+' B';
         break;
         case 1:
-        return bytes+'KB';
+        return bytes+' KB';
         break;
         case 2:
-        return bytes+'MB';
+        return bytes+' MB';
         break;
         case 3:
-        return bytes+'GB';
+        return bytes+' GB';
         break;
         default:
-        return bytes+'GB';
+        return bytes+' GB';
     }
 }
 function getBytes(byteString)
