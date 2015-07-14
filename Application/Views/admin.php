@@ -73,6 +73,19 @@ $( document ).ready(function()
             $(this).remove();
         });
     });
+    $('.email').click(function() 
+    {
+        var email = $(this).html();
+        $(this).html('');
+        $(this).after('<form name="updateEmail" class="emailUpdate" id="'+$(this).attr('id')+'" method="post" action="index.php?c=admin&m=updateUserEmail"><input type="text" name="email" id="'+$(this).attr('id')+'" class="form-control inputEmail" style="width: 100px; display: inline;"><button type="submit" class="btn btn-primary">Save</button></form>');
+        $('#'+$(this).attr('id')+'.inputEmail').val(byteSplit[0]);
+        $('#'+$(this).attr('id')+'.emailUpdate').submit(function (event){
+            event.preventDefault();
+            $.post( "index.php?c=admin&m=updateUserEmail", { id: $(this).attr('id'), email: $('#'+$(this).attr('id')+'.inputEmail').val() } );
+            $('#'+$(this).attr('id')+'.email').html($('#'+$(this).attr('id')+'.inputEmail').val());
+            $(this).remove();
+        });
+    });
 });
 </script>
 <div class="table-responsive">
@@ -105,7 +118,7 @@ $( document ).ready(function()
                 echo "<td>".$user['id']."</td>";
                 echo "<td>".$user['firstname']."</td>";
                 echo "<td>".$user['lastname']."</td>";
-                echo "<td>".$user['email']."</td>";
+                echo "<td><a href='#' class='email' id=".$user['id']." style='color:blue;'>".$user['email']."</a></td>";
                 echo "<td><a href='#' class='quota' id=".$user['id']." style='color:blue;'></a></td>";
                 echo "<td>".$user['rank']."</td>";
                 echo "<td>".$user['reg_date']."</td>";
