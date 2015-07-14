@@ -1,7 +1,7 @@
 <script>
 function getByteString(bytes)
 {
-    var dvisible = true;
+    var divisible = true;
     var divided = 0;
     while(divisible)
     {
