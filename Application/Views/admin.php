@@ -69,7 +69,7 @@ $( document ).ready(function()
         $('#'+$(this).attr('id')+'.quotaUpdate').submit(function (event){
             event.preventDefault();
             $.post( "index.php?c=admin&m=updateUserQuota", { id: $(this).attr('id'), bytes: getBytes($('#'+$(this).attr('id')+'.inputBytes').val()) } );
-            $('#'+$(this).attr('id')+'.quota').html(byteSplit[0]+' '+byteSplit[1]);
+            $('#'+$(this).attr('id')+'.quota').html($(this).attr('id')+'.inputBytes').val()+' '+$(this).attr('id')+'.byteString').val());
             $(this).remove();
         });
     });
