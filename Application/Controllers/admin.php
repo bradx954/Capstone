@@ -36,5 +36,23 @@ class Admin extends Controller
         $bytes = $_POST['bytes'];
         $this->M_Users->updateUserQuota($id,$bytes);
     }
+    function updateUserEmail()
+    {
+        $id = $_POST['id'];
+        $email = $_POST['email'];
+        $this->M_Users->updateUserEmail($id,$email);
+    }
+    function updateUserFirstName()
+    {
+        $id = $_POST['id'];
+        $firstName = $_POST['firstName'];
+        $this->M_Users->updateUserFirstName($id,$firstName);
+    }
+    function updateUserLastName()
+    {
+        $id = $_POST['id'];
+        $lastName = $_POST['lastName'];
+        $this->M_Users->updateUserLastName($id,$lastName);
+    }
 }
 ?>
