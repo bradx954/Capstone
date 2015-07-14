@@ -33,13 +33,13 @@ function getByteString(bytes)
 function getBytes(byteString)
 {
     var byteSplit = byteString.split(" ");
-    switch(byteSplite[1])
+    switch(byteSplit[1])
     {
-        case 'B': return byteSplite[0];
-        case 'KB': return byteSplite[0]*1000;
-        case 'MB': return byteSplite[0]*1000*1000;
-        case 'GB': return byteSplite[0]*1000*1000*1000;
-        default: return byteSplite[0];
+        case 'B': return byteSplit[0];
+        case 'KB': return byteSplit[0]*1000;
+        case 'MB': return byteSplit[0]*1000*1000;
+        case 'GB': return byteSplit[0]*1000*1000*1000;
+        default: return byteSplit[0];
     }
 }
 $( document ).ready(function() 
