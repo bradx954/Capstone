@@ -1,7 +1,31 @@
 <script>
 function getByteString(bytes)
 {
-    return '1MB';
+    var dvisible = true;
+    var divided = 0;
+    while(divisible)
+    {
+        if(bytes > 999)
+        {
+            bytes = bytes / 1000;
+            divided++;
+        }
+        else{divisible = false;}
+    }
+    switch(divided)
+    {
+        case 0:
+        return bytes+'KB';
+        break;
+        case 1:
+        return bytes+'MB';
+        break;
+        case 2:
+        return bytes+'GB';
+        break;
+        default:
+        return bytes+'GB';
+    }
 }
 function getBytes(byteString)
 {
