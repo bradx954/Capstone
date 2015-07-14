@@ -32,7 +32,7 @@ function getByteString(bytes)
 }
 function getBytes(byteString)
 {
-    var byteSplit = byteString.Split(" ");
+    var byteSplit = byteString.split(" ");
     switch(byteSplite[1])
     {
         case 'B': return byteSplite[0];
