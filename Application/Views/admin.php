@@ -32,7 +32,15 @@ function getByteString(bytes)
 }
 function getBytes(byteString)
 {
-    return 100000;
+    var byteSplit = byteString.Split(" ");
+    switch(byteSplite[1])
+    {
+        case 'B': return byteSplite[0];
+        case 'KB': return byteSplite[0]*1000;
+        case 'MB': return byteSplite[0]*1000*1000;
+        case 'GB': return byteSplite[0]*1000*1000*1000;
+        default: return byteSplite[0];
+    }
 }
 $( document ).ready(function() 
 {
