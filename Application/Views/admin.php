@@ -63,7 +63,7 @@ $( document ).ready(function()
     {
         var byteSplit = $(this).html().split(' ');
         $(this).html('');
-        $(this).after('<input type="number" name="bytes" class="form-control" maxlength="3" style="width: 75px; display: inline;"><select class="form-control" style="width: 50px; display: inline;"><option value="B">B</option><option value="KB">KB</option><option value="MB">MB</option><option value="GB">GB</option></select>'); 
+        $(this).after('<form method="post" action="index.php?c=admin&m=updateQuota"><input type="number" name="bytes" class="form-control" style="width: 100px; display: inline;"><select class="form-control" style="width: 75px; display: inline;"><option value="B">B</option><option value="KB">KB</option><option value="MB">MB</option><option value="GB">GB</option></select><button type="submit" class="btn btn-primary">Save</button></form>'); 
     });
 });
 </script>
