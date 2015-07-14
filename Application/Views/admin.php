@@ -16,13 +16,13 @@
             switch($user['active'])
             {
                 case 0:
-                    $user['active'] = '<a id=active-'.$user['id'].' style="color:red;">False</p>';
+                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False</p>';
                 break;
                 case 1:
-                    $user['active'] = '<a id=active'.$user['id'].' style="color:green;">True</p>';;
+                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:green;">True</p>';;
                 break;
                 default:
-                    $user['active'] = '<a id=active'.$user['id'].' style="color:red;">False</p>';
+                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False</p>';
             }
             echo "<tr style='color: black;'>";
                 echo "<td>".$user['id']."</td>";
