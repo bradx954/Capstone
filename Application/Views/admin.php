@@ -1,9 +1,9 @@
 <script>
-function getByteString(bytes=0)
+function getByteString(bytes)
 {
     return '1MB';
 }
-function getBytes(byteString='')
+function getBytes(byteString)
 {
     return 100000;
 }
