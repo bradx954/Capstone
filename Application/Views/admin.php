@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class='table table-striped table-bordered table-hover table-condensed' style="background-color:white;">
+    <table class='table table-bordered table-hover table-condensed' style="background-color:white;">
     <tr style="color: black;">
         <th>ID</th>
         <th>First Name</th>
@@ -16,13 +16,13 @@
             switch($user['active'])
             {
                 case 0:
-                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False</p>';
+                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False</a>';
                 break;
                 case 1:
-                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:green;">True</p>';;
+                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:green;">True</a>';;
                 break;
                 default:
-                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False?</p>';
+                    $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False?</a>';
             }
             echo "<tr style='color: black;'>";
                 echo "<td>".$user['id']."</td>";
