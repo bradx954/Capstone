@@ -3,7 +3,7 @@ $( document ).ready(function()
 {
     $('.active').click(function() 
     {
-        if((this).html == 'True')
+        if((this).html() == 'True')
         {
             $.post( "index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') } );
             $(this).css('color', 'red');
