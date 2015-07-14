@@ -77,7 +77,7 @@ $( document ).ready(function()
     {
         var email = $(this).html();
         $(this).html('');
-        $(this).after('<form name="updateEmail" class="emailUpdate" id="'+$(this).attr('id')+'" method="post" action="index.php?c=admin&m=updateUserEmail"><input type="text" name="email" id="'+$(this).attr('id')+'" class="form-control inputEmail" style="width: 250px; display: inline;"><button type="submit" class="btn btn-primary">Save</button></form>');
+        $(this).after('<form name="updateEmail" class="emailUpdate" id="'+$(this).attr('id')+'" method="post" action="index.php?c=admin&m=updateUserEmail"><input type="text" name="email" id="'+$(this).attr('id')+'" class="form-control inputEmail" style="width: 300px; display: inline;"><button type="submit" class="btn btn-primary">Save</button></form>');
         $('#'+$(this).attr('id')+'.inputEmail').val(email);
         $('#'+$(this).attr('id')+'.emailUpdate').submit(function (event){
             event.preventDefault();
