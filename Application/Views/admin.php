@@ -101,7 +101,7 @@ $( document ).ready(function()
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
             echo "</tr>\n";
-            echo "<script>$('#".$user['id']." .quota').html(function(){return getByteString(".$user['quota'].");});</script>\n";
+            echo "<script>$('#".$user['id']." .quota').html(getByteString(".$user['quota']."));</script>\n";
         }
     ?>
     </table> 
