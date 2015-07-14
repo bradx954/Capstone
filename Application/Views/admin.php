@@ -13,6 +13,17 @@
     <?php
         foreach($TPL['users'] as $user)
         {
+            switch($user['active'])
+            {
+                case 0:
+                    $user['active'] = '<p style="color:red;">False</p>';
+                break;
+                case 1:
+                    $user['active'] = '<p style="color:green;">True</p>';;
+                break;
+                default:
+                    $user['active'] = '<p style="color:red;">False</p>';
+            }
             echo "<tr style='color: black;'>";
                 echo "<td>".$user['id']."</td>";
                 echo "<td>".$user['firstname']."</td>";
