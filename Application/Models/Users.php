@@ -75,15 +75,16 @@ class Users extends Model {
 	}
 	public function deleteUser($ID)
 	{
-		$sql = "DELETE FROM CS_Users WHERE compid = :ID;";
+		$sql = "DELETE FROM CS_Users WHERE id = :ID;";
 		try {
 			$rs = NULL;
 			$rs = $this->DBH->prepare($sql);
 			$rs->execute(array(':ID' => $ID));
 		}
 		catch (PDOException $e){
-			$this->DBO->showErrorPage("Error deleting user.",$e );							
+			return "<div class='alert alert-danger'>Error deleting user.</div>";							
 		}
+        return '<div class="alert alert-success">User '.$ID.' deleted.</div>';
 	}
 	public function getUser($Email)
 	{
@@ -112,7 +113,51 @@ class Users extends Model {
 			$this->DBO->showErrorPage("Error updating user.",$e );							
 		}
 	}
-	
+    public function activateUser($ID)
+    {
+        $sql = "UPDATE CS_Users SET active=1 WHERE id = :id;";
+		try 
+        {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e)
+        {
+			return "<div class='alert alert-danger'>Error updating user.</div>";						
+		}
+        return "<div class='alert alert-success'>User Activated.</div>";	
+    }
+	public function deactivateUser($ID)
+    {
+        $sql = "UPDATE CS_Users SET active=0 WHERE id = :id;";
+		try 
+        {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e)
+        {
+			return "<div class='alert alert-danger'>Error updating user.</div>";						
+		}
+        return "<div class='alert alert-success'>User Deactivated.</div>";	
+    }
+    public function checkActive($ID)
+    {
+        $sql = "SELECT active FROM CS_Users WHERE id = :id;";
+        try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+            $rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;			
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
 }
 
 ?>

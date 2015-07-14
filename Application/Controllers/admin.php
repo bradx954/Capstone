@@ -14,5 +14,28 @@ class Admin extends Controller
         $TPL['users'] = $this->M_Users->getUsers();
 		$this->view->render('admin',$TPL);
 	}
+    function deleteUser()
+    {
+        $id = $_POST['id'];
+        $this->M_Users->deleteUser($id);
+        return;
+    }
+    function toggleUser()
+    {
+        $id = $_POST['id'];
+        $active = $this->M_Users->checkActive($id);
+        switch($active)
+        {
+            case 0:
+                $this->M_Users->activateUser($id);
+            break;
+            case 1:
+                $this->M_Users->deactivateUser($id);
+            break;
+            default:
+            return;   
+        }
+        return;
+    }
 }
 ?>

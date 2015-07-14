@@ -3,7 +3,7 @@ $( document ).ready(function()
 {
     $('.active').click(function() 
     {
-      alert($(this).attr('id'));
+      $.post( "index.php?c=admin&m=toggleUser", { id: $(this).attr('id') } );
     });
 });
 </script>
