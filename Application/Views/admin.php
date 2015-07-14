@@ -61,7 +61,18 @@ $( document ).ready(function()
     });
     $('.quota').click(function() 
     {
-        alert($(this).html());
+        var byteSplit = $(this).html().split(' ');
+        $(this).html('');
+        $(this).toggleClass('quota quota-adjust');
+        $(this).html('
+            <input type="number" name="bytes">
+            <select>
+                <option value="B">B</option>
+                <option value="KB">KB</option>
+                <option value="MB">MB</option>
+                <option value="GB">GB</option>
+            </select>
+        ');
     });
 });
 </script>
