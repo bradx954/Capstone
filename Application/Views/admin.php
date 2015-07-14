@@ -1,4 +1,12 @@
 <script>
+function getByteString(bytes=0)
+{
+    return '1MB';
+}
+function getBytes(byteString='')
+{
+    return 100000;
+}
 $( document ).ready(function() 
 {
     $('.active').click(function() 
@@ -49,7 +57,7 @@ $( document ).ready(function()
                 echo "<td>".$user['firstname']."</td>";
                 echo "<td>".$user['lastname']."</td>";
                 echo "<td>".$user['email']."</td>";
-                echo "<td>".$user['quota']."</td>";
+                echo "<td><script>document.write(getByteString(".$user['quota']."));</script></td>";
                 echo "<td>".$user['rank']."</td>";
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
