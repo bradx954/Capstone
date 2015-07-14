@@ -20,22 +20,15 @@ class Admin extends Controller
         $this->M_Users->deleteUser($id);
         return;
     }
-    function toggleUser()
+    function deactivateUser()
     {
         $id = $_POST['id'];
-        $active = $this->M_Users->checkActive($id);
-        switch($active)
-        {
-            case 0:
-                $this->M_Users->activateUser($id);
-            break;
-            case 1:
-                $this->M_Users->deactivateUser($id);
-            break;
-            default:
-            return;   
-        }
-        return;
+        $this->M_Users->deactivateUser($id);
+    }
+    function activateUser()
+    {
+        $id = $_POST['id'];
+        $this->M_Users->activateUser($id);
     }
 }
 ?>

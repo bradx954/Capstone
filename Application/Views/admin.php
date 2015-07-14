@@ -3,7 +3,18 @@ $( document ).ready(function()
 {
     $('.active').click(function() 
     {
-      $.post( "index.php?c=admin&m=toggleUser", { id: $(this).attr('id') } );
+        if($(this).css == 'green')
+        {
+            $.post( "index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') } );
+            $(this).css('color', 'red');
+            $(this).html("False");
+        }
+        else
+        {
+            $.post( "index.php?c=admin&m=activateUser", { id: $(this).attr('id') } );
+            $(this).css('color', 'green');
+            $(this).html("True");
+        }
     });
 });
 </script>
