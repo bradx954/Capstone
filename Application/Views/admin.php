@@ -1,7 +1,10 @@
 <script>
-$('.active').click(function() 
+$( document ).ready(function() 
 {
-  alert($(this).attr('id'));
+    $('.active').click(function() 
+    {
+      alert($(this).attr('id'));
+    });
 });
 </script>
 <div class="table-responsive">
