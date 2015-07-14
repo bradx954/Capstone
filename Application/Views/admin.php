@@ -92,7 +92,7 @@ $( document ).ready(function()
                 echo "<td>".$user['firstname']."</td>";
                 echo "<td>".$user['lastname']."</td>";
                 echo "<td>".$user['email']."</td>";
-                echo "<td><script>document.write(getByteString(".$user['quota']."));</script></td>";
+                echo "<td><a href='#' class='quota' id=".$user['id']." style='color:yellow;'><script>document.write(getByteString(".$user['quota']."));</script></td>";
                 echo "<td>".$user['rank']."</td>";
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
