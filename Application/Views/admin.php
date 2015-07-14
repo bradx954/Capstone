@@ -91,7 +91,7 @@ $( document ).ready(function()
                 default:
                     $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False?</a>';
             }
-            echo "<tr style='color: black;'>";
+            echo "<tr style='color: black;'>\n";
                 echo "<td>".$user['id']."</td>";
                 echo "<td>".$user['firstname']."</td>";
                 echo "<td>".$user['lastname']."</td>";
@@ -100,8 +100,8 @@ $( document ).ready(function()
                 echo "<td>".$user['rank']."</td>";
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
-            echo "</tr>";
-            echo "<script>$(#".$user['id']." .quota).html(getByteString(".$user['quota']."));</script>";
+            echo "</tr>\n";
+            echo "<script>$(#".$user['id']." .quota).html(getByteString(".$user['quota']."));</script>\n";
         }
     ?>
     </table> 
