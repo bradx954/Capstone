@@ -64,7 +64,8 @@ $( document ).ready(function()
         var byteSplit = $(this).html().split(' ');
         $(this).html('');
         $(this).after('<form name="updateQuota" id="'+$(this).attr('id')+'" method="post" action="index.php?c=admin&m=updateQuota"><input type="number" name="bytes" id="'+$(this).attr('id')+'" class="form-control inputBytes" style="width: 100px; display: inline;"><select name="byteString" id="'+$(this).attr('id')+'" class="form-control byteString" style="width: 75px; display: inline;"><option value="B">B</option><option value="KB">KB</option><option value="MB">MB</option><option value="GB">GB</option></select><button type="submit" class="btn btn-primary">Save</button></form>');
-        $('#'+$(this).attr('id')+'.inputBytes').val(byteSplit[0]); 
+        $('#'+$(this).attr('id')+'.inputBytes').val(byteSplit[0]);
+        $('#'+$(this).attr('id')+'.byteString').val(byteSplit[1]);  
     });
 });
 </script>
