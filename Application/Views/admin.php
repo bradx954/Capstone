@@ -1,3 +1,9 @@
+<script>
+$('.active').click(function() 
+{
+  alert($(this).attr('id'));
+});
+</script>
 <div class="table-responsive">
     <table class='table table-bordered table-hover table-condensed' style="background-color:white;">
     <tr style="color: black;">
