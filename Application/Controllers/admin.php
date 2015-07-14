@@ -30,5 +30,11 @@ class Admin extends Controller
         $id = $_POST['id'];
         $this->M_Users->activateUser($id);
     }
+    function updateUserQuota()
+    {
+        $id = $_POST['id'];
+        $bytes = $_POST['bytes'];
+        $this->M_Users->updateUserQuota($id,$bytes);
+    }
 }
 ?>

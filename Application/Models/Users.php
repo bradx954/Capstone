@@ -101,18 +101,21 @@ class Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0];
 	}
-	public function updateUser($ID,$username, $password, $accesslevel, $freezeaccount)
-	{
-		$sql = "UPDATE CS_Users SET username='".$username."', password='".$password."', accesslevel='".$accesslevel."',freezeaccount='".$freezeaccount."' WHERE compid = ".$ID.";";
-		try {
+	public function updateUserQuota($ID, $BYTES)
+    {
+        $sql = "UPDATE CS_Users SET quota=:quota WHERE id = :id;";
+		try 
+        {
 			$rs = NULL;
 			$rs = $this->DBH->prepare($sql);
-			$rs->execute(array(':order' => $order));
+			$rs->execute(array(':id' => $ID, ':quota' => $BYTES));
 		}
-		catch (PDOException $e){
-			$this->DBO->showErrorPage("Error updating user.",$e );							
+		catch (PDOException $e)
+        {
+			return "<div class='alert alert-danger'>Error updating user.</div>";						
 		}
-	}
+        return "<div class='alert alert-success'>Quota Updated.</div>";
+    }
     public function activateUser($ID)
     {
         $sql = "UPDATE CS_Users SET active=1 WHERE id = :id;";
