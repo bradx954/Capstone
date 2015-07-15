@@ -146,11 +146,14 @@ $( document ).ready(function()
                 echo "<td><a href='#' class='lastName' id=".$user['id']." style='color:blue;'>".$user['lastname']."</a></td>";
                 echo "<td><a href='#' class='email' id=".$user['id']." style='color:blue;'>".$user['email']."</a></td>";
                 echo "<td><a href='#' class='quota' id=".$user['id']." style='color:blue;'></a></td>";
-                echo "<td><select name='rank' class='form-control rank' value='".$user['rank']."'><option>user</option><option>admin</option><option>superadmin</option></select></td>";
+                echo "<td><select id='".$user['id']."' name='rank' class='form-control rank' style='width: 100px;'><option>user</option><option>admin</option><option>superadmin</option></select></td>";
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
             echo "</tr>\n";
-            echo "<script>$('#".$user['id'].".quota').html(getByteString(".$user['quota']."));</script>\n";
+            echo "<script>
+                $('#".$user['id'].".quota').html(getByteString(".$user['quota']."));
+                $('#".$user['id'].".rank').val('".$user['rank']."');
+            </script>\n";
         }
     ?>
     </table> 
