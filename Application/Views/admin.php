@@ -116,6 +116,10 @@ $( document ).ready(function()
     {
         $.post( "index.php?c=admin&m=updateUserRank", { id: $(this).attr('id'), rank: $(this).val() } );
     });
+    $('.delete').click(function() 
+    {
+        $.post( "index.php?c=admin&m=deleteUser", { id: $(this).attr('id') } );
+    });
 });
 </script>
 <div class="table-responsive">
@@ -153,7 +157,7 @@ $( document ).ready(function()
                 echo "<td><select id='".$user['id']."' name='rank' class='form-control rank' style='width: 100px;'><option>user</option><option>admin</option><option>superadmin</option></select></td>";
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
-                echo "<td style='width: 26px;'><img src='Web/Images/Delete-Icon.png'/></td>";
+                echo "<td style='width: 26px;'><a class='delete' id=".$user['id']." href='#'><img src='Web/Images/Delete-Icon.png'/></a></td>";
             echo "</tr>\n";
             echo "<script>
                 $('#".$user['id'].".quota').html(getByteString(".$user['quota']."));
