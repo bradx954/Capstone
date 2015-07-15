@@ -99,6 +99,19 @@ $( document ).ready(function()
             $(this).remove();
         });
     });
+    $('.lastName').click(function() 
+    {
+        var name = $(this).html();
+        $(this).html('');
+        $(this).after('<form name="updateLastName" class="lastNameUpdate" id="'+$(this).attr('id')+'" method="post" action="index.php?c=admin&m=updateUserLastName"><input type="text" name="lastName" id="'+$(this).attr('id')+'" class="form-control inputLastName" style="width: 150px; display: inline;"><button type="submit" class="btn btn-primary">Save</button></form>');
+        $('#'+$(this).attr('id')+'.inputLastName').val(name);
+        $('#'+$(this).attr('id')+'.lastNameUpdate').submit(function (event){
+            event.preventDefault();
+            $.post( "index.php?c=admin&m=updateUserLastName", { id: $(this).attr('id'), lastName: $('#'+$(this).attr('id')+'.inputLastName').val() } );
+            $('#'+$(this).attr('id')+'.lastName').html($('#'+$(this).attr('id')+'.inputLastName').val());
+            $(this).remove();
+        });
+    });
 });
 </script>
 <div class="table-responsive">
