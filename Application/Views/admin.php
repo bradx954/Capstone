@@ -153,6 +153,7 @@ $( document ).ready(function()
                 echo "<td><select id='".$user['id']."' name='rank' class='form-control rank' style='width: 100px;'><option>user</option><option>admin</option><option>superadmin</option></select></td>";
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
+                echo "<td>Trash</td>";
             echo "</tr>\n";
             echo "<script>
                 $('#".$user['id'].".quota').html(getByteString(".$user['quota']."));
