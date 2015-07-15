@@ -119,6 +119,7 @@ $( document ).ready(function()
     $('.delete').click(function() 
     {
         $.post( "index.php?c=admin&m=deleteUser", { id: $(this).attr('id') } );
+        $('tr#'+$(this).attr('id')).remove();
     });
 });
 </script>
@@ -148,7 +149,7 @@ $( document ).ready(function()
                 default:
                     $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False?</a>';
             }
-            echo "<tr style='color: black;'>\n";
+            echo "<tr id='".$user['id']."' style='color: black;'>\n";
                 echo "<td>".$user['id']."</td>";
                 echo "<td><a href='#' class='firstName' id=".$user['id']." style='color:blue;'>".$user['firstname']."</a></td>";
                 echo "<td><a href='#' class='lastName' id=".$user['id']." style='color:blue;'>".$user['lastname']."</a></td>";
