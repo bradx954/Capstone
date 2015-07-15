@@ -90,7 +90,7 @@ $( document ).ready(function()
     {
         var name = $(this).html();
         $(this).html('');
-        $(this).after('<form name="updateFirstName" class="firstNameUpdate" id="'+$(this).attr('id')+'" method="post" action="index.php?c=admin&m=updateUserFirstName"><input type="text" name="firstName" id="'+$(this).attr('id')+'" class="form-control inputFirstName" style="width: 300px; display: inline;"><button type="submit" class="btn btn-primary">Save</button></form>');
+        $(this).after('<form name="updateFirstName" class="firstNameUpdate" id="'+$(this).attr('id')+'" method="post" action="index.php?c=admin&m=updateUserFirstName"><input type="text" name="firstName" id="'+$(this).attr('id')+'" class="form-control inputFirstName" style="width: 150px; display: inline;"><button type="submit" class="btn btn-primary">Save</button></form>');
         $('#'+$(this).attr('id')+'.inputFirstName').val(name);
         $('#'+$(this).attr('id')+'.firstNameUpdate').submit(function (event){
             event.preventDefault();
