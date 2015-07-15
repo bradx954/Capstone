@@ -54,5 +54,11 @@ class Admin extends Controller
         $lastName = $_POST['lastName'];
         $this->M_Users->updateUserLastName($id,$lastName);
     }
+    function updateUserRank()
+    {
+        $id = $_POST['id'];
+        $rank = $_POST['rank'];
+        $this->M_Users->updateUserRank($id,$rank);
+    }
 }
 ?>

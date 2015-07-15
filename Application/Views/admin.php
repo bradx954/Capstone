@@ -112,6 +112,10 @@ $( document ).ready(function()
             $(this).remove();
         });
     });
+    $('.rank').change(function() 
+    {
+        $.post( "index.php?c=admin&m=updateUserRank", { id: $(this).attr('id'), rank: $(this).val() } );
+    });
 });
 </script>
 <div class="table-responsive">

@@ -161,6 +161,21 @@ class Users extends Model {
 		}
         return "<div class='alert alert-success'>First Name Updated.</div>";
     }
+    public function updateUserRank($ID, $RANK)
+    {
+        $sql = "UPDATE CS_Users SET rank=:rank WHERE id = :id;";
+		try 
+        {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID, ':rank' => $RANK));
+		}
+		catch (PDOException $e)
+        {
+			return "<div class='alert alert-danger'>Error updating user.</div>";						
+		}
+        return "<div class='alert alert-success'>Rank Updated.</div>";
+    }
     public function activateUser($ID)
     {
         $sql = "UPDATE CS_Users SET active=1 WHERE id = :id;";
