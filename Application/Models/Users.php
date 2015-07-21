@@ -189,7 +189,7 @@ class Users extends Model {
         {
 			"Error updating user.";							
 		}
-        return "User Activated";	
+        return "User Activated.";	
     }
 	public function deactivateUser($ID)
     {

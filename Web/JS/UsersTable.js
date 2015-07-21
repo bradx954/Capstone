@@ -48,7 +48,7 @@ $(document).ready(function () {
                 data: { id: $(this).attr('id') },
                 context: this,
                 success: function (data, textStatus, jqXHR) {
-                    if (data == 'User Deactivated') {
+                    if (data == 'User Deactivated.') {
                         $(this).css('color', 'red');
                         $(this).html("False");
                     }
@@ -69,7 +69,7 @@ $(document).ready(function () {
                 data: { id: $(this).attr('id') },
                 context: this,
                 success: function (data, textStatus, jqXHR) {
-                    if (data == 'User Activated') {
+                    if (data == 'User Activated.') {
                         $(this).css('color', 'green');
                         $(this).html("True");
                     }
