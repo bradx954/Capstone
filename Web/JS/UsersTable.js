@@ -38,6 +38,7 @@ function getBytes(byteString) {
 function makeChange(formURL, postData) {
     return $.ajax(
     {
+        async: false,
         url: formURL,
         type: "POST",
         data: postData,
@@ -46,9 +47,7 @@ function makeChange(formURL, postData) {
 $(document).ready(function () {
     $('.active').click(function () {
         if ($(this).html() == 'True') {
-            $.when(makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') })).then(function (postResponse) {
-                alert(postResponse);
-            });
+            var postResponse = makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
             //$.post("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
             if (postResponse.statusText == 'OK') {
                 $(this).css('color', 'red');
@@ -56,9 +55,7 @@ $(document).ready(function () {
             }
         }
         else {
-            $.when(makeChange("index.php?c=admin&m=activateUser", { id: $(this).attr('id') })).then(function (postResponse) {
-                alert(postResponse);
-            });
+            var postResponse = makeChange("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
             //$.post("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
             if (postResponse.statusText == 'OK') {
                 $(this).css('color', 'green');
