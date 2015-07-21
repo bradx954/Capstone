@@ -187,9 +187,9 @@ class Users extends Model {
 		}
 		catch (PDOException $e)
         {
-			return "<div class='alert alert-danger'>Error updating user.</div>";						
+			return "Error updating user.";						
 		}
-        return "<div class='alert alert-success'>User Activated.</div>";	
+        return "User Activated";	
     }
 	public function deactivateUser($ID)
     {
@@ -202,9 +202,9 @@ class Users extends Model {
 		}
 		catch (PDOException $e)
         {
-			return "<div class='alert alert-danger'>Error updating user.</div>";						
+			return "Error updating user.";						
 		}
-        return "<div class='alert alert-success'>User Deactivated.</div>";	
+        return ">User Deactivated.";	
     }
     public function checkActive($ID)
     {

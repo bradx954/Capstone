@@ -35,14 +35,8 @@ function getBytes(byteString) {
         default: return byteSplit[0];
     }
 }
-function makeChange(formURL, postData) {
-    return $.ajax(
-    {
-        async: false,
-        url: formURL,
-        type: "POST",
-        data: postData,
-    });
+function showError(postError) {
+    alert(postError);
 }
 $(document).ready(function () {
     $('.active').click(function () {
@@ -58,7 +52,7 @@ $(document).ready(function () {
                     $(this).html("False");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-
+                    showError(errorThrown);
                 }
             });
         }
@@ -74,7 +68,7 @@ $(document).ready(function () {
                     $(this).html("True");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-
+                    showError(errorThrown);
                 }
             });
         }
