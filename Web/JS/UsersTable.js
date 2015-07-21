@@ -34,18 +34,41 @@ function getBytes(byteString) {
         case 'GB': return byteSplit[0] * 1000 * 1000 * 1000;
         default: return byteSplit[0];
     }
+    function makeChange(formURL, postData)
+    {
+        $.ajax(
+      	{
+      	    url: formURL,
+      	    type: "POST",
+      	    data: postData,
+      	    success: function (data, textStatus, jqXHR)
+      	    {
+      	        return array(0, data);
+      	    },
+      	    error: function (jqXHR, textStatus, errorThrown)
+      	    {
+      	        return array(1, errorThrown);
+      	    }
+      	});
+    }
 }
 $(document).ready(function () {
     $('.active').click(function () {
         if ($(this).html() == 'True') {
-            $.post("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
-            $(this).css('color', 'red');
-            $(this).html("False");
+            var postResponse = makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
+            //$.post("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
+            if (postResponse[0] == 0) {
+                $(this).css('color', 'red');
+                $(this).html("False");
+            }
         }
         else {
-            $.post("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
-            $(this).css('color', 'green');
-            $(this).html("True");
+            var postResponse = makeChange("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
+            //$.post("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
+            if (postResponse[0] == 0) {
+                $(this).css('color', 'green');
+                $(this).html("True");
+            }
         }
     });
     $('.quota').click(function () {
