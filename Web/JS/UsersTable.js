@@ -36,7 +36,10 @@ function getBytes(byteString) {
     }
 }
 function showError(postError) {
-    $.notify(postError, "error", { position: "center" });
+    $.notify(
+  postError,
+  { position: "down" }
+);
 }
 $(document).ready(function () {
     $('.active').click(function () {
