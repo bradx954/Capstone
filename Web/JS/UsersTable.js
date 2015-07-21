@@ -36,18 +36,11 @@ function getBytes(byteString) {
     }
 }
 function makeChange(formURL, postData) {
-    var postReturn = 0;
     return $.ajax(
     {
         url: formURL,
         type: "POST",
         data: postData,
-        success: function (data, textStatus, jqXHR) {
-            postReturn = new Array(0, data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            postReturn = new Array(1, errorThrown);
-        }
     });
 }
 $(document).ready(function () {
@@ -55,7 +48,7 @@ $(document).ready(function () {
         if ($(this).html() == 'True') {
             var postResponse = makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
             //$.post("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
-            if (postResponse[0] == 0) {
+            if (postResponse.statusText == 'OK') {
                 $(this).css('color', 'red');
                 $(this).html("False");
             }
@@ -63,7 +56,7 @@ $(document).ready(function () {
         else {
             var postResponse = makeChange("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
             //$.post("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
-            if (postResponse[0] == 0) {
+            if (postResponse.statusText == 'OK') {
                 $(this).css('color', 'green');
                 $(this).html("True");
             }
