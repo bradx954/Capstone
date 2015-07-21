@@ -59,6 +59,7 @@ $(document).ready(function () {
                 type: "POST",
                 data: { id: $(this).attr('id') },
                 success: function (data, textStatus, jqXHR) {
+                    alert('test');
                     $(this).css('color', 'red');
                     $(this).html("False");
                 },
