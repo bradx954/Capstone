@@ -201,9 +201,30 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.inputLastName').val(name);
         $('#' + $(this).attr('id') + '.lastNameUpdate').submit(function (event) {
             event.preventDefault();
-            $.post("index.php?c=admin&m=updateUserLastName", { id: $(this).attr('id'), lastName: $('#' + $(this).attr('id') + '.inputLastName').val() });
-            $('#' + $(this).attr('id') + '.lastName').html($('#' + $(this).attr('id') + '.inputLastName').val());
-            $(this).remove();
+            $.ajax(
+            {
+                url: "index.php?c=admin&m=updateUserLastName",
+                type: "POST",
+                data: { id: $(this).attr('id'), lastName: $('#' + $(this).attr('id') + '.inputLastName').val() },
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    if (data == 'Last Name Updated.') {
+                        $('#' + $(this).attr('id') + '.lastName').html($('#' + $(this).attr('id') + '.inputLastName').val());
+                        $(this).remove();
+                    }
+                    else if (data == 'Record no longer exists.') {
+                        $('tr#' + $(this).attr('id')).remove();
+                        showError(data);
+                    }
+                    else {
+                        showError(data);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showError(errorThrown);
+                }
+            });
+        });
         });
     });
     $('.rank').change(function () {

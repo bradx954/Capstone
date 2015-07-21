@@ -163,7 +163,7 @@ class Users extends Model {
 			return "Error updating user.";						
 		}
         if($rs->rowCount() == 0){return 'Record no longer exists.';}
-        return "First Name Updated.";
+        return "Last Name Updated.";
     }
     public function updateUserRank($ID, $RANK)
     {
