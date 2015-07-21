@@ -112,9 +112,10 @@ class Users extends Model {
 		}
 		catch (PDOException $e)
         {
-			return "<div class='alert alert-danger'>Error updating user.</div>";						
+			return "Error updating user.";						
 		}
-        return "<div class='alert alert-success'>Quota Updated.</div>";
+        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        return "Quota Updated.";
     }
     public function updateUserEmail($ID, $EMAIL)
     {
@@ -129,6 +130,7 @@ class Users extends Model {
         {
 			return "<div class='alert alert-danger'>Error updating user.</div>";						
 		}
+        if($rs->rowCount() == 0){return 'Record no longer exists.';}
         return "<div class='alert alert-success'>Email Updated.</div>";
     }
     public function updateUserFirstName($ID, $FIRSTNAME)
@@ -144,6 +146,7 @@ class Users extends Model {
         {
 			return "<div class='alert alert-danger'>Error updating user.</div>";						
 		}
+        if($rs->rowCount() == 0){return 'Record no longer exists.';}
         return "<div class='alert alert-success'>First Name Updated.</div>";
     }
     public function updateUserLastName($ID, $LASTNAME)
@@ -159,6 +162,7 @@ class Users extends Model {
         {
 			return "<div class='alert alert-danger'>Error updating user.</div>";						
 		}
+        if($rs->rowCount() == 0){return 'Record no longer exists.';}
         return "<div class='alert alert-success'>First Name Updated.</div>";
     }
     public function updateUserRank($ID, $RANK)
@@ -174,6 +178,7 @@ class Users extends Model {
         {
 			return "<div class='alert alert-danger'>Error updating user.</div>";						
 		}
+        if($rs->rowCount() == 0){return 'Record no longer exists.';}
         return "<div class='alert alert-success'>Rank Updated.</div>";
     }
     public function activateUser($ID)

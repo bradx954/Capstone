@@ -103,9 +103,32 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.byteString').val(byteSplit[1]);
         $('#' + $(this).attr('id') + '.quotaUpdate').submit(function (event) {
             event.preventDefault();
-            $.post("index.php?c=admin&m=updateUserQuota", { id: $(this).attr('id'), bytes: getBytes($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val()) });
-            $('#' + $(this).attr('id') + '.quota').html($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val());
-            $(this).remove();
+            $.ajax(
+            {
+                url: "index.php?c=admin&m=updateUserQuota",
+                type: "POST",
+                data: { id: $(this).attr('id'), bytes: getBytes($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val()) },
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    if (data == 'Quota Updated.') {
+                        $('#' + $(this).attr('id') + '.quota').html($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val());
+                        $(this).remove();
+                    }
+                    else if (data == 'Record no longer exists.') {
+                        $('tr#' + $(this).attr('id')).remove();
+                        showError(data);
+                    }
+                    else {
+                        showError(data);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showError(errorThrown);
+                }
+            });
+            
+            //$.post("index.php?c=admin&m=updateUserQuota", { id: $(this).attr('id'), bytes: getBytes($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val()) });
+            
         });
     });
     $('.email').click(function () {
