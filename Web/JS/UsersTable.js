@@ -58,9 +58,10 @@ $(document).ready(function () {
                 url: "index.php?c=admin&m=deactivateUser",
                 type: "POST",
                 data: { id: $(this).attr('id') },
+                context: this,
                 success: function (data, textStatus, jqXHR) {
-                    $('.active #' + $(this).attr('id')).css('color', 'red');
-                    $('.active #' + $(this).attr('id')).html("False");
+                    $(this).css('color', 'red');
+                    $(this).html("False");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
 
