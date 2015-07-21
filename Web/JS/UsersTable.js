@@ -126,9 +126,6 @@ $(document).ready(function () {
                     showError(errorThrown);
                 }
             });
-            
-            //$.post("index.php?c=admin&m=updateUserQuota", { id: $(this).attr('id'), bytes: getBytes($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val()) });
-            
         });
     });
     $('.email').click(function () {
@@ -138,9 +135,32 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.inputEmail').val(email);
         $('#' + $(this).attr('id') + '.emailUpdate').submit(function (event) {
             event.preventDefault();
-            $.post("index.php?c=admin&m=updateUserEmail", { id: $(this).attr('id'), email: $('#' + $(this).attr('id') + '.inputEmail').val() });
-            $('#' + $(this).attr('id') + '.email').html($('#' + $(this).attr('id') + '.inputEmail').val());
-            $(this).remove();
+            $.ajax(
+            {
+                url: "index.php?c=admin&m=updateUserEmail",
+                type: "POST",
+                data: { id: $(this).attr('id'), email: $('#' + $(this).attr('id') + '.inputEmail').val() },
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    if (data == 'Email Updated.') {
+                        $('#' + $(this).attr('id') + '.email').html($('#' + $(this).attr('id') + '.inputEmail').val());
+                        $(this).remove();
+                    }
+                    else if (data == 'Record no longer exists.') {
+                        $('tr#' + $(this).attr('id')).remove();
+                        showError(data);
+                    }
+                    else {
+                        showError(data);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showError(errorThrown);
+                }
+            });
+            //event.preventDefault();
+            //$.post("index.php?c=admin&m=updateUserEmail", { id: $(this).attr('id'), email: $('#' + $(this).attr('id') + '.inputEmail').val() });
+            
         });
     });
     $('.firstName').click(function () {
