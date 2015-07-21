@@ -250,7 +250,27 @@ $(document).ready(function () {
         });
     });
     $('.delete').click(function () {
-        $.post("index.php?c=admin&m=deleteUser", { id: $(this).attr('id') });
-        $('tr#' + $(this).attr('id')).remove();
+        $.ajax(
+        {
+            url: "index.php?c=admin&m=deleteUser",
+            type: "POST",
+            data: { id: $(this).attr('id') },
+            context: this,
+            success: function (data, textStatus, jqXHR) {
+                if (data == 'User ' + $(this).attr('id') + ' deleted.') {
+                    $('tr#' + $(this).attr('id')).remove();
+                }
+                else if (data == 'Record no longer exists.') {
+                    $('tr#' + $(this).attr('id')).remove();
+                    showError(data);
+                }
+                else {
+                    showError(data);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showError(errorThrown);
+            }
+        });
     });
 });

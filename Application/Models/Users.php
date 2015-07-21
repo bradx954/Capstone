@@ -82,9 +82,10 @@ class Users extends Model {
 			$rs->execute(array(':ID' => $ID));
 		}
 		catch (PDOException $e){
-			return "<div class='alert alert-danger'>Error deleting user.</div>";							
+			return "Error deleting user.";							
 		}
-        return '<div class="alert alert-success">User '.$ID.' deleted.</div>';
+        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        return 'User '.$ID.' deleted.';
 	}
 	public function getUser($Email)
 	{
