@@ -27,7 +27,7 @@
                     $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False?</a>';
             }
             echo "<tr id='".$user['id']."' style='color: black;'>\n";
-            if($GLOBALS['config']['uel'][$user['rank']][$_SESSION['auth']['accesslevel']] && $GLOBALS['config']['uel'][$userRank][$_SESSION['auth']['accesslevel']]){
+            if($GLOBALS['config']['uel'][$user['rank']][$_SESSION['auth']['accesslevel']]){
                 echo "<td>".$user['id']."</td>";
                 echo "<td><a href='#' class='firstName' id=".$user['id']." style='color:blue;'>".$user['firstname']."</a></td>";
                 echo "<td><a href='#' class='lastName' id=".$user['id']." style='color:blue;'>".$user['lastname']."</a></td>";
