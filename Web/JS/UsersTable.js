@@ -52,6 +52,10 @@ $(document).ready(function () {
                         $(this).css('color', 'red');
                         $(this).html("False");
                     }
+                    else if (data == 'Record no longer exists.') {
+                        $('tr#' + $(this).attr('id')).remove();
+                        showError(data);
+                    }
                     else {
                         showError(data);
                     }
@@ -72,6 +76,11 @@ $(document).ready(function () {
                     if (data == 'User Activated.') {
                         $(this).css('color', 'green');
                         $(this).html("True");
+                    }
+                    else if (data == 'Record no longer exists.')
+                    {
+                        $('tr#' + $(this).attr('id')).remove();
+                        showError(data);
                     }
                     else {
                         showError(data);
