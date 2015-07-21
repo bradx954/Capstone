@@ -225,7 +225,6 @@ $(document).ready(function () {
                 }
             });
         });
-        });
     });
     $('.rank').change(function () {
         $.post("index.php?c=admin&m=updateUserRank", { id: $(this).attr('id'), rank: $(this).val() });
