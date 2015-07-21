@@ -36,19 +36,20 @@ function getBytes(byteString) {
     }
 }
 function makeChange(formURL, postData) {
-    var postReturn;
+    var postReturn = 0;
     $.ajax(
     {
         url: formURL,
         type: "POST",
         data: postData,
         success: function (data, textStatus, jqXHR) {
-            postReturn = Array(0, data);
+            postReturn = new Array(0, data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            postReturn = Array(1, errorThrown);
+            postReturn = new Array(1, errorThrown);
         }
     });
+    while (postReturn == 0){}
     return postReturn;
 }
 $(document).ready(function () {
