@@ -36,7 +36,7 @@ function getBytes(byteString) {
     }
 }
 function makeChange(formURL, postData) {
-    var postReturn = new Array(0, 'Critical Error');
+    var postReturn;
     $.ajax(
     {
         url: formURL,
