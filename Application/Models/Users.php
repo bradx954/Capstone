@@ -102,6 +102,21 @@ class Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0];
 	}
+    public function getUserRank($ID)
+    {
+        $sql = "SELECT rank FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
 	public function updateUserQuota($ID, $BYTES)
     {
         $sql = "UPDATE CS_Users SET quota=:quota WHERE id = :id;";

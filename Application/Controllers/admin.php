@@ -17,7 +17,9 @@ class Admin extends Controller
     function deleteUser()
     {
         $id = $_POST['id'];
-        return $this->M_Users->deleteUser($id);
+        $rank = $this->M_Users->getUserRank($id);
+        if($config['uel'][$rank][$_SESSION['rank']]){return $this->M_Users->deleteUser($id);}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function deactivateUser()
     {
