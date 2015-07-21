@@ -158,9 +158,6 @@ $(document).ready(function () {
                     showError(errorThrown);
                 }
             });
-            //event.preventDefault();
-            //$.post("index.php?c=admin&m=updateUserEmail", { id: $(this).attr('id'), email: $('#' + $(this).attr('id') + '.inputEmail').val() });
-            
         });
     });
     $('.firstName').click(function () {
@@ -170,9 +167,31 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.inputFirstName').val(name);
         $('#' + $(this).attr('id') + '.firstNameUpdate').submit(function (event) {
             event.preventDefault();
+            $.ajax(
+            {
+                url: "index.php?c=admin&m=updateUserFirstName",
+                type: "POST",
+                data: { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() },
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    if (data == 'First Name Updated.') {
+                        $('#' + $(this).attr('id') + '.firstName').html($('#' + $(this).attr('id') + '.inputFirstName').val());
+                        $(this).remove();
+                    }
+                    else if (data == 'Record no longer exists.') {
+                        $('tr#' + $(this).attr('id')).remove();
+                        showError(data);
+                    }
+                    else {
+                        showError(data);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showError(errorThrown);
+                }
+            });
+            event.preventDefault();
             $.post("index.php?c=admin&m=updateUserFirstName", { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() });
-            $('#' + $(this).attr('id') + '.firstName').html($('#' + $(this).attr('id') + '.inputFirstName').val());
-            $(this).remove();
         });
     });
     $('.lastName').click(function () {
