@@ -189,6 +189,7 @@ class Users extends Model {
         {
 			"Error updating user.";							
 		}
+        if($rs->mysql_affected_rows() == 0){return 'Record no longer exists.';}
         return "User Activated.";	
     }
 	public function deactivateUser($ID)
@@ -204,6 +205,7 @@ class Users extends Model {
         {
 			return "Error updating user.";						
 		}
+        if($rs->mysql_affected_rows() == 0){return 'Record no longer exists.';}
         return "User Deactivated.";	
     }
     public function checkActive($ID)
