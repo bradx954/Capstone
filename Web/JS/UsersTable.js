@@ -37,7 +37,7 @@ function getBytes(byteString) {
 }
 function makeChange(formURL, postData) {
     var postReturn = 0;
-    $.ajax(
+    return $.ajax(
     {
         url: formURL,
         type: "POST",
@@ -49,8 +49,6 @@ function makeChange(formURL, postData) {
             postReturn = new Array(1, errorThrown);
         }
     });
-    while (postReturn == 0){}
-    return postReturn;
 }
 $(document).ready(function () {
     $('.active').click(function () {
