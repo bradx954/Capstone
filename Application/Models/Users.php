@@ -161,7 +161,7 @@ class Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
         return "Email Updated.";
     }
     public function updateUserFirstName($ID, $FIRSTNAME)
@@ -177,7 +177,7 @@ class Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
         return "First Name Updated.";
     }
     public function updateUserLastName($ID, $LASTNAME)
@@ -193,7 +193,7 @@ class Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
         return "Last Name Updated.";
     }
     public function updateUserRank($ID, $RANK)
@@ -209,7 +209,7 @@ class Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
         return "Rank Updated.";
     }
     public function activateUser($ID)
@@ -225,7 +225,7 @@ class Users extends Model {
         {
 			"Error updating user.";							
 		}
-        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false{return 'Record no longer exists.';}
         return "User Activated.";	
     }
 	public function deactivateUser($ID)
@@ -241,7 +241,7 @@ class Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
         return "User Deactivated.";	
     }
     public function checkActive($ID)
