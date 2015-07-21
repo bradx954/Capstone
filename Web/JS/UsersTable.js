@@ -36,18 +36,20 @@ function getBytes(byteString) {
     }
 }
 function makeChange(formURL, postData) {
+    var postReturn = new Array(0, 'Critical Error');
     $.ajax(
     {
         url: formURL,
         type: "POST",
         data: postData,
         success: function (data, textStatus, jqXHR) {
-            return new Array(0, data);
+            postReturn = new Array(0, data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            return new Array(1, errorThrown);
+            postReturn = new Array(1, errorThrown);
         }
     });
+    return postReturn;
 }
 $(document).ready(function () {
     $('.active').click(function () {
