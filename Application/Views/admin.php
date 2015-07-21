@@ -27,6 +27,7 @@
                     $user['active'] = '<a href="#" class="active" id='.$user['id'].' style="color:red;">False?</a>';
             }
             echo "<tr id='".$user['id']."' style='color: black;'>\n";
+            if($GLOBALS['config']['uel'][$user['rank']][$_SESSION['auth']['accesslevel']] && $GLOBALS['config']['uel'][$userRank][$_SESSION['auth']['accesslevel']]){
                 echo "<td>".$user['id']."</td>";
                 echo "<td><a href='#' class='firstName' id=".$user['id']." style='color:blue;'>".$user['firstname']."</a></td>";
                 echo "<td><a href='#' class='lastName' id=".$user['id']." style='color:blue;'>".$user['lastname']."</a></td>";
@@ -36,11 +37,26 @@
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
                 echo "<td style='width: 26px;'><a class='delete' id=".$user['id']." href='#'><img src='Web/Images/Delete-Icon.png'/></a></td>";
-            echo "</tr>\n";
-            echo "<script>
-                $('#".$user['id'].".quota').html(getByteString(".$user['quota']."));
-                $('#".$user['id'].".rank').val('".$user['rank']."');
-            </script>\n";
+                echo "</tr>\n";
+                echo "<script>
+                    $('#".$user['id'].".quota').html(getByteString(".$user['quota']."));
+                    $('#".$user['id'].".rank').val('".$user['rank']."');
+                </script>\n";
+           }
+           else {
+                echo "<td id=".$user['id'].">".$user['id']."</td>";
+                echo "<td id=".$user['id'].">".$user['firstname']."</td>";
+                echo "<td id=".$user['id'].">".$user['lastname']."</td>";
+                echo "<td id=".$user['id'].">".$user['email']."</td>";
+                echo "<td id=".$user['id']." class='quota-off'>".$user['quota']."</td>";
+                echo "<td id=".$user['id'].">".$user['rank']."</td>";
+                echo "<td id=".$user['id'].">".$user['reg_date']."</td>";
+                echo "<td id=".$user['id'].">".$user['active']."</td>";
+                echo "</tr>\n";
+                echo "<script>
+                    $('#".$user['id'].".quota-off').html(getByteString(".$user['quota']."));
+                </script>\n";
+            }
         }
     ?>
     </table> 
