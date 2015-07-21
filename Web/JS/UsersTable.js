@@ -227,7 +227,27 @@ $(document).ready(function () {
         });
     });
     $('.rank').change(function () {
-        $.post("index.php?c=admin&m=updateUserRank", { id: $(this).attr('id'), rank: $(this).val() });
+        $.ajax(
+        {
+            url: "index.php?c=admin&m=updateUserRank",
+            type: "POST",
+            data: { id: $(this).attr('id'), rank: $(this).val() },
+            context: this,
+            success: function (data, textStatus, jqXHR) {
+                if (data == 'Rank Updated.') {
+                }
+                else if (data == 'Record no longer exists.') {
+                    $('tr#' + $(this).attr('id')).remove();
+                    showError(data);
+                }
+                else {
+                    showError(data);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showError(errorThrown);
+            }
+        });
     });
     $('.delete').click(function () {
         $.post("index.php?c=admin&m=deleteUser", { id: $(this).attr('id') });
