@@ -87,21 +87,36 @@ class Users extends Model {
         if($rs->rowCount() == 0){return 'Record no longer exists.';}
         return 'User '.$ID.' deleted.';
 	}
-	public function getUser($Email)
+	public function getUser($ID)
 	{
-		$sql = "SELECT * FROM CS_Users WHERE email = :email;";
+		$sql = "SELECT * FROM CS_Users WHERE id = :id;";
 		try 
 		{
 			$rs = NULL;
 			$rs = $this->DBH->prepare($sql);
-			$rs->execute(array(':email' => $Email));
+			$rs->execute(array(':id' => $ID));
 		}
 		catch (PDOException $e){
-			$this->DBO->showErrorPage("Error retrieving user.",$e );							
+			return 'Error retreiving user.';						
 		}
 		$array = $rs->fetchAll();
 		return $array[0];
 	}
+    public function userExists($ID)
+    {
+        $sql = "SELECT count(*) FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return 'Error retreiving user.';						
+		}
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
     public function getUserRank($ID)
     {
         $sql = "SELECT rank FROM CS_Users WHERE id = :id;";
@@ -130,7 +145,7 @@ class Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
         return "Quota Updated.";
     }
     public function updateUserEmail($ID, $EMAIL)
