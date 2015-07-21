@@ -19,7 +19,7 @@ class Admin extends Controller
         $id = $_POST['id'];
         $rank = $this->M_Users->getUserRank($id);
         if($config['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->deleteUser($id);}
-        else{return 'Insuficent permisions to perform action.'+$rank+$_SESSION['auth']['accesslevel'];}
+        else{return 'Insuficent permisions to perform action.'.$rank.$_SESSION['auth']['accesslevel'];}
     }
     function deactivateUser()
     {
