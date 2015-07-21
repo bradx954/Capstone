@@ -59,9 +59,8 @@ $(document).ready(function () {
                 type: "POST",
                 data: { id: $(this).attr('id') },
                 success: function (data, textStatus, jqXHR) {
-                    alert('test');
-                    $(this).css('color', 'red');
-                    $(this).html("False");
+                    $('.active #' + $(this).attr('id')).css('color', 'red');
+                    $('.active #' + $(this).attr('id')).html("False");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
 
