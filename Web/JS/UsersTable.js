@@ -47,12 +47,6 @@ function makeChange(formURL, postData) {
 $(document).ready(function () {
     $('.active').click(function () {
         if ($(this).html() == 'True') {
-            /*var postResponse = makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
-            //$.post("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
-            if (postResponse.statusText == 'OK') {
-                $(this).css('color', 'red');
-                $(this).html("False");
-            }*/
             $.ajax(
             {
                 url: "index.php?c=admin&m=deactivateUser",
@@ -69,12 +63,20 @@ $(document).ready(function () {
             });
         }
         else {
-            var postResponse = makeChange("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
-            //$.post("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
-            if (postResponse.statusText == 'OK') {
-                $(this).css('color', 'green');
-                $(this).html("True");
-            }
+            $.ajax(
+            {
+                url: "index.php?c=admin&m=activateUser",
+                type: "POST",
+                data: { id: $(this).attr('id') },
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    $(this).css('color', 'green');
+                    $(this).html("True");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
         }
     });
     $('.quota').click(function () {
