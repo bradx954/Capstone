@@ -33,7 +33,11 @@
                 echo "<td><a href='#' class='lastName' id=".$user['id']." style='color:blue;'>".$user['lastname']."</a></td>";
                 echo "<td><a href='#' class='email' id=".$user['id']." style='color:blue;'>".$user['email']."</a></td>";
                 echo "<td><a href='#' class='quota' id=".$user['id']." style='color:blue;'></a></td>";
-                echo "<td><select id='".$user['id']."' name='rank' class='form-control rank' style='width: 100px;'><option>user</option><option>admin</option><option>superadmin</option></select></td>";
+                echo "<td><select id='".$user['id']."' name='rank' class='form-control rank' style='width: 100px;'>";
+                if($GLOBALS['config']['uel']['user'][$_SESSION['auth']['accesslevel']]){echo "<option>user</option>";}
+                if($GLOBALS['config']['uel']['admin'][$_SESSION['auth']['accesslevel']]){echo "<option>admin</option>";}
+                if($GLOBALS['config']['uel']['superadmin'][$_SESSION['auth']['accesslevel']]){echo "<option>superadmin</option>";}
+                echo "</select></td>";
                 echo "<td>".$user['reg_date']."</td>";
                 echo "<td>".$user['active']."</td>";
                 echo "<td style='width: 26px;'><a class='delete' id=".$user['id']." href='#'><img src='Web/Images/Delete-Icon.png'/></a></td>";
