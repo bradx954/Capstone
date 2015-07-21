@@ -44,7 +44,7 @@ function showError(postError) {
 function showMessage(postMessage)
 {
     $.notify(
-  postError,
+  postMessage,
   { position: "down", className: "info" }
 );
 }
