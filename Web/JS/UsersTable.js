@@ -47,6 +47,7 @@ $(document).ready(function () {
     $('.active').click(function () {
         if ($(this).html() == 'True') {
             var postResponse = makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
+            alert(postResponse.statusText);
             //$.post("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
             if (postResponse.statusText == 'OK') {
                 $(this).css('color', 'red');
@@ -55,6 +56,7 @@ $(document).ready(function () {
         }
         else {
             var postResponse = makeChange("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
+            alert(postResponse.statusText);
             //$.post("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
             if (postResponse.statusText == 'OK') {
                 $(this).css('color', 'green');
