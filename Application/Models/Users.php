@@ -225,7 +225,7 @@ class Users extends Model {
         {
 			"Error updating user.";							
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false{return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
         return "User Activated.";	
     }
 	public function deactivateUser($ID)
