@@ -42,10 +42,10 @@ function makeChange(formURL, postData) {
         type: "POST",
         data: postData,
         success: function (data, textStatus, jqXHR) {
-            return array(0, data);
+            return [0, data];
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            return array(1, errorThrown);
+            return [1, errorThrown];
         }
     });
 }
