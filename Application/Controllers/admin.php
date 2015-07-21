@@ -19,47 +19,61 @@ class Admin extends Controller
         $id = $_POST['id'];
         $rank = $this->M_Users->getUserRank($id);
         if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->deleteUser($id);}
-        else{return 'Insuficent permisions to perform action.'.$rank.$_SESSION['auth']['accesslevel'];}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function deactivateUser()
     {
         $id = $_POST['id'];
-        return $this->M_Users->deactivateUser($id);
+        $rank = $this->M_Users->getUserRank($id);
+        if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->deactivateUser($id);}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function activateUser()
     {
         $id = $_POST['id'];
-        return $this->M_Users->activateUser($id);
+        $rank = $this->M_Users->getUserRank($id);
+        if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->activateUser($id);}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function updateUserQuota()
     {
         $id = $_POST['id'];
         $bytes = $_POST['bytes'];
-        return $this->M_Users->updateUserQuota($id,$bytes);
+        $rank = $this->M_Users->getUserRank($id);
+        if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserQuota($id,$bytes);}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function updateUserEmail()
     {
         $id = $_POST['id'];
         $email = $_POST['email'];
-        return $this->M_Users->updateUserEmail($id,$email);
+        $rank = $this->M_Users->getUserRank($id);
+        if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserEmail($id,$email);}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function updateUserFirstName()
     {
         $id = $_POST['id'];
         $firstName = $_POST['firstName'];
-        return $this->M_Users->updateUserFirstName($id,$firstName);
+        $rank = $this->M_Users->getUserRank($id);
+        if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserFirstName($id,$firstName);}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function updateUserLastName()
     {
         $id = $_POST['id'];
         $lastName = $_POST['lastName'];
-        return $this->M_Users->updateUserLastName($id,$lastName);
+        $rank = $this->M_Users->getUserRank($id);
+        if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserLastName($id,$lastName);}
+        else{return 'Insuficent permisions to perform action.';}
     }
     function updateUserRank()
     {
         $id = $_POST['id'];
-        $rank = $_POST['rank'];
-        return $this->M_Users->updateUserRank($id,$rank);
+        $userRank = $_POST['rank'];
+        $rank = $this->M_Users->getUserRank($id);
+        if($GLOBALS['config']['uel'][$rank][$_SESSION['auth']['accesslevel']] && $GLOBALS['config']['uel'][$userRank][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserRank($id,$userRank);}
+        else{return 'Insuficent permisions to perform action.';}
     }
 }
 ?>
