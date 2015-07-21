@@ -41,6 +41,13 @@ function showError(postError) {
   { position: "down" }
 );
 }
+function showMessage(postMessage)
+{
+    $.notify(
+  postError,
+  { position: "down", className: "info" }
+);
+}
 $(document).ready(function () {
     $('.active').click(function () {
         if ($(this).html() == 'True') {
@@ -52,6 +59,7 @@ $(document).ready(function () {
                 context: this,
                 success: function (data, textStatus, jqXHR) {
                     if (data == 'User Deactivated.') {
+                        showMessage(data);
                         $(this).css('color', 'red');
                         $(this).html("False");
                     }
@@ -77,6 +85,7 @@ $(document).ready(function () {
                 context: this,
                 success: function (data, textStatus, jqXHR) {
                     if (data == 'User Activated.') {
+                        showMessage(data);
                         $(this).css('color', 'green');
                         $(this).html("True");
                     }
@@ -111,6 +120,7 @@ $(document).ready(function () {
                 context: this,
                 success: function (data, textStatus, jqXHR) {
                     if (data == 'Quota Updated.') {
+                        showMessage(data);
                         $('#' + $(this).attr('id') + '.quota').html($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val());
                         $(this).remove();
                     }
@@ -143,6 +153,7 @@ $(document).ready(function () {
                 context: this,
                 success: function (data, textStatus, jqXHR) {
                     if (data == 'Email Updated.') {
+                        showMessage(data);
                         $('#' + $(this).attr('id') + '.email').html($('#' + $(this).attr('id') + '.inputEmail').val());
                         $(this).remove();
                     }
@@ -175,6 +186,7 @@ $(document).ready(function () {
                 context: this,
                 success: function (data, textStatus, jqXHR) {
                     if (data == 'First Name Updated.') {
+                        showMessage(data);
                         $('#' + $(this).attr('id') + '.firstName').html($('#' + $(this).attr('id') + '.inputFirstName').val());
                         $(this).remove();
                     }
@@ -209,6 +221,7 @@ $(document).ready(function () {
                 context: this,
                 success: function (data, textStatus, jqXHR) {
                     if (data == 'Last Name Updated.') {
+                        showMessage(data);
                         $('#' + $(this).attr('id') + '.lastName').html($('#' + $(this).attr('id') + '.inputLastName').val());
                         $(this).remove();
                     }
@@ -235,6 +248,7 @@ $(document).ready(function () {
             context: this,
             success: function (data, textStatus, jqXHR) {
                 if (data == 'Rank Updated.') {
+                    showMessage(data);
                 }
                 else if (data == 'Record no longer exists.') {
                     $('tr#' + $(this).attr('id')).remove();
@@ -258,6 +272,7 @@ $(document).ready(function () {
             context: this,
             success: function (data, textStatus, jqXHR) {
                 if (data == 'User ' + $(this).attr('id') + ' deleted.') {
+                    showMessage(data);
                     $('tr#' + $(this).attr('id')).remove();
                 }
                 else if (data == 'Record no longer exists.') {
