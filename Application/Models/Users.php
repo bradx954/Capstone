@@ -187,9 +187,9 @@ class Users extends Model {
 		}
 		catch (PDOException $e)
         {
-			return "Error updating user.";						
+			return array(1,"Error updating user.");							
 		}
-        return "User Activated";	
+        return array(0,"User Activated");	
     }
 	public function deactivateUser($ID)
     {
@@ -202,9 +202,9 @@ class Users extends Model {
 		}
 		catch (PDOException $e)
         {
-			return "Error updating user.";						
+			return array(1,"Error updating user.");						
 		}
-        return ">User Deactivated.";	
+        return array(0,"User Deactivated.");	
     }
     public function checkActive($ID)
     {

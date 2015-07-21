@@ -48,8 +48,13 @@ $(document).ready(function () {
                 data: { id: $(this).attr('id') },
                 context: this,
                 success: function (data, textStatus, jqXHR) {
-                    $(this).css('color', 'red');
-                    $(this).html("False");
+                    if (data[0] == 0) {
+                        $(this).css('color', 'red');
+                        $(this).html("False");
+                    }
+                    else {
+                        showError(data[1]);
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     showError(errorThrown);
@@ -64,8 +69,13 @@ $(document).ready(function () {
                 data: { id: $(this).attr('id') },
                 context: this,
                 success: function (data, textStatus, jqXHR) {
-                    $(this).css('color', 'green');
-                    $(this).html("True");
+                    if (data[0] == 0) {
+                        $(this).css('color', 'green');
+                        $(this).html("True");
+                    }
+                    else {
+                        showError(data[1]);
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     showError(errorThrown);
