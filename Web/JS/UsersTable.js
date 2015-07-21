@@ -34,23 +34,20 @@ function getBytes(byteString) {
         case 'GB': return byteSplit[0] * 1000 * 1000 * 1000;
         default: return byteSplit[0];
     }
-    function makeChange(formURL, postData)
+}
+function makeChange(formURL, postData) {
+    $.ajax(
     {
-        $.ajax(
-      	{
-      	    url: formURL,
-      	    type: "POST",
-      	    data: postData,
-      	    success: function (data, textStatus, jqXHR)
-      	    {
-      	        return array(0, data);
-      	    },
-      	    error: function (jqXHR, textStatus, errorThrown)
-      	    {
-      	        return array(1, errorThrown);
-      	    }
-      	});
-    }
+        url: formURL,
+        type: "POST",
+        data: postData,
+        success: function (data, textStatus, jqXHR) {
+            return array(0, data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            return array(1, errorThrown);
+        }
+    });
 }
 $(document).ready(function () {
     $('.active').click(function () {
