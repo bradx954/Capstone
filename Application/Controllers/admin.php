@@ -17,48 +17,47 @@ class Admin extends Controller
     function deleteUser()
     {
         $id = $_POST['id'];
-        $this->M_Users->deleteUser($id);
-        return;
+        return $this->M_Users->deleteUser($id);
     }
     function deactivateUser()
     {
         $id = $_POST['id'];
-        $this->M_Users->deactivateUser($id);
+        return $this->M_Users->deactivateUser($id);
     }
     function activateUser()
     {
         $id = $_POST['id'];
-        $this->M_Users->activateUser($id);
+        return $this->M_Users->activateUser($id);
     }
     function updateUserQuota()
     {
         $id = $_POST['id'];
         $bytes = $_POST['bytes'];
-        $this->M_Users->updateUserQuota($id,$bytes);
+        return $this->M_Users->updateUserQuota($id,$bytes);
     }
     function updateUserEmail()
     {
         $id = $_POST['id'];
         $email = $_POST['email'];
-        $this->M_Users->updateUserEmail($id,$email);
+        return $this->M_Users->updateUserEmail($id,$email);
     }
     function updateUserFirstName()
     {
         $id = $_POST['id'];
         $firstName = $_POST['firstName'];
-        $this->M_Users->updateUserFirstName($id,$firstName);
+        return $this->M_Users->updateUserFirstName($id,$firstName);
     }
     function updateUserLastName()
     {
         $id = $_POST['id'];
         $lastName = $_POST['lastName'];
-        $this->M_Users->updateUserLastName($id,$lastName);
+        return $this->M_Users->updateUserLastName($id,$lastName);
     }
     function updateUserRank()
     {
         $id = $_POST['id'];
         $rank = $_POST['rank'];
-        $this->M_Users->updateUserRank($id,$rank);
+        return $this->M_Users->updateUserRank($id,$rank);
     }
 }
 ?>
