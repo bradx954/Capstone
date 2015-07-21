@@ -47,7 +47,7 @@ $(document).ready(function () {
     $('.active').click(function () {
         if ($(this).html() == 'True') {
             $.when(makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') })).then(function (postResponse) {
-                alert(postResponse.statusText);
+                alert(postResponse);
             });
             //$.post("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') });
             if (postResponse.statusText == 'OK') {
@@ -56,8 +56,8 @@ $(document).ready(function () {
             }
         }
         else {
-            $.when(makeChange("index.php?c=admin&m=deactivateUser", { id: $(this).attr('id') })).then(function (postResponse) {
-                alert(postResponse.statusText);
+            $.when(makeChange("index.php?c=admin&m=activateUser", { id: $(this).attr('id') })).then(function (postResponse) {
+                alert(postResponse);
             });
             //$.post("index.php?c=admin&m=activateUser", { id: $(this).attr('id') });
             if (postResponse.statusText == 'OK') {
