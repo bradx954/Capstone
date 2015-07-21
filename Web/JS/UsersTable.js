@@ -48,12 +48,12 @@ $(document).ready(function () {
                 data: { id: $(this).attr('id') },
                 context: this,
                 success: function (data, textStatus, jqXHR) {
-                    if (data[0] == 0) {
+                    if (data == 'User Deactivated') {
                         $(this).css('color', 'red');
                         $(this).html("False");
                     }
                     else {
-                        showError(data[1]);
+                        showError(data);
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -69,12 +69,12 @@ $(document).ready(function () {
                 data: { id: $(this).attr('id') },
                 context: this,
                 success: function (data, textStatus, jqXHR) {
-                    if (data[0] == 0) {
+                    if (data == 'User Activated') {
                         $(this).css('color', 'green');
                         $(this).html("True");
                     }
                     else {
-                        showError(data[1]);
+                        showError(data);
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
