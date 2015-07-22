@@ -68,7 +68,7 @@ require_once  ROOT . '/Application/Controllers/' . 'users' . '.php';
 //require_once  ROOT . '/application/controllers/' . 'supervisors' . '.php';
 //require_once  ROOT . '/application/models/' . 'example_m' . '.php';
 //require_once  ROOT . '/application/models/' . 'userauth' . '.php'; 
-require_once  ROOT . '/Application/Models/' . 'Users' . '.php';
+require_once  ROOT . '/Application/Models/' . 'M_Users' . '.php';
 require_once  ROOT . '/Application/Models/' . 'userauth' . '.php';
 //require_once  ROOT . '/application/models/' . 'phonebook' . '.php'; 
  

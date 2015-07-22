@@ -6,7 +6,7 @@ class Home extends Controller
 	function __construct() 
 	{
 		parent::__construct(); 
-		$this->M_Users = new Users();
+		$this->M_Users = new M_Users();
 	}
 	function index()
 	{

@@ -1,6 +1,6 @@
 <?php
 //I, Brad Baago, 000306223 certify that this material is my original work. No other person's work has been used without due acknowledgement.
-class Users extends Model {
+class M_Users extends Model {
 	private   $DBO;
 	private   $DBH;
 
