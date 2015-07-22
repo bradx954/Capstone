@@ -17,7 +17,7 @@
             </div>
             <div class='nav navbar-nav navbar-right'>
 			    <li><a><?php echo $_SESSION['auth']['email']; ?></a></li>
-                <li><a href='#'>index.php?c=settings&m=index</a></li>
+                <li><a href='index.php?c=settings&m=index'>Settings</a></li>
                 <li><a href='index.php?c=home&m=logout'>Logout</a></li>
 		    </div>
         </div>
