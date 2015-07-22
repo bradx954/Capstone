@@ -12,7 +12,7 @@ class Users extends Controller
 	function index()
 	{
         $TPL['users'] = $this->M_Users->getUsers();
-		$this->view->render('admin',$TPL);
+		$this->view->render('users',$TPL);
 	}
     function deleteUser()
     {
