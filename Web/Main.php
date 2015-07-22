@@ -59,7 +59,7 @@ require_once  ROOT . '/Library/Classes/' . 'Model' . '.php';
 require_once  ROOT . '/Library/Classes/' . 'View' . '.php';
 //require_once  ROOT . '/application/controllers/' . 'example' . '.php';
 require_once  ROOT . '/Application/Controllers/' . 'home' . '.php';
-require_once  ROOT . '/Application/Controllers/' . 'admin' . '.php';
+require_once  ROOT . '/Application/Controllers/' . 'users' . '.php';
 //require_once  ROOT . '/application/controllers/' . 'register' . '.php';
 //require_once  ROOT . '///application/controllers/' . 'login' . '.php';
 //require_once  ROOT . '/application/controllers/' . 'admin' . '.php';

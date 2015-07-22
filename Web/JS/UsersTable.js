@@ -53,7 +53,7 @@ $(document).ready(function () {
         if ($(this).html() == 'True') {
             $.ajax(
             {
-                url: "index.php?c=admin&m=deactivateUser",
+                url: "index.php?c=users&m=deactivateUser",
                 type: "POST",
                 data: { id: $(this).attr('id') },
                 context: this,
@@ -79,7 +79,7 @@ $(document).ready(function () {
         else {
             $.ajax(
             {
-                url: "index.php?c=admin&m=activateUser",
+                url: "index.php?c=users&m=activateUser",
                 type: "POST",
                 data: { id: $(this).attr('id') },
                 context: this,
@@ -114,7 +114,7 @@ $(document).ready(function () {
             event.preventDefault();
             $.ajax(
             {
-                url: "index.php?c=admin&m=updateUserQuota",
+                url: "index.php?c=users&m=updateUserQuota",
                 type: "POST",
                 data: { id: $(this).attr('id'), bytes: getBytes($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val()) },
                 context: this,
@@ -147,7 +147,7 @@ $(document).ready(function () {
             event.preventDefault();
             $.ajax(
             {
-                url: "index.php?c=admin&m=updateUserEmail",
+                url: "index.php?c=users&m=updateUserEmail",
                 type: "POST",
                 data: { id: $(this).attr('id'), email: $('#' + $(this).attr('id') + '.inputEmail').val() },
                 context: this,
@@ -180,7 +180,7 @@ $(document).ready(function () {
             event.preventDefault();
             $.ajax(
             {
-                url: "index.php?c=admin&m=updateUserFirstName",
+                url: "index.php?c=users&m=updateUserFirstName",
                 type: "POST",
                 data: { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() },
                 context: this,
@@ -203,7 +203,7 @@ $(document).ready(function () {
                 }
             });
             event.preventDefault();
-            $.post("index.php?c=admin&m=updateUserFirstName", { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() });
+            $.post("index.php?c=users&m=updateUserFirstName", { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() });
         });
     });
     $('.lastName').click(function () {
@@ -215,7 +215,7 @@ $(document).ready(function () {
             event.preventDefault();
             $.ajax(
             {
-                url: "index.php?c=admin&m=updateUserLastName",
+                url: "index.php?c=users&m=updateUserLastName",
                 type: "POST",
                 data: { id: $(this).attr('id'), lastName: $('#' + $(this).attr('id') + '.inputLastName').val() },
                 context: this,
@@ -242,7 +242,7 @@ $(document).ready(function () {
     $('.rank').change(function () {
         $.ajax(
         {
-            url: "index.php?c=admin&m=updateUserRank",
+            url: "index.php?c=users&m=updateUserRank",
             type: "POST",
             data: { id: $(this).attr('id'), rank: $(this).val() },
             context: this,
@@ -266,7 +266,7 @@ $(document).ready(function () {
     $('.delete').click(function () {
         $.ajax(
         {
-            url: "index.php?c=admin&m=deleteUser",
+            url: "index.php?c=users&m=deleteUser",
             type: "POST",
             data: { id: $(this).attr('id') },
             context: this,

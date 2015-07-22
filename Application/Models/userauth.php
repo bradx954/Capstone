@@ -180,11 +180,12 @@ class UserAuth extends Model {
     */
     public function writeSession() 
     {
-	$_SESSION['auth']['email'] = $this->values[3];
-	$_SESSION['auth']['ipAddress'] = $_SERVER['REMOTE_ADDR'];
-	$_SESSION['auth']['accesslevel'] = $this->values[11];
-	$_SESSION['auth']['active'] = $this->values[9];
-	$_SESSION['auth']['logintime'] = date("Y-m-d h:m:s",time());
+	    $_SESSION['auth']['email'] = $this->values[3];
+	    $_SESSION['auth']['ipAddress'] = $_SERVER['REMOTE_ADDR'];
+	    $_SESSION['auth']['accesslevel'] = $this->values[11];
+	    $_SESSION['auth']['active'] = $this->values[9];
+	    $_SESSION['auth']['logintime'] = date("Y-m-d h:m:s",time());
+        $_SESSION['auth']['id'] = $this->values[0];
      }
 	
 	/**
