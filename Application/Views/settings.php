@@ -6,12 +6,11 @@
     //influenced by http://stackoverflow.com/questions/22087076/how-to-make-a-simple-image-upload-using-javascript-html
     function previewImage()
     {
-       var preview = $('#imagePreview'); //selects the query named img
        var file    = $('#newImage').prop('files')[0]; //sames as here
        var reader  = new FileReader();
 
        reader.onloadend = function () {
-           preview.src = reader.result;
+           $("#imagePreview").attr('src', reader.result);
        }
 
        if (file) {
