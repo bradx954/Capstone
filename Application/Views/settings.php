@@ -10,14 +10,14 @@
       	{
       		url : formURL,
       		type: "POST",
-      		data : { image: $("#imagePreview").attr('src') },
+      		data : { image: $("#imagePreviewLarge").attr('src') },
       		success:function(data, textStatus, jqXHR) 
       		{
                 if(data == 'Avatar Updated.')
                 {
                   $('#FormMessage').html('<div class="alert alert-success">'+data+'</div>');
-                  $("#avatar").attr('src',$("#imagePreview").attr('src'));
-                  $("#avatar-icon-nav").attr('src',$("#imagePreview").attr('src'));
+                  $("#avatar").attr('src',$("#imagePreviewLarge").attr('src'));
+                  $("#avatar-icon-nav").attr('src',$("#imagePreviewLarge").attr('src'));
                 }
                 else{$('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
       		},
