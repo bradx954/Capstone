@@ -16,7 +16,7 @@
                 <?php if($GLOBALS['config']['acl']['users'][$_SESSION['auth']['accesslevel']] == true){echo "<li "; if($TPL['page'] == 'users'){echo "class='active'";}echo"><a href='index.php?c=users'>Users</a></li>";} ?>
             </div>
             <div class='nav navbar-nav navbar-right'>
-                <li><a><img height='16' width='16' src='data:image/png;base64, <?php echo $_SESSION['auth']['avatar'];?>' /></a></li>
+                <li><a><img height='24' width='24' src='data:image/png;base64, <?php echo $_SESSION['auth']['avatar'];?>' /></a></li>
                 <li><a><?php echo $_SESSION['auth']['email']; ?></a></li>
                 <li><a href='index.php?c=settings&m=index'>Settings</a></li>
                 <li><a href='index.php?c=home&m=logout'>Logout</a></li>
