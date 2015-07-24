@@ -188,6 +188,7 @@ class UserAuth extends Model {
         $_SESSION['auth']['id'] = $this->values[0];
         if($this->values[12] === 0){$_SESSION['auth']['avatar'] = "data:image/png;base64,"+base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));}
         else{$_SESSION['auth']['avatar'] = $this->values[12];}
+        $_SESSION['auth']['email'] = $this->values[12];
      }
 	
 	/**
