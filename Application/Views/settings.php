@@ -16,7 +16,7 @@
                 if(data == 'Avatar Updated.')
                 {
                   $('#FormMessage').html('<div class="alert alert-success">'+data+'</div>');
-                  $("#avatar").attr('src',$("#imagePreviewLarge").attr('src'));
+                  $("#profile-avatar").attr('src',$("#imagePreviewLarge").attr('src'));
                   $("#avatar-icon-nav").attr('src',$("#imagePreviewLarge").attr('src'));
                 }
                 else{$('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
@@ -53,7 +53,7 @@
     }
 </script>
 <div id="avatar">
-    <?php echo "<img id='avatar' height='256' width='256' src='data:image/png;base64,".$_SESSION['auth']['avatar']."' />"; ?>
+    <?php echo "<img id='profile-avatar' height='256' width='256' src='data:image/png;base64,".$_SESSION['auth']['avatar']."' />"; ?>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePicture">Change</button>
     <button type="button" class="btn btn-default">Delete</button>
 </div>
