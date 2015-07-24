@@ -10,7 +10,7 @@
       	{
       		url : formURL,
       		type: "POST",
-      		data : postData,
+      		data : { image: $("#imagePreview").attr('src') },
       		success:function(data, textStatus, jqXHR) 
       		{
                 if(data == 'Avatar Updated.')
@@ -64,6 +64,9 @@
       <div class="modal-body">
       <div id="FormMessage"></div>
       <img src="" height="256" width="256" alt="Image preview..." id='imagePreview'>
+      <img src="" height="128" width="128" alt="Image preview..." id='imagePreview'>
+      <img src="" height="64" width="64" alt="Image preview..." id='imagePreview'>
+      <img src="" height="32" width="32" alt="Image preview..." id='imagePreview'>
         <form id='avatar-form' method="post" action="index.php?c=settings&m=updateUserAvatar">
             <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()"/>
         </form>
