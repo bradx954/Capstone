@@ -24,7 +24,7 @@
       		    }
       	});
           e.preventDefault();	//STOP default action
-          $("#avatar-form").unbind('submit');
+          //$("#avatar-form").unbind('submit');
       });
       });
     function saveImage()
