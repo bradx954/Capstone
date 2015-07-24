@@ -2,6 +2,10 @@
     //influenced by http://stackoverflow.com/questions/22087076/how-to-make-a-simple-image-upload-using-javascript-html
     function saveImage()
     {
+        
+    }
+    function previewImage()
+    {
        var preview = $('#imagePreview'); //selects the query named img
        var file    = $('#newImage').prop('files')[0]; //sames as here
        var reader  = new FileReader();
@@ -32,7 +36,7 @@
       <div class="modal-body">
       <img id='imagePreview'/>
         <form id='avatar-form' method="post" action="#">
-            <input type="file" id="newImage" name="newImage" accept="image/*">
+            <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()">
         <form>
       </div>
       <div class="modal-footer">
