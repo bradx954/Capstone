@@ -65,7 +65,7 @@
       <div id="FormMessage"></div>
       <img src="" height="256" width="256" alt="Image preview..." id='imagePreview'>
         <form id='avatar-form' method="post" action="index.php?c=settings&m=updateUserAvatar">
-            <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()">
+            <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()"></input>
         <form>
       </div>
       <div class="modal-footer">
