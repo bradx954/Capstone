@@ -48,6 +48,10 @@ class Settings extends Controller
     function updateUserAvatar()
     {
         $avatar = $_POST['image'];
+        if(strlen($avatar) > 5000)
+        {
+            return "Image to large.";
+        }
         return $this->M_Users->updateUserAvatar($this->UserID,$avatar);
     }
 }
