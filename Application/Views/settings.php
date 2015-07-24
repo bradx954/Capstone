@@ -1,7 +1,20 @@
 <script>
+    //influenced by http://stackoverflow.com/questions/22087076/how-to-make-a-simple-image-upload-using-javascript-html
     function saveImage()
     {
-        alert('Saved!');
+       var preview = $('#imagePreview'); //selects the query named img
+       var file    = $('#newImage').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
     }
 </script>
 <div id="avatar">
@@ -17,8 +30,9 @@
         <h4 class="modal-title">Change Avatar Picture</h4>
       </div>
       <div class="modal-body">
+      <img id='imagePreview'/>
         <form id='avatar-form'>
-            <input type="file" id="avatar">
+            <input type="file" id="newImage">
         <form>
       </div>
       <div class="modal-footer">
