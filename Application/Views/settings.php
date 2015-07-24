@@ -17,11 +17,11 @@
                 {
                   $('#FormMessage').html('<div class="alert alert-success">'+data+'</div>');
                 }
-                else{('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
+                else{$('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
       		    },
       		    error: function(jqXHR, textStatus, errorThrown) 
       		    {
-                    ('#FormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
+                    $('#FormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
       		    }
       	});
           e.preventDefault();	//STOP default action
