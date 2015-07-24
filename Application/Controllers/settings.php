@@ -49,7 +49,7 @@ class Settings extends Controller
     {
         $avatar = $_POST['image'];
         if($avatar ==""){return 'Error no image';}
-        if(strlen($avatar) > 10000)
+        if(strlen($avatar) > 100000)
         {
             return "Image to large.";
         }
