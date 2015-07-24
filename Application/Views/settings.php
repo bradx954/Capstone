@@ -16,6 +16,8 @@
                 if(data == 'Avatar Updated.')
                 {
                   $('#FormMessage').html('<div class="alert alert-success">'+data+'</div>');
+                  $("#avatar").attr('src',$("#imagePreview").attr('src'));
+                  $("#avatar-icon-nav").attr('src',$("#imagePreview").attr('src'));
                 }
                 else{$('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
       		},
@@ -39,7 +41,8 @@
        var reader  = new FileReader();
 
        reader.onloadend = function () {
-           $("#imagePreview").attr('src', reader.result);
+           $("#imagePreviewLarge").attr('src', reader.result);
+           $("#imagePreviewSmall").attr('src', reader.result);
        }
 
        if (file) {
@@ -50,7 +53,7 @@
     }
 </script>
 <div id="avatar">
-    <?php echo "<img height='256' width='256' src='data:image/png;base64,".$_SESSION['auth']['avatar']."' />"; ?>
+    <?php echo "<img id='avatar' height='256' width='256' src='data:image/png;base64,".$_SESSION['auth']['avatar']."' />"; ?>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePicture">Change</button>
     <button type="button" class="btn btn-default">Delete</button>
 </div>
@@ -63,10 +66,8 @@
       </div>
       <div class="modal-body">
       <div id="FormMessage"></div>
-      <img src="" height="256" width="256" alt="Image preview..." id='imagePreview'>
-      <img src="" height="128" width="128" alt="Image preview..." id='imagePreview'>
-      <img src="" height="64" width="64" alt="Image preview..." id='imagePreview'>
-      <img src="" height="32" width="32" alt="Image preview..." id='imagePreview'>
+      <img src="" height="256" width="256" alt="Image preview..." id='imagePreviewLarge'>
+      <img src="" height="36" width="36" alt="Image preview..." id='imagePreviewSmall'>
         <form id='avatar-form' method="post" action="index.php?c=settings&m=updateUserAvatar">
             <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()"/>
         </form>
