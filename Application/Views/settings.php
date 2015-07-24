@@ -3,7 +3,7 @@
     function saveImage()
     {
        var preview = $('#imagePreview'); //selects the query named img
-       var file    = $('#newImage').files[0]; //sames as here
+       var file    = $('#newImage').prop('files')[0]; //sames as here
        var reader  = new FileReader();
 
        reader.onloadend = function () {
