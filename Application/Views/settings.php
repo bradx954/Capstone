@@ -18,12 +18,12 @@
                   $('#FormMessage').html('<div class="alert alert-success">'+data+'</div>');
                 }
                 else{$('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
-      		    },
-      		    error: function(jqXHR, textStatus, errorThrown) 
-      		    {
-                    $('#FormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
-      		    }
-      	});
+      		},
+      		error: function(jqXHR, textStatus, errorThrown) 
+      		{
+                $('#FormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
+      		}
+        });
           e.preventDefault();	//STOP default action
           //$("#avatar-form").unbind('submit');
       });
@@ -65,7 +65,7 @@
       <div id="FormMessage"></div>
       <img src="" height="256" width="256" alt="Image preview..." id='imagePreview'>
         <form id='avatar-form' method="post" action="index.php?c=settings&m=updateUserAvatar">
-            <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()"></input>
+            <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()"/>
         </form>
       </div>
       <div class="modal-footer">
