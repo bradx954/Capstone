@@ -32,7 +32,7 @@
       <div class="modal-body">
       <img id='imagePreview'/>
         <form id='avatar-form'>
-            <input type="file" id="newImage">
+            <input type="file" id="newImage" name="newImage" accept="image/*">
         <form>
       </div>
       <div class="modal-footer">
