@@ -33,7 +33,7 @@
       </div>
       <div class="modal-body">
       <img id='imagePreview'/>
-        <form id='avatar-form'>
+        <form id='avatar-form' method="post" action="#">
             <input type="file" id="newImage" name="newImage" accept="image/*">
         <form>
       </div>
