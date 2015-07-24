@@ -47,7 +47,7 @@ class Settings extends Controller
     }
     function updateUserAvatar()
     {
-        $avatar = $_FILES['newImage'];
+        $avatar = $_FILES['newImage']['tmp_name'];
         return $this->M_Users->updateUserAvatar($this->UserID,$avatar);
     }
 }
