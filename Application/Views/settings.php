@@ -13,7 +13,7 @@
        var reader  = new FileReader();
 
        reader.onloadend = function () {
-           preview.src = reader.result+"?"+d.getTime();
+           preview.src = reader.result+"?timestamp="+d.getTime();
        }
 
        if (file) {
