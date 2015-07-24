@@ -45,5 +45,10 @@ class Settings extends Controller
         $question = $_POST['question'];
         $answer = $_POST['answer'];
     }
+    function updateUserAvatar()
+    {
+        $avatar = $_POST['avatar'];
+        return "avatar updated! Just kidding no it diddent do anything.";
+    }
 }
 ?>
