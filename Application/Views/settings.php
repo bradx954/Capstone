@@ -1,9 +1,9 @@
 <script>
     $(document).ready(function()
     {
-    $('#FormMessage').html('');
     $("#avatar-form").submit(function(e)
       {
+        $('#FormMessage').html('');
       	var postData = $(this).serializeArray();
       	var formURL = $(this).attr("action");
       	$.ajax(
