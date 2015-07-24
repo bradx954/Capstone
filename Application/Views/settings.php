@@ -1,6 +1,7 @@
 <script>
     $(document).ready(function()
     {
+    $('#FormMessage').html('');
     $("#avatar-form").submit(function(e)
       {
       	var postData = $(this).serializeArray();
@@ -14,13 +15,13 @@
       		{
                 if(data == 'Avatar Updated.')
                 {
-                  $('FormMessage').html('<div class="alert alert-success">'+data+'</div>');
+                  $('#FormMessage').html('<div class="alert alert-success">'+data+'</div>');
                 }
-                else{('FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
+                else{('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
       		    },
       		    error: function(jqXHR, textStatus, errorThrown) 
       		    {
-                    document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">'+errorThrown+'</div>';
+                    ('#FormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
       		    }
       	});
           e.preventDefault();	//STOP default action
@@ -29,7 +30,6 @@
       });
     function saveImage()
     {
-      $('#FormMessage').html('');
       $('#avatar-form').submit();
     }
     //influenced by http://stackoverflow.com/questions/22087076/how-to-make-a-simple-image-upload-using-javascript-html
