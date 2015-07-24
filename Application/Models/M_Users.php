@@ -145,7 +145,7 @@ class M_Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "Quota Updated.";
     }
     public function updateUserEmail($ID, $EMAIL)
@@ -161,7 +161,7 @@ class M_Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "Email Updated.";
     }
     public function updateUserFirstName($ID, $FIRSTNAME)
@@ -177,7 +177,7 @@ class M_Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "First Name Updated.";
     }
     public function updateUserLastName($ID, $LASTNAME)
@@ -193,7 +193,7 @@ class M_Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "Last Name Updated.";
     }
     public function updateUserRank($ID, $RANK)
@@ -209,7 +209,7 @@ class M_Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "Rank Updated.";
     }
     public function activateUser($ID)
@@ -225,7 +225,7 @@ class M_Users extends Model {
         {
 			"Error updating user.";							
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "User Activated.";	
     }
 	public function deactivateUser($ID)
@@ -241,7 +241,7 @@ class M_Users extends Model {
         {
 			return "Error updating user.";						
 		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'Record no longer exists.';}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "User Deactivated.";	
     }
     public function checkActive($ID)
@@ -258,6 +258,22 @@ class M_Users extends Model {
 		} 
 		$array = $rs->fetchAll();
 		return $array[0][0];
+    }
+    function updateUserAvatar($ID, $AVATAR)
+    {
+        $sql = "UPDATE CS_Users SET avatar = :avatar WHERE id = :id;";
+		try 
+        {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID, ':avatar' => $AVATAR));
+		}
+		catch (PDOException $e)
+        {
+			return "Error updating avatar.";						
+		}
+        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
+        return "Avatar Updated.";
     }
 }
 

@@ -47,8 +47,8 @@ class Settings extends Controller
     }
     function updateUserAvatar()
     {
-        $avatar = $_POST['avatar'];
-        return "avatar updated! Just kidding no it diddent do anything.";
+        $avatar = $_POST['newImage'];
+        return $this->M_Users->updateUserAvatar($this->UserID,$avatar);
     }
 }
 ?>

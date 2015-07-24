@@ -1,7 +1,34 @@
 <script>
     function saveImage()
     {
-        
+      $('#FormMessage').html('');
+
+      $("#avatar-form").submit(function(e)
+      {
+      	var postData = $(this).serializeArray();
+      	var formURL = $(this).attr("action");
+      	$.ajax(
+      	{
+      		url : formURL,
+      		type: "POST",
+      		data : postData,
+      		success:function(data, textStatus, jqXHR) 
+      		{
+                if(data == 'Avatar Updated.')
+                {
+                  $('FormMessage').html('<div class="alert alert-success">'+data+'</div>');
+                }
+                else{('FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
+      		    },
+      		    error: function(jqXHR, textStatus, errorThrown) 
+      		    {
+                    document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">'+errorThrown+'</div>';
+      		    }
+      	});
+          e.preventDefault();	//STOP default action
+          $("#avatar-form").unbind('submit');
+      });
+      $('#avatar-form').submit();
     }
     //influenced by http://stackoverflow.com/questions/22087076/how-to-make-a-simple-image-upload-using-javascript-html
     function previewImage()
@@ -33,8 +60,9 @@
         <h4 class="modal-title">Change Avatar Picture</h4>
       </div>
       <div class="modal-body">
+      <div id="FormMessage"></div>
       <img src="" height="256" width="256" alt="Image preview..." id='imagePreview'>
-        <form id='avatar-form' method="post" action="#">
+        <form id='avatar-form' method="post" action="index.php?c=settings&m=updateUserAvatar">
             <input type="file" id="newImage" name="newImage" accept="image/*" onchange="previewImage()">
         <form>
       </div>
