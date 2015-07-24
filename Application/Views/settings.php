@@ -23,6 +23,7 @@
 </script>
 <div id="avatar">
     <?php echo "<img height='256' width='256' src='data:image/png;base64,".$_SESSION['auth']['avatar']."' />"; ?>
+    <img src="" height="256" width="256" alt="Image preview..." id='imagePreview'>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePicture">Change</button>
     <button type="button" class="btn btn-default">Delete</button>
 </div>
