@@ -24,7 +24,7 @@
                 $('#FormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
       		}
         });
-          e.preventDefault();	//STOP default action
+          //e.preventDefault();	//STOP default action
           //$("#avatar-form").unbind('submit');
       });
       });
