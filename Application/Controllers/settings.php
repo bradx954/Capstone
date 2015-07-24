@@ -54,7 +54,7 @@ class Settings extends Controller
             return "Image to large.";
         }
         $result = $this->M_Users->updateUserAvatar($this->UserID,$avatar);
-        if($result == "Avatar Updated")
+        if($result == "Avatar Updated.")
         {
             $_SESSION['auth']['avatar'] = $avatar;
             return $result;
