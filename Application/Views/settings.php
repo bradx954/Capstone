@@ -1,9 +1,7 @@
 <script>
-    function saveImage()
+    $(document).ready(function()
     {
-      $('#FormMessage').html('');
-
-      $("#avatar-form").submit(function(e)
+    $("#avatar-form").submit(function(e)
       {
       	var postData = $(this).serializeArray();
       	var formURL = $(this).attr("action");
@@ -28,6 +26,10 @@
           e.preventDefault();	//STOP default action
           $("#avatar-form").unbind('submit');
       });
+      });
+    function saveImage()
+    {
+      $('#FormMessage').html('');
       $('#avatar-form').submit();
     }
     //influenced by http://stackoverflow.com/questions/22087076/how-to-make-a-simple-image-upload-using-javascript-html
