@@ -87,14 +87,14 @@ class M_Users extends Model {
         if($rs->rowCount() == 0){return 'Record no longer exists.';}
         return 'User '.$ID.' deleted.';
 	}
-	public function getUser($ID)
+	public function getUser($EMAIL)
 	{
-		$sql = "SELECT * FROM CS_Users WHERE id = :id;";
+		$sql = "SELECT * FROM CS_Users WHERE email = :email;";
 		try 
 		{
 			$rs = NULL;
 			$rs = $this->DBH->prepare($sql);
-			$rs->execute(array(':id' => $ID));
+			$rs->execute(array(':email' => $EMAIL));
 		}
 		catch (PDOException $e){
 			return 'Error retreiving user.';						
