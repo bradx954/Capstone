@@ -186,7 +186,7 @@ class UserAuth extends Model {
 	    $_SESSION['auth']['active'] = $this->values[9];
 	    $_SESSION['auth']['logintime'] = date("Y-m-d h:m:s",time());
         $_SESSION['auth']['id'] = $this->values[0];
-        if(isset($this->values[12]) == false){$_SESSION['auth']['avatar'] = "data:image/png;base64,"+base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));}
+        if($this->values[12] == '0'){$_SESSION['auth']['avatar'] = "data:image/png;base64,"+base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));}
         else{$_SESSION['auth']['avatar'] = $this->values[12];}
      }
 	
