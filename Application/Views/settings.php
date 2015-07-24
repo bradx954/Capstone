@@ -1,3 +1,3 @@
 <?php
-    echo "<img>data:image/x-icon;".$_SESSION['auth']['avatar'].",imageData</>";
+    echo "<img src='data:image/png;base64,".$_SESSION['auth']['avatar']."' />";
 ?>
