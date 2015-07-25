@@ -29,3 +29,10 @@ h1
 {
     color: black;
 }
+.module-container
+{
+    background-color: white;
+    color: black;
+    margin: 5px;
+    padding: 5px;
+}

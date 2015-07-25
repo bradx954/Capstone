@@ -52,8 +52,8 @@
        }
     }
 </script>
-<div id="avatar">
-    <?php echo "<img id='profile-avatar' height='256' width='256' src='".$_SESSION['auth']['avatar']."' />"; ?>
+<div id="avatar" class="module-container">
+    <?php echo "<img id='profile-avatar' height='256' width='256' src='".$_SESSION['auth']['avatar']."' />"; ?></br>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePicture">Change</button>
     <button type="button" class="btn btn-default">Delete</button>
 </div>
