@@ -53,9 +53,9 @@
     }
 </script>
 <div id="avatar" class="module-container" style="width: 300px;">
-    <?php echo "<img id='profile-avatar' height='256' width='256' src='".$_SESSION['auth']['avatar']."' style='margin: auto;'/>"; ?>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePicture" style="width: 120px;">Change</button>
-    <button type="button" class="btn btn-default" style="width: 120px;">Delete</button>
+    <?php echo "<img id='profile-avatar' height='256' width='256' src='".$_SESSION['auth']['avatar']."' style='display: block; margin: auto;'/>"; ?>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePicture" style="display: block; margin: auto; width: 120px;">Change</button>
+    <button type="button" class="btn btn-default" style="display: block; margin: auto; width: 120px;">Delete</button>
 </div>
 <div id="changePicture" class="modal fade" role="dialog">
   <div class="modal-dialog">
