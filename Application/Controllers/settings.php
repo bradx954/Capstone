@@ -61,5 +61,15 @@ class Settings extends Controller
         }
         return $result;
     }
+    function deleteUserAvatar()
+    {
+        $result = $this->M_Users->updateUserAvatar($this->UserID,"");
+        if($result == "Avatar Updated.")
+        {
+            $_SESSION['auth']['avatar'] = "data:image/png;base64,".base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));
+            return "Avatar Deleted.";
+        }
+        return $result;
+    }
 }
 ?>
