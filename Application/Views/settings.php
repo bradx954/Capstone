@@ -33,7 +33,7 @@
           {
             $.ajax(
       	    {
-      		    url : formURL,
+      		    url : "index.php?c=settings&m=deleteUserAvatar",
       		    type: "POST",
       		    data : { },
       		    success:function(data, textStatus, jqXHR) 
