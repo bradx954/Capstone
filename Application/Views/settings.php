@@ -1,34 +1,57 @@
 <script>
     $(document).ready(function()
     {
-    $("#avatar-form").submit(function(e)
-      {
-        $('#FormMessage').html('');
-      	var postData = $(this).serializeArray();
-      	var formURL = $(this).attr("action");
-      	$.ajax(
-      	{
-      		url : formURL,
-      		type: "POST",
-      		data : { image: $("#imagePreviewLarge").attr('src') },
-      		success:function(data, textStatus, jqXHR) 
-      		{
-                if(data == 'Avatar Updated.')
-                {
-                  $('#FormMessage').html('<div class="alert alert-success">'+data+'</div>');
-                  $("#profile-avatar").attr('src',$("#imagePreviewLarge").attr('src'));
-                  $("#avatar-icon-nav").attr('src',$("#imagePreviewLarge").attr('src'));
-                }
-                else{$('#FormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
-      		},
-      		error: function(jqXHR, textStatus, errorThrown) 
-      		{
-                $('#FormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
-      		}
-        });
-          e.preventDefault();	//STOP default action
-          //$("#avatar-form").unbind('submit');
-      });
+        $("#avatar-form").submit(function(e)
+          {
+            $('#createAvatarFormMessage').html('');
+      	    var postData = $(this).serializeArray();
+      	    var formURL = $(this).attr("action");
+      	    $.ajax(
+      	    {
+      		    url : formURL,
+      		    type: "POST",
+      		    data : { image: $("#imagePreviewLarge").attr('src') },
+      		    success:function(data, textStatus, jqXHR) 
+      		    {
+                    if(data == 'Avatar Updated.')
+                    {
+                      $('#createAvatarFormMessage').html('<div class="alert alert-success">'+data+'</div>');
+                      $("#profile-avatar").attr('src',$("#imagePreviewLarge").attr('src'));
+                      $("#avatar-icon-nav").attr('src',$("#imagePreviewLarge").attr('src'));
+                    }
+                    else{$('#createAvatarFormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
+      		    },
+      		    error: function(jqXHR, textStatus, errorThrown) 
+      		    {
+                    $('#createAvatarFormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
+      		    }
+            });
+              e.preventDefault();	//STOP default action
+              //$("#avatar-form").unbind('submit');
+          });
+          $("#btnDeleteAvatar").click(function()
+          {
+            $.ajax(
+      	    {
+      		    url : formURL,
+      		    type: "POST",
+      		    data : { },
+      		    success:function(data, textStatus, jqXHR) 
+      		    {
+                    if(data == 'Avatar Deleted.')
+                    {
+                      $('#deleteAvatarFormMessage').html('<div class="alert alert-success">'+data+'</div>');
+                      $("#profile-avatar").attr('src',"Web/Images/default-avatar.jpg");
+                      $("#avatar-icon-nav").attr('src',"Web/Images/default-avatar.jpg");
+                    }
+                    else{$('#deleteAvatarFormMessage').html('<div class="alert alert-danger">'+data+'</div>');}
+      		    },
+      		    error: function(jqXHR, textStatus, errorThrown) 
+      		    {
+                    $('#deleteAvatarFormMessage').html('<div class="alert alert-danger">'+errorThrown+'</div>');
+      		    }
+            });
+          });
       });
     function saveImage()
     {
@@ -67,7 +90,7 @@
         <h4 class="modal-title">Change Avatar Picture</h4>
       </div>
       <div class="modal-body">
-      <div id="FormMessage"></div>
+      <div id="createAvatarFormMessage"></div>
       <img src="" height="256" width="256" alt="Image preview..." id='imagePreviewLarge'>
       <img src="" height="36" width="36" alt="Image preview..." id='imagePreviewSmall'>
         <form id='avatar-form' method="post" action="index.php?c=settings&m=updateUserAvatar">
@@ -87,10 +110,11 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h2>You sure you want to delete your avatar?<h2>
+                <div id="deleteAvatarFormMessage"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a class="btn btn-danger btn-ok">Delete</a>
+                <a id="btnDeleteAvatar" class="btn btn-danger btn-ok">Delete</a>
             </div>
         </div>
     </div>
