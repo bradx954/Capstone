@@ -85,14 +85,11 @@
 <div class="modal fade" id="confirm-delete-avatar" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-            <h2>You sure you want to delete your avatar?<h2>
-            </div>
             <div class="modal-body">
-                
+                <h2>You sure you want to delete your avatar?<h2>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <a class="btn btn-danger btn-ok">Delete</a>
             </div>
         </div>
