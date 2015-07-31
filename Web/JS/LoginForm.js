@@ -10,7 +10,7 @@ $(document).ready(function () {
                 type: "POST",
                 data: postData,
                 success: function (data, textStatus, jqXHR) {
-                    if (data == "Login Success") { window.location.assign("<?php echo $TPL['Login_Page'];?>"); }
+                    if (data == "Login Success") { window.location.assign("index.php"); }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
