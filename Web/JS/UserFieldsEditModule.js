@@ -49,7 +49,7 @@
             {
                 url: "index.php?c=settings&m=updateUserFirstName",
                 type: "POST",
-                data: { firstname: $('#' + $(this).attr('id') + '.inputFirstNameUserField').val() },
+                data: { firstName: $('#' + $(this).attr('id') + '.inputFirstNameUserField').val() },
                 context: this,
                 success: function (data, textStatus, jqXHR) {
                     if (data == 'First Name Updated.') {
