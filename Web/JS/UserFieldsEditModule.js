@@ -4,8 +4,12 @@
     {
         var email = $(this).html();
         $(this).html('');
-        $(this).after('<form name="updateEmailUserField" class="emailUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserEmail"><input type="text" name="emailUserField" id="' + $(this).attr('id') + '" class="form-control inputEmailUserField" style="width: 300px; display: inline;"><button type="submit" class="btn btn-primary">Save</button></form>');
+        $(this).after('<form name="updateEmailUserField" class="emailUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserEmail"><input type="text" name="emailUserField" id="' + $(this).attr('id') + '" class="form-control inputEmailUserField" style="width: 200px; display: inline;"><button type="submit" class="btn btn-primary" style="width:100px;">Save</button><button class="btn btn-default" style="width:100px;" id="emailUserFieldCancel">Cancel</button></form>');
         $('#' + $(this).attr('id') + '.inputEmailUserField').val(email);
+        $('#emailUserFieldCancel').click(function () {
+            $('#0.EmailUserField').html(email);
+            $('#emailUserFieldUpdate').remove();
+        });
         $('#' + $(this).attr('id') + '.emailUserFieldUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
