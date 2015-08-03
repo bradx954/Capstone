@@ -2,6 +2,7 @@
 {
     $('.EmailUserField').click(function ()
     {
+        $('#UserEditFieldsMessage').html("<div class='alert alert-warning'>Warning: Editing email will effect your login credentials.</div>");
         var email = $(this).html();
         $(this).html('');
         $(this).after('<form name="updateEmailUserField" class="emailUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserEmail"><input type="text" name="emailUserField" id="' + $(this).attr('id') + '" class="form-control inputEmailUserField" style="width: 200px; display: inline;"><button type="submit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="emailUserFieldCancel">Cancel</button></form>');

@@ -207,6 +207,10 @@ class M_Users extends Model {
 			return "Error updating user.";						
 		}
         if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
+        if(is_array($this->getUser(mysql_escape_string($EMAIL))))
+		{
+			return 'Email already registered.';
+		}
         return "Email Updated.";
     }
     public function updateUserFirstName($ID, $FIRSTNAME)
