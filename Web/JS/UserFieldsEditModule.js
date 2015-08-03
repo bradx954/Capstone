@@ -5,7 +5,7 @@
         $('#UserEditFieldsMessage').html("<div class='alert alert-warning'>Warning: Editing email will effect your login credentials.</div>");
         var email = $(this).html();
         $(this).html('');
-        $(this).after('<form name="updateEmailUserField" class="emailUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserEmail"><input type="text" name="emailUserField" id="' + $(this).attr('id') + '" class="form-control inputEmailUserField" style="width: 200px; display: inline;"><button type="submit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="emailUserFieldCancel">Cancel</button></form>');
+        $(this).after('<form name="updateEmailUserField" class="emailUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserEmail"><input type="text" name="emailUserField" id="' + $(this).attr('id') + '" class="form-control inputEmailUserField" style="width: 200px; display: inline;"><button type="submit" id="emailUserFieldSubmit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="emailUserFieldCancel">Cancel</button></form>');
         $('#' + $(this).attr('id') + '.inputEmailUserField').val(email);
         $('#emailUserFieldCancel').click(function () {
             $('#0.EmailUserField').html(email);
@@ -15,9 +15,11 @@
             $('#UserEditFieldsMessage').html('');
             var emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
             if (emailRegex.test($(this).val()) === false) {
-                $('#UserEditFieldsMessage').html('<div class="alert alert-warning">Email is invalid.<div>');
+                $('#UserEditFieldsMessage').html('<div class="alert alert-danger">Email is invalid.<div>');
+                $('#emailUserFieldSubmit').prop('disabled', true);
                 return false;
             }
+            $('#emailUserFieldSubmit').prop('disabled', false);
             return true;
         });
         $('#' + $(this).attr('id') + '.emailUserFieldUpdate').submit(function (event) {
