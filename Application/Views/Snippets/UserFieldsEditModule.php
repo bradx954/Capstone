@@ -4,15 +4,15 @@
     <div id="UserEditFieldsMessage"></div>
     <table style="color: black; width: 100%;">
         <tr>
-            <td>Email</td>
-            <td><?php echo $TPL['email'];?></td>
+            <td><b>Email:</b></td>
+            <td><a id="0" class="EmailUserField"><?php echo $TPL['email'];?></a></td>
         </tr>
         <tr>
-            <td>First Name</td>
+            <td><b>First Name:</b></td>
             <td><?php echo $TPL['fname'];?></td>
         </tr>
         <tr>
-            <td>Last Name</td>
+            <td><b>Last Name:</b></td>
             <td><?php echo $TPL['lname'];?></td>
         </tr>
     </table>
