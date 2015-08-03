@@ -11,6 +11,15 @@
             $('#0.EmailUserField').html(email);
             $('.emailUserFieldUpdate').remove();
         });
+        $('.inputEmailUserField').on('keyup', function (e) {
+            $('#UserEditFieldsMessage').html('');
+            var emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+            if (emailRegex.test($(this).val()) === false) {
+                $('#UserEditFieldsMessage').html('<div class="alert alert-warning">Email is invalid.<div>');
+                return false;
+            }
+            return true;
+        });
         $('#' + $(this).attr('id') + '.emailUserFieldUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
