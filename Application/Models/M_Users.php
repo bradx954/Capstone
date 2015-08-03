@@ -195,6 +195,10 @@ class M_Users extends Model {
     }
     public function updateUserEmail($ID, $EMAIL)
     {
+        if(is_array($this->getUser($EMAIL)))
+		{
+			return 'Email already registered.';
+		}
         $sql = "UPDATE CS_Users SET email=:email WHERE id = :id;";
 		try 
         {
@@ -207,10 +211,6 @@ class M_Users extends Model {
 			return "Error updating user.";						
 		}
         if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
-        if(is_array($this->getUser(mysql_escape_string($EMAIL))))
-		{
-			return 'Email already registered.';
-		}
         return "Email Updated.";
     }
     public function updateUserFirstName($ID, $FIRSTNAME)
