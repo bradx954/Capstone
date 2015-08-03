@@ -67,4 +67,37 @@
             });
         });
     });
+    $('.LastNameUserField').click(function () {
+        var lname = $(this).html();
+        $(this).html('');
+        $(this).after('<form name="updateLastNameUserField" class="lnameUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserLastName"><input type="text" name="lnameUserField" id="' + $(this).attr('id') + '" class="form-control inputLastNameUserField" style="width: 200px; display: inline;"><button type="submit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="lnameUserFieldCancel">Cancel</button></form>');
+        $('#' + $(this).attr('id') + '.inputLastNameUserField').val(lname);
+        $('#lnameUserFieldCancel').click(function () {
+            $('#0.LastNameUserField').html(lname);
+            $('.lnameUserFieldUpdate').remove();
+        });
+        $('#' + $(this).attr('id') + '.lnameUserFieldUpdate').submit(function (event) {
+            event.preventDefault();
+            $.ajax(
+            {
+                url: "index.php?c=settings&m=updateUserLastName",
+                type: "POST",
+                data: { lastName: $('#' + $(this).attr('id') + '.inputLastNameUserField').val() },
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    if (data == 'Last Name Updated.') {
+                        $('#UserEditFieldsMessage').html("<div class='alert alert-success'>" + data + "</div>");
+                        $('#' + $(this).attr('id') + '.LastNameUserField').html($('#' + $(this).attr('id') + '.inputLastNameUserField').val());
+                        $(this).remove();
+                    }
+                    else {
+                        $('#UserEditFieldsMessage').html("<div class='alert alert-danger'>" + data + "</div>");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showError(errorThrown);
+                }
+            });
+        });
+    });
 });
