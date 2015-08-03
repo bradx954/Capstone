@@ -2,7 +2,7 @@
 <div id="UserFields" class="module-container" style="width: 300px;">
     <h2 style="text-align: center; margin: 0px;">Fields</h2>
     <div id="UserEditFieldsMessage"></div>
-    <table>
+    <table style="color: black; text-align: center; margin: 0px;">
         <tr>
             <td>Email</td>
             <td><?php echo $TPL['email'];?></td>
