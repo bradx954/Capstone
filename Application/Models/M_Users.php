@@ -132,6 +132,51 @@ class M_Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
     }
+    public function getUserEmail($ID)
+    {
+        $sql = "SELECT email FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
+    public function getUserFirstName($ID)
+    {
+        $sql = "SELECT firstname FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
+    public function getUserLastName($ID)
+    {
+        $sql = "SELECT lastname FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
 	public function updateUserQuota($ID, $BYTES)
     {
         $sql = "UPDATE CS_Users SET quota=:quota WHERE id = :id;";

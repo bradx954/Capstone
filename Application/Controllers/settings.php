@@ -13,6 +13,9 @@ class Settings extends Controller
 	}
 	function index()
 	{
+        $TPL['email'] = $this->M_Users->getUserEmail($this->UserID);
+        $TPL['fname'] = $this->M_Users->getUserFirstName($this->UserID);
+        $TPL['lname'] = $this->M_Users->getUserLastName($this->UserID);
 		$this->view->render('settings',$TPL);
 	}
     function deleteUser()
