@@ -9,11 +9,11 @@
         </tr>
         <tr>
             <td><b>First Name:</b></td>
-            <td><?php echo $TPL['fname'];?></td>
+            <td><a id="0" class="FirstNameUserField"><?php echo $TPL['fname'];?></a></td>
         </tr>
         <tr>
             <td><b>Last Name:</b></td>
-            <td><?php echo $TPL['lname'];?></td>
+            <td><a id="0" class="LastNameUserField"><?php echo $TPL['lname'];?></a></td>
         </tr>
     </table>
 </div>

@@ -34,4 +34,37 @@
             });
         });
     });
+    $('.FirstNameUserField').click(function () {
+        var fname = $(this).html();
+        $(this).html('');
+        $(this).after('<form name="updateFirstNameUserField" class="fnameUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserFirstName"><input type="text" name="fnameUserField" id="' + $(this).attr('id') + '" class="form-control inputFirstNameUserField" style="width: 200px; display: inline;"><button type="submit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="fnameUserFieldCancel">Cancel</button></form>');
+        $('#' + $(this).attr('id') + '.inputFirstNameUserField').val(fname);
+        $('#fnameUserFieldCancel').click(function () {
+            $('#0.FirstNameUserField').html(fname);
+            $('.fnameUserFieldUpdate').remove();
+        });
+        $('#' + $(this).attr('id') + '.fnameUserFieldUpdate').submit(function (event) {
+            event.preventDefault();
+            $.ajax(
+            {
+                url: "index.php?c=settings&m=updateUserFirstName",
+                type: "POST",
+                data: { firstname: $('#' + $(this).attr('id') + '.inputFirstNameUserField').val() },
+                context: this,
+                success: function (data, textStatus, jqXHR) {
+                    if (data == 'First Name Updated.') {
+                        $('#UserEditFieldsMessage').html("<div class='alert alert-success'>"+data+"</div>");
+                        $('#' + $(this).attr('id') + '.FirstNameUserField').html($('#' + $(this).attr('id') + '.inputFirstNameUserField').val());
+                        $(this).remove();
+                    }
+                    else {
+                        $('#UserEditFieldsMessage').html("<div class='alert alert-danger'>" + data + "</div>");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showError(errorThrown);
+                }
+            });
+        });
+    });
 });
