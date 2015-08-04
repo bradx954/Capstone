@@ -25,17 +25,20 @@ class Settings extends Controller
     function updateUserEmail()
     {
         $email = $_POST['email'];
-        return $this->M_Users->updateUserEmail($this->UserID,$email);
+        if($GLOBALS['config']['usel']['email'][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserEmail($this->UserID,$email);}
+        else{return "insufficent permissions.";}
     }
     function updateUserFirstName()
     {
         $firstName = $_POST['firstName'];
-        return $this->M_Users->updateUserFirstName($this->UserID,$firstName);
+        if($GLOBALS['config']['usel']['fname'][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserFirstName($this->UserID,$firstName);}
+        else{return "insufficent permissions.";}
     }
     function updateUserLastName()
     {
         $lastName = $_POST['lastName'];
-        return $this->M_Users->updateUserLastName($this->UserID,$lastName);
+        if($GLOBALS['config']['usel']['lname'][$_SESSION['auth']['accesslevel']]){return $this->M_Users->updateUserLastName($this->UserID,$lastName);}
+        else{return "insufficent permissions.";}
     }
     function updateUserPassword()
     {
