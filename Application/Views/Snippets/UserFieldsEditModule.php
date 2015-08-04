@@ -5,15 +5,23 @@
     <table style="color: black; width: 100%;">
         <tr>
             <td><b>Email:</b></td>
-            <td><a id="0" class="EmailUserField"><?php echo $TPL['email'];?></a></td>
-        </tr>
+            <?php 
+                if($GLOBALS['config']['usel']['email'][$_SESSION['auth']['accesslevel']]){echo "<td><a id='0' class='EmailUserField'>".$TPL['email']."</a></td></tr>";}
+                else{echo "<td>".$TPL['email']."</td>";}
+            ?>
         <tr>
             <td><b>First Name:</b></td>
-            <td><a id="0" class="FirstNameUserField"><?php echo $TPL['fname'];?></a></td>
+            <?php 
+                if($GLOBALS['config']['usel']['fname'][$_SESSION['auth']['accesslevel']]){echo "<td><a id='0' class='FirstNameUserField'>".$TPL['fname']."</a></td></tr>";}
+                else{echo "<td>".$TPL['fname']."</td>";}
+            ?>
         </tr>
         <tr>
             <td><b>Last Name:</b></td>
-            <td><a id="0" class="LastNameUserField"><?php echo $TPL['lname'];?></a></td>
+            <?php 
+                if($GLOBALS['config']['usel']['lname'][$_SESSION['auth']['accesslevel']]){echo "<td><a id='0' class='LastNameUserField'>".$TPL['lname']."</a></td></tr>";}
+                else{echo "<td>".$TPL['lname']."</td>";}
+            ?>
         </tr>
     </table>
 </div>
