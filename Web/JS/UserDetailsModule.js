@@ -1,5 +1,9 @@
 ﻿//requires byte string functions.
 $(document).ready(function () {
+
+    var freespace = $('#UserDetailsFreeSpace').html();
+    var usedspace = $('#UserDetailsUsedSpace').html();
+
     $('#UserDetailsQuota').html(getByteString($('#UserDetailsQuota').html()));
     $('#UserDetailsUsedSpace').html(getByteString($('#UserDetailsUsedSpace').html()));
     $('#UserDetailsFreeSpace').html(getByteString($('#UserDetailsFreeSpace').html()));
@@ -18,8 +22,8 @@ $(document).ready(function () {
 		    showInLegend: true,
 		    legendText: "{indexLabel}",
 		    dataPoints: [
-				{ y: 4181563, indexLabel: "Used Space" },
-				{ y: 2175498, indexLabel: "Free Space" }
+				{ y: usedspace, indexLabel: "Used Space" },
+				{ y: freespace, indexLabel: "Free Space" }
 		    ]
 		}
 	    ]
