@@ -13,5 +13,17 @@
                 echo "<td>".$TPL['rdate']."</td>";
             ?>
         </tr>
+        <tr>
+            <td><b>Files:</b></td>
+            <?php 
+                echo "<td>".$TPL['files']."</td>";
+            ?>
+        </tr>
+        <tr>
+            <td><b>Folders:</b></td>
+            <?php 
+                echo "<td>".$TPL['folders']."</td>";
+            ?>
+        </tr>
     </table>
 </div>

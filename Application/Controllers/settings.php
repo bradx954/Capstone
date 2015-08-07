@@ -18,6 +18,10 @@ class Settings extends Controller
         $TPL['lname'] = $this->M_Users->getUserLastName($this->UserID);
         $TPL['rank'] = $this->M_Users->getUserRank($this->UserID);
         $TPL['rdate'] = $this->M_Users->getUserRegisterDate($this->UserID);
+
+        $TPL['files'] = 0;
+        $TPL['folders'] = 0;
+
 		$this->view->render('settings',$TPL);
 	}
     function deleteUser()
