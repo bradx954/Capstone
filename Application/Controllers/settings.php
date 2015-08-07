@@ -22,8 +22,8 @@ class Settings extends Controller
 
         $TPL['files'] = 0;
         $TPL['folders'] = 0;
-        $TPL['usedspace'] = 0;
-        $TPL['freespace'] = $TPL['quota'];
+        $TPL['usedspace'] = 1000;
+        $TPL['freespace'] = $TPL['quota']-1000;
 
 		$this->view->render('settings',$TPL);
 	}
