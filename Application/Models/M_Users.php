@@ -132,6 +132,21 @@ class M_Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
     }
+    public function getUserRegisterDate($ID)
+    {
+        $sql = "SELECT reg_date FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
     public function getUserEmail($ID)
     {
         $sql = "SELECT email FROM CS_Users WHERE id = :id;";
