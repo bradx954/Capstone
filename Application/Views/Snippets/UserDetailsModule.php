@@ -25,5 +25,11 @@
                 echo "<td>".$TPL['folders']."</td>";
             ?>
         </tr>
+        <tr>
+            <td><b>Quota:</b></td>
+            <?php 
+                echo "<td>".$TPL['quota']."</td>";
+            ?>
+        </tr>
     </table>
 </div>

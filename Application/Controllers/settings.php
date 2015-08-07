@@ -17,6 +17,7 @@ class Settings extends Controller
         $TPL['fname'] = $this->M_Users->getUserFirstName($this->UserID);
         $TPL['lname'] = $this->M_Users->getUserLastName($this->UserID);
         $TPL['rank'] = $this->M_Users->getUserRank($this->UserID);
+        $TPL['quota'] = $this->M_Users->getUserQuota($this->UserID);
         $TPL['rdate'] = $this->M_Users->getUserRegisterDate($this->UserID);
 
         $TPL['files'] = 0;
