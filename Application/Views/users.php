@@ -1,4 +1,5 @@
 <script src='Web/JS/notify.min.js'></script>
+<script src='Web/JS/ByteStringFunctions.js'></script>
 <script src='Web/JS/UsersTable.js'></script>
 <div class="table-responsive">
     <table class='table table-bordered table-hover table-condensed' style="background-color:white;">

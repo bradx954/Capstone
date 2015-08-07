@@ -1,3 +1,4 @@
+<script src='Web/JS/ByteStringFunctions.js'></script>
 <script src='Web/JS/UserDetailsModule.js'></script>
 <div id="UserDetails" class="module-container" style="width: 300px;">
     <h2 style="text-align: center; margin: 0px;">Details</h2>
@@ -28,7 +29,7 @@
         <tr>
             <td><b>Quota:</b></td>
             <?php 
-                echo "<td>".$TPL['quota']."</td>";
+                echo "<td id='UserDetailsQuota'>".$TPL['quota']."</td>";
             ?>
         </tr>
     </table>
