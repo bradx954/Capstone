@@ -32,5 +32,20 @@
                 echo "<td id='UserDetailsQuota'>".$TPL['quota']."</td>";
             ?>
         </tr>
+        <tr>
+            <td><b>Used Space:</b></td>
+            <?php 
+                echo "<td id='UserDetailsQuota'>".$TPL['usedspace']."</td>";
+            ?>
+        </tr>
+        <tr>
+            <td><b>Free Space:</b></td>
+            <?php 
+                echo "<td id='UserDetailsQuota'>".$TPL['freespace']."</td>";
+            ?>
+        </tr>
+        <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $TPL['usedspace'];?>"
+  aria-valuemin="0" aria-valuemax="<?php echo $TPL['quota'];?>" style="width:100%">
+        </div>
     </table>
 </div>
