@@ -1,4 +1,5 @@
 <script src='Web/JS/ByteStringFunctions.js'></script>
+<script type="text/javascript" src="Web/JS/canvasjs.min.js"></script>
 <script src='Web/JS/UserDetailsModule.js'></script>
 <div id="UserDetails" class="module-container" style="width: 300px;">
     <h2 style="text-align: center; margin: 0px;">Details</h2>
@@ -44,8 +45,6 @@
                 echo "<td id='UserDetailsFreeSpace'>".$TPL['freespace']."</td>";
             ?>
         </tr>
-        <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $TPL['usedspace'] / $TPL['quota'];?>"
-  aria-valuemin="0" aria-valuemax="100" style="width:100%">
-        </div>
     </table>
+    <div id="UserDetailsChart" style="height: 300px; width: 100%;"></div>
 </div>
