@@ -25,6 +25,6 @@ $(document).ready(function () {
     });
     $("#loginForgotPassowrd").click(function () {
         $("#LoginFormHome").css('display', 'none');
-        $("#LoginFormHomeEmail").css('display', 'block');
+        $("#LoginFormEmail").css('display', 'block');
     });
 });
