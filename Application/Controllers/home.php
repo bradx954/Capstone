@@ -27,5 +27,20 @@ class Home extends Controller
 		$this->MUserAuth->logout();
 		$this->index();
 	}
+    function checkAnswer()
+    {
+        $ANSWER = $_POST['answer'];
+        $EMAIL = $_POST['email'];
+        $ID = $this->M_Users->getUserID($EMAIL);
+        return $this->M_Users->verifyAnswer($ID, $ANSWER);
+    }
+    function updatePassword()
+    {
+        $ANSWER = $_POST['answer'];
+        $EMAIL = $_POST['email'];
+        $ID = $this->M_Users->getUserID($EMAIL);
+        $PASSWORD = $_POST['password'];
+        return $this->M_Users->updatePassword($ID, $ANSWER, $PASSWORD);
+    }
 }
 ?>

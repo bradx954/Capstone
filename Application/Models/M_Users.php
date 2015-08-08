@@ -102,6 +102,21 @@ class M_Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0];
 	}
+    public function getUserID($EMAIL)
+    {
+        $sql = "SELECT id FROM CS_Users WHERE email = :email;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':email' => $EMAIL));
+		}
+		catch (PDOException $e){
+			return 'Error retreiving user id.';						
+		}
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
     public function userExists($ID)
     {
         $sql = "SELECT count(*) FROM CS_Users WHERE id = :id;";
@@ -291,8 +306,7 @@ class M_Users extends Model {
     public function updateUserPassword($ID, $ANSWER, $PASSWORD)
     {
         $SALT = $this->getUserSalt($ID);
-        $ANSWER = hash("md5", hash("md5", $ANSWER) + $SALT);
-        if($ANSWER != $this->getUserAnswer($ID)){return "Reset request denied.";}
+        if($this->verifyAnswer($ID, $ANSWER) == false){return "Reset request denied.";}
         $PASSWORD = hash("md5", hash("md5", $PASSWORD) + $SALT);
         $sql = "UPDATE CS_Users SET password=:password WHERE id = :id;";
 		try 
@@ -306,6 +320,13 @@ class M_Users extends Model {
 			return "Error updating user password.";						
 		}
         return "Password Updated.";
+    }
+    public function verifyAnswer($ID, $ANSWER)
+    {
+        $SALT = $this->getUserSalt($ID);
+        $ANSWER = hash("md5", hash("md5", $ANSWER) + $SALT);
+        if($ANSWER != $this->getUserAnswer($ID)){return false;}
+        else{return true;}
     }
     public function updateUserFirstName($ID, $FIRSTNAME)
     {
