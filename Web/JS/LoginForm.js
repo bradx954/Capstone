@@ -23,4 +23,8 @@ $(document).ready(function () {
         });
         $('#LoginForm').submit();
     });
+    $("#loginForgotPassowrd").click(function () {
+        $("#LoginFormHome").css('display', 'none');
+        $("#LoginFormHomeEmail").css('display', 'block');
+    });
 });
