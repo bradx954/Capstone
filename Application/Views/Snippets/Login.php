@@ -20,7 +20,7 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="width: 100%;">
         </div>
         </form>
-        <a id='loginForgotPassowrd'>Forgot Password?</a>
+        <a href="#" id='loginForgotPassowrd'>Forgot Password?</a>
         <button class="btn btn-primary" id="SubmitLoginForm" style="width: 100%;">Login</button>
       </div>
     </div>
