@@ -132,6 +132,21 @@ class M_Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
     }
+    public function getUserQuestion($ID)
+    {
+        $sql = "SELECT question FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
     public function getUserRegisterDate($ID)
     {
         $sql = "SELECT reg_date FROM CS_Users WHERE id = :id;";
@@ -207,6 +222,36 @@ class M_Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
     }
+    private function getUserSalt($ID)
+    {
+        $sql = "SELECT salt FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
+    private function getUserAnswer($ID)
+    {
+        $sql = "SELECT answer FROM CS_Users WHERE id = :id;";
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+    }
 	public function updateUserQuota($ID, $BYTES)
     {
         $sql = "UPDATE CS_Users SET quota=:quota WHERE id = :id;";
@@ -242,6 +287,25 @@ class M_Users extends Model {
 		}
         if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "Email Updated.";
+    }
+    public function updateUserPassword($ID, $ANSWER, $PASSWORD)
+    {
+        $SALT = $this->getUserSalt($ID);
+        $ANSWER = hash("md5", hash("md5", $ANSWER) + $SALT);
+        if($ANSWER != $this->getUserAnswer($ID)){return "Reset request denied.";}
+        $PASSWORD = hash("md5", hash("md5", $PASSWORD) + $SALT);
+        $sql = "UPDATE CS_Users SET password=:password WHERE id = :id;";
+		try 
+        {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':id' => $ID, ':password' => $PASSWORD));
+		}
+		catch (PDOException $e)
+        {
+			return "Error updating user password.";						
+		}
+        return "Password Updated.";
     }
     public function updateUserFirstName($ID, $FIRSTNAME)
     {
