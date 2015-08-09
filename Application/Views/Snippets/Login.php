@@ -46,6 +46,22 @@
             </form>
             <button class="btn btn-primary" id="SubmitLoginFormAnswer" style="width: 100%;">Next</button>
         </div>
+        <div id="LoginFormPasswordEnter" style="display: none;">
+        <h3>Answer Security Question.</h3>
+            <form action="index.php?c=home&m=updatePassword" method="post" name="LoginFormPassword" id="LoginFormPassword">
+                <div class="form-group" id='passwordGroup'>
+                  <label for='Password'>Password</label>
+                  <div class="" id="passwordStrength"></div>
+                  <div class="form-inline">
+                    <input type="password" class="form-control" id="password1" name="password" placeholder="Password" style="width: 49%;">
+                    <input type="password" class="form-control" id="password2" placeholder="Password Confirm" style="width: 49%;">
+                  </div>
+                </div>
+                <input type="hidden" id="email" name="email">
+                <input type="hidden" id="answer" name="answer">
+            </form>
+            <button class="btn btn-primary" id="SubmitLoginFormPassword" style="width: 100%;">Reset Password</button>
+        </div>
       </div>
     </div>
   </div>

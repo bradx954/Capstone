@@ -66,8 +66,11 @@ $(document).ready(function () {
                 type: "POST",
                 data: postData,
                 success: function (data, textStatus, jqXHR) {
-                    if (data == true) {
-                        document.getElementById('LoginFormMessage').innerHTML = data;
+                    if (data == "Answer Correct.") {
+                        $('#LoginFormAnswerEnter').css('display', 'none');
+                        $('#LoginFormPasswordEnter').css('display', 'block');
+                        $('#LoginFormPassword input[id=email]').val($('#LoginFormEmail input[id=email]').val());
+                        $('#LoginFormPassword input[id=answer]').val($('#LoginFormAnswer input[id=answer]').val());
                     }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
@@ -80,5 +83,30 @@ $(document).ready(function () {
             $("#LoginFormAnswer").unbind('submit');
         });
         $('#LoginFormAnswer').submit();
+    });
+    $("#SubmitLoginFormPassword").click(function () {
+        $("#LoginFormPassword").submit(function (e) {
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+            $.ajax(
+            {
+                url: formURL,
+                type: "POST",
+                data: postData,
+                success: function (data, textStatus, jqXHR) {
+                    if (data == true) {
+                        document.getElementById('LoginFormMessage').innerHTML = data;
+                    }
+                    else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
+                }
+            });
+            e.preventDefault();	//STOP default action
+            //e.unbind();
+            $("#LoginFormPassword").unbind('submit');
+        });
+        $('#LoginFormPassword').submit();
     });
 });

@@ -27,7 +27,7 @@
             <input type="text" class="form-control" id="Name" name="lName" placeholder="Last Name" style="width: 49%;">
           </div>
         </div>
-        <div class="form-group"" id='passwordGroup'>
+        <div class="form-group" id='passwordGroup'>
           <label for='Password'>Password</label>
           <div class="" id="passwordStrength"></div>
           <div class="form-inline">
