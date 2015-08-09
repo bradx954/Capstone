@@ -10,17 +10,17 @@
         <tr>
             <td><b>Avatars:</b></td>
             <td><?php echo $TPL['avatars'];?></td>
-            <td><button class="btn btn-primary" id="ServerDatabaseResetAvatars">Reset</button></td>
+            <td><button class="btn btn-primary" id="ServerDatabaseResetAvatars" style="width: 100%">Reset</button></td>
         </tr>
         <tr>
             <td><b>Files:</b></td>
             <td><?php echo $TPL['files'];?></td>
-            <td><button class="btn btn-primary" id="ServerDatabaseResetFiles">Reset</button></td>
+            <td><button class="btn btn-primary" id="ServerDatabaseResetFiles" style="width: 100%">Reset</button></td>
         </tr>
         <tr>
             <td><b>Folders:</b></td>
             <td><?php echo $TPL['folders'];?></td>
-            <td><button class="btn btn-primary" id="ServerDatabaseResetFolders">Reset</button></td>
+            <td><button class="btn btn-primary" id="ServerDatabaseResetFolders" style="width: 100%">Reset</button></td>
         </tr>
     </table>
     <button class="btn btn-primary" id="ServerDatabaseReset" style="width: 100%">Total Reset</button>
