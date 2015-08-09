@@ -1,6 +1,7 @@
 <script src='Web/JS/ServerDatabaseModule.js'></script>
 <div id="ServerDatabase" class="module-container" style="width: 300px;">
     <h2 style="text-align: center; margin: 0px;">Database</h2>
+    <div id="ServerDatabaseMessage"></div>
     <table class="table" style="color: black; width: 100%;">
         <tr>
             <td><b>Users:</b></td>

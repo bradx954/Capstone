@@ -16,5 +16,9 @@ class Server extends Controller
         $TPL['folders'] = 0;
 		$this->view->render('server',$TPL);
 	}
+    function resetUsers()
+    {
+        return "Reset Failed.";
+    }
 }
 ?>
