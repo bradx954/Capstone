@@ -41,7 +41,7 @@
                 <div class="form-group" id="answerGroup">
                   <label for="Answer" id="LoginFormQuestion"></label>
                   <input type="text" class="form-control" id="answer" name="answer" placeholder="Answer" style="width: 100%;">
-                  <input type="hidden" id="enteredemail" name="email">
+                  <input type="hidden" id="email" name="email">
                 </div>
             </form>
             <button class="btn btn-primary" id="SubmitLoginFormAnswer" style="width: 100%;">Next</button>
