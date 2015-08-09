@@ -71,6 +71,7 @@ $(document).ready(function () {
                         $('#LoginFormPasswordEnter').css('display', 'block');
                         $('#LoginFormPassword input[id=email]').val($('#LoginFormEmail input[id=email]').val());
                         $('#LoginFormPassword input[id=answer]').val($('#LoginFormAnswer input[id=answer]').val());
+                        document.getElementById('LoginFormMessage').innerHTML = "";
                     }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
@@ -94,8 +95,10 @@ $(document).ready(function () {
                 type: "POST",
                 data: postData,
                 success: function (data, textStatus, jqXHR) {
-                    if (data == true) {
-                        document.getElementById('LoginFormMessage').innerHTML = data;
+                    if (data == "Password Updated.") {
+                        document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-success">' + data + '</div>';
+                        $('#LoginFormPasswordEnter').css('display', 'none');
+                        $('#LoginFormHome').css('display', 'block');
                     }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
