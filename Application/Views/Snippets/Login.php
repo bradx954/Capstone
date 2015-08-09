@@ -51,10 +51,10 @@
             <form action="index.php?c=home&m=updatePassword" method="post" name="LoginFormPassword" id="LoginFormPassword">
                 <div class="form-group" id='passwordGroup'>
                   <label for='Password'>Password</label>
-                  <div class="" id="passwordStrength"></div>
+                  <div class="" id="newpasswordStrength"></div>
                   <div class="form-inline">
-                    <input type="password" class="form-control" id="password1" name="password" placeholder="Password" style="width: 49%;">
-                    <input type="password" class="form-control" id="password2" placeholder="Password Confirm" style="width: 49%;">
+                    <input type="password" class="form-control" id="newpassword1" name="password" placeholder="Password" style="width: 49%;">
+                    <input type="password" class="form-control" id="newpassword2" placeholder="Password Confirm" style="width: 49%;">
                   </div>
                 </div>
                 <input type="hidden" id="email" name="email">
