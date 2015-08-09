@@ -22,7 +22,6 @@
             <td><?php echo $TPL['folders'];?></td>
             <td><button class="btn btn-primary" id="ServerDatabaseResetFolders">Reset</button></td>
         </tr>
-        <button class="btn btn-primary" id="ServerDatabaseReset" style="width: 100%">Total Reset</button>
     </table>
-    <div id="UserDetailsChart" style="height: 300px; width: 100%;"></div>
+    <button class="btn btn-primary" id="ServerDatabaseReset" style="width: 100%">Total Reset</button>
 </div>
