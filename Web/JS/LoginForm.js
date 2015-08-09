@@ -40,7 +40,7 @@ $(document).ready(function () {
                     if (data != "Error retreiving user id.")
                     {
                         $("#LoginFormEmailEnter").css('display', 'none');
-                        $('#LoginFormQuestionAnswer').css('display', 'block');
+                        $('#LoginFormAnswerEnter').css('display', 'block');
                         $('#LoginFormQuestion').html(data);
                     }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
