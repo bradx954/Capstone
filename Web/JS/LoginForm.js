@@ -42,6 +42,7 @@ $(document).ready(function () {
                         $("#LoginFormEmailEnter").css('display', 'none');
                         $('#LoginFormAnswerEnter').css('display', 'block');
                         $('#LoginFormQuestion').html(data);
+                        $('#enteredemail').val($('#email').val());
                     }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
