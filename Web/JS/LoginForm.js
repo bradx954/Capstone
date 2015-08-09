@@ -73,6 +73,7 @@ $(document).ready(function () {
                         $('#LoginFormAnswerEnter').css('display', 'block');
                         $('#LoginFormQuestion').html(data);
                         $('#LoginFormAnswer input[id=email]').val($('#LoginFormEmail input[id=email]').val());
+                        document.getElementById('LoginFormMessage').innerHTML = "";
                     }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
