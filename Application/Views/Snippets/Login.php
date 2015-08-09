@@ -24,7 +24,7 @@
             <a href="#" id='loginForgotPassowrd'>Forgot Password?</a>
             <button class="btn btn-primary" id="SubmitLoginForm" style="width: 100%;">Login</button>
         </div>
-        <div id="LoginFormEmail" style="display: none;">
+        <div id="LoginFormEmailEnter" style="display: none;">
         <h3>Enter email of account.</h3>
             <form action="index.php?c=home&m=checkEmail" method="post" name="LoginFormEmail" id="LoginFormEmail">
                 <div class="form-group" id="emailGroup">
