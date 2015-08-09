@@ -5,7 +5,7 @@
         <tr>
             <td><b>Users:</b></td>
             <td><?php echo $TPL['users'];?></td>
-            <td><button class="btn btn-primary" id="ServerDatabaseResetUsers">Reset</button></td>
+            <td><button class="btn btn-primary" id="ServerDatabaseResetUsers" style="width: 100%">Reset</button></td>
         </tr>
         <tr>
             <td><b>Avatars:</b></td>
