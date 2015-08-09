@@ -67,7 +67,7 @@ $(document).ready(function () {
                 type: "POST",
                 data: postData,
                 success: function (data, textStatus, jqXHR) {
-                    if (data != "Error retreiving user id." && data != "")
+                    if (data != "Error retreiving user id." && data != "No user with specified email found.")
                     {
                         $("#LoginFormEmailEnter").css('display', 'none');
                         $('#LoginFormAnswerEnter').css('display', 'block');

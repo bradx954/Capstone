@@ -32,7 +32,9 @@ class Home extends Controller
         $EMAIL = $_POST['email'];
         $ID = $this->M_Users->getUserID($EMAIL);
         if($ID == "Error retreiving user id."){return $ID;}
-        return $this->M_Users->getUserQuestion($ID);
+        $QUESTION = $this->M_Users->getUserQuestion($ID);
+        if($QUESTION == ""){return "No user with specified email found.";}
+        return $QUESTION;
     }
     function checkAnswer()
     {
