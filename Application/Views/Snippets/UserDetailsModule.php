@@ -9,6 +9,7 @@
             <?php 
                 echo "<td>".$TPL['rank']."</td>";
             ?>
+        </tr>
         <tr>
             <td><b>Date Registered:</b></td>
             <?php 

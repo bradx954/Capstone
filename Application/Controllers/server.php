@@ -10,6 +10,10 @@ class Server extends Controller
 	}
 	function index()
 	{
+        $TPL['users'] = 0;
+        $TPL['avatars'] = 0;
+        $TPL['files'] = 0;
+        $TPL['folders'] = 0;
 		$this->view->render('server',$TPL);
 	}
 }
