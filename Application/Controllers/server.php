@@ -10,7 +10,7 @@ class Server extends Controller
 	}
 	function index()
 	{
-        $TPL['users'] = 0;
+        $TPL['users'] = $this->M_Users->getUserCount();
         $TPL['avatars'] = 0;
         $TPL['files'] = 0;
         $TPL['folders'] = 0;
