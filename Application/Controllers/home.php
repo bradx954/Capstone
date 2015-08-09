@@ -39,7 +39,17 @@ class Home extends Controller
         $ANSWER = $_POST['answer'];
         $EMAIL = $_POST['email'];
         $ID = $this->M_Users->getUserID($EMAIL);
-        return $this->M_Users->verifyAnswer($ID, $ANSWER);
+        switch($this->M_Users->verifyAnswer($ID, $ANSWER))
+        {
+            case true:
+            return "Answer Correct.";
+            break;
+            case false:
+            return "Wrong Answer.";
+            break;
+            default:
+            return "Unknown server error.";
+        }
     }
     function updatePassword()
     {
