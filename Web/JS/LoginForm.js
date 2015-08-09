@@ -37,7 +37,12 @@ $(document).ready(function () {
                 type: "POST",
                 data: postData,
                 success: function (data, textStatus, jqXHR) {
-                    if (data == "Login Success") { window.location.assign("index.php"); }
+                    if (data != "Error retreiving user id.")
+                    {
+                        $("#LoginFormEmailEnter").css('display', 'none');
+                        $('#LoginFormQuestionAnswer').css('display', 'block');
+                        $('#LoginFormQuestion').html(data);
+                    }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

@@ -35,6 +35,16 @@
             </form>
             <button class="btn btn-primary" id="SubmitLoginFormEmail" style="width: 100%;">Next</button>
         </div>
+        <div id="LoginFormAnswerEnter" style="display: none;">
+        <h3>Answer Security Question.</h3>
+            <form action="index.php?c=home&m=checkAnswer" method="post" name="LoginFormAnswer" id="LoginFormAnswer">
+                <div class="form-group" id="answerGroup">
+                  <label for="Answer" id="LoginFormQuestion"></label>
+                  <input type="text" class="form-control" id="answer" name="answer" placeholder="Answer" style="width: 100%;">
+                </div>
+            </form>
+            <button class="btn btn-primary" id="SubmitLoginFormAnswer" style="width: 100%;">Next</button>
+        </div>
       </div>
     </div>
   </div>
