@@ -42,10 +42,10 @@ class Home extends Controller
         switch($this->M_Users->verifyAnswer($ID, $ANSWER))
         {
             case true:
-            return "Answer Correct.";
+            return "Answer Correct.".$EMAIL.":".$ID.":".$ANSWER;
             break;
             case false:
-            return "Wrong Answer.";
+            return "Wrong Answer.".$EMAIL.":".$ID.":".$ANSWER;
             break;
             default:
             return "Unknown server error.";
