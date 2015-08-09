@@ -27,6 +27,13 @@ class Home extends Controller
 		$this->MUserAuth->logout();
 		$this->index();
 	}
+    function checkEmail()
+    {
+        $EMAIL = $_POST['email'];
+        $ID = $this->M_Users->getUserID($EMAIL);
+        if($ID == "Error retreiving user id."){return $ID;}
+        return $this->M_Users->getUserQuestion($ID);
+    }
     function checkAnswer()
     {
         $ANSWER = $_POST['answer'];
