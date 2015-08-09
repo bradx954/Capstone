@@ -57,7 +57,7 @@ class Home extends Controller
         $EMAIL = $_POST['email'];
         $ID = $this->M_Users->getUserID($EMAIL);
         $PASSWORD = $_POST['password'];
-        return $this->M_Users->updatePassword($ID, $ANSWER, $PASSWORD);
+        return $this->M_Users->updateUserPassword($ID, $ANSWER, $PASSWORD);
     }
 }
 ?>
