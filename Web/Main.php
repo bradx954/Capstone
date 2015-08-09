@@ -61,6 +61,8 @@ require_once  ROOT . '/Library/Classes/' . 'View' . '.php';
 require_once  ROOT . '/Application/Controllers/' . 'home' . '.php';
 require_once  ROOT . '/Application/Controllers/' . 'users' . '.php';
 require_once  ROOT . '/Application/Controllers/' . 'settings' . '.php';
+require_once  ROOT . '/Application/Controllers/' . 'server' . '.php';
+require_once  ROOT . '/Application/Controllers/' . 'files' . '.php';
 //require_once  ROOT . '/application/controllers/' . 'register' . '.php';
 //require_once  ROOT . '///application/controllers/' . 'login' . '.php';
 //require_once  ROOT . '/application/controllers/' . 'admin' . '.php';
