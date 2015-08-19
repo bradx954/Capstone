@@ -18,7 +18,20 @@ class Server extends Controller
 	}
     function resetUsers()
     {
-        return "Reset Failed.";
+        $db = new PDO("mysql:host="+DB_HOST+";dbname="+DB_NAME, DB_USER, DB_PASS);
+
+        $query = file_get_contents("Scripts/resetUsers.sql");
+
+        $stmt = $db->prepare($query);
+
+        if ($stmt->execute())
+        {
+             return "Reset Success.";
+        }
+        else
+        {
+             return "Reset Failed.";
+        }
     }
 }
 ?>
