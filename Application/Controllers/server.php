@@ -18,12 +18,11 @@ class Server extends Controller
 	}
     function resetUsers()
     {
-        $DBO = Database::getInstance();
-	    $DBH = $DBO->getPDOConnection();
+        $db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
 
         $query = file_get_contents("Scripts/resetUsers.sql");
         
-        $stmt = $DBH->prepare($query);
+        $stmt = $db->prepare($query);
 
         if ($stmt->execute())
         {
