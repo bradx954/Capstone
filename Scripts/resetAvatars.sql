@@ -1,10 +1,10 @@
-﻿DROP TABLE IF EXISTS 'CS_Avatars';
+﻿DROP TABLE IF EXISTS CS_Avatars;
 
-CREATE TABLE 'CS_Avatars'
+CREATE TABLE CS_Avatars
 (
 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(30),
 	userid INT(6) NOT NULL,
 	avatar BLOB,
-	reg_date TIMESTAMP,
+	reg_date TIMESTAMP
 );
