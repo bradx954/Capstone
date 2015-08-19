@@ -11,7 +11,6 @@ CREATE TABLE 'CS_Users'
 	answer VARCHAR(35) NOT NULL,
 	quota BIGINT,
 	salt MEDIUMINT,
-	avatar BLOB,
 	active TINYINT,
 	reg_date TIMESTAMP,
 );
