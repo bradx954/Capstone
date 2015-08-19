@@ -21,8 +21,10 @@ class Server extends Controller
         $db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
 
         $query = file_get_contents("Scripts/resetUsers.sql");
-        return $query;
+        
         $stmt = $db->prepare($query);
+
+        return $stmt->execute();
 
         if ($stmt->execute())
         {
