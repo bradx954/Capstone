@@ -439,6 +439,21 @@ class M_Users extends Model {
         if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
         return "Avatar Updated.";
     }
+    function resetUsers()
+    {
+        $query = file_get_contents("Scripts/resetUsers.sql");
+        
+        $stmt = $this->DBH->prepare($query);
+
+        if ($stmt->execute())
+        {
+             return "Reset Success.";
+        }
+        else
+        {
+             return "Reset Failed.";
+        }
+    }
 }
 
 ?>
