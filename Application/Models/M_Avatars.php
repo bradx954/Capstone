@@ -33,7 +33,7 @@ class M_Avatars extends Model {
 		{
 			$rs = NULL;
 			$rs = $this->DBH->prepare($sql);
-			$rs->execute(array(':user' => $USERID));
+			$rs->execute(array(':userid' => $USERID));
 		}
 		catch (PDOException $e){
 			return 'Error retreiving user id.';						
