@@ -43,7 +43,7 @@ class M_Avatars extends Model {
     }
     function setAvatar($USERID, $AVATAR)
     {
-        $ID = $this->getAvatarID($USERID);
+        return $this->getAvatarID($USERID);
         if($ID != -1){return $this->updateAvatar($ID, $AVATAR);}
         else{return $this->createAvatar($USERID, $AVATAR);}
     }
@@ -57,7 +57,7 @@ class M_Avatars extends Model {
 			$rs->execute(array(':userid' => $USERID));
 		}
 		catch (PDOException $e){
-			return -1;						
+			return $e;						
 		}
 		$array = $rs->fetchAll();
 		return $array[0][0];
