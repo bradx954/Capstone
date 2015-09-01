@@ -12,5 +12,6 @@ CREATE TABLE CS_Users
 	quota BIGINT,
 	salt MEDIUMINT,
 	active TINYINT,
+	rank VARCHAR(10) NOT NULL,
 	reg_date TIMESTAMP
 );

@@ -182,12 +182,13 @@ class UserAuth extends Model {
     {
 	    $_SESSION['auth']['email'] = $this->values[3];
 	    $_SESSION['auth']['ipAddress'] = $_SERVER['REMOTE_ADDR'];
-	    $_SESSION['auth']['accesslevel'] = $this->values[11];
+	    $_SESSION['auth']['accesslevel'] = $this->values[10];
 	    $_SESSION['auth']['active'] = $this->values[9];
 	    $_SESSION['auth']['logintime'] = date("Y-m-d h:m:s",time());
         $_SESSION['auth']['id'] = $this->values[0];
-        if(isset($this->values[12]) != true || $this->values[12]==""){$_SESSION['auth']['avatar'] = "data:image/png;base64,".base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));}
-        else{$_SESSION['auth']['avatar'] = $this->values[12];}
+        //if(isset($this->values[12]) != true || $this->values[12]==""){$_SESSION['auth']['avatar'] = "data:image/png;base64,".base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));}
+        $_SESSION['auth']['avatar'] = "data:image/png;base64,".base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));
+        //else{$_SESSION['auth']['avatar'] = $this->values[12];}
      }
 	
 	/**
