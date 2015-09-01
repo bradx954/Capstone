@@ -199,8 +199,9 @@ class UserAuth extends Model {
 		catch (PDOException $e){
 			$_SESSION['auth']['avatar'] = "data:image/png;base64,".base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));				
 		}
-		$array = $rs->fetchAll();
-		$_SESSION['auth']['avatar'] = $array[0][0];
+        $array = $rs->fetchAll();
+        if($array[0][0] == ""){$_SESSION['auth']['avatar'] = "data:image/png;base64,".base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));}
+		else{$_SESSION['auth']['avatar'] = $array[0][0];}
      }
 	
 	/**
