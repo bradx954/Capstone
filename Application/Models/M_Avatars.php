@@ -44,9 +44,8 @@ class M_Avatars extends Model {
     function setAvatar($USERID, $AVATAR)
     {
         $ID = $this->getAvatarID($USERID);
-        //if($ID != -1){return $this->updateAvatar($ID, $AVATAR);}
-        //else{return $this->createAvatar($USERID, $AVATAR);}
-        return $this->createAvatar($USERID, $AVATAR);
+        if($ID > -1){return $this->updateAvatar($ID, $AVATAR);}
+        else{return $this->createAvatar($USERID, $AVATAR);}
     }
     private function getAvatarID($USERID)
     {
