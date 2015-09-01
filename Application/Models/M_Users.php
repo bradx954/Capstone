@@ -423,22 +423,6 @@ class M_Users extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
     }
-    function updateUserAvatar($ID, $AVATAR)
-    {
-        $sql = "UPDATE CS_Users SET avatar = :avatar WHERE id = :id;";
-		try 
-        {
-			$rs = NULL;
-			$rs = $this->DBH->prepare($sql);
-			$rs->execute(array(':id' => $ID, ':avatar' => $AVATAR));
-		}
-		catch (PDOException $e)
-        {
-			return "Error updating avatar.";						
-		}
-        if($rs->rowCount() == 0 && $this->userExists($ID) == false){return 'User no longer exists.';}
-        return "Avatar Updated.";
-    }
     function resetUsers()
     {
         $query = file_get_contents("Scripts/resetUsers.sql");

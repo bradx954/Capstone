@@ -3,11 +3,13 @@
 class Settings extends Controller 
 {
 	private $M_Users;
+    private $M_Avatars;
     private $UserID;
 	function __construct() 
 	{
 		parent::__construct(); 
 		$this->M_Users = new M_Users();
+        $this->M_Avatars = new M_Avatars();
         $this->UserID = $_SESSION['auth']['id'];
 
 	}
@@ -68,7 +70,7 @@ class Settings extends Controller
         {
             return "Image to large.";
         }
-        $result = $this->M_Users->updateUserAvatar($this->UserID,$avatar);
+        $result = $this->M_Avatars->setAvatar($this->UserID,$avatar);
         if($result == "Avatar Updated.")
         {
             $_SESSION['auth']['avatar'] = $avatar;
@@ -78,7 +80,7 @@ class Settings extends Controller
     }
     function deleteUserAvatar()
     {
-        $result = $this->M_Users->updateUserAvatar($this->UserID,"");
+        $result = $this->M_Avatars->setAvatar($this->UserID,"");
         if($result == "Avatar Updated.")
         {
             $_SESSION['auth']['avatar'] = "data:image/png;base64,".base64_encode(file_get_contents('Web/Images/default-avatar.jpg'));
