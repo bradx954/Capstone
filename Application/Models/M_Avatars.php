@@ -74,7 +74,7 @@ class M_Avatars extends Model {
 		catch (PDOException $e){
 			return 'Failed to create avatar.';						
 		}
-		return 'Avatar created.';
+		return 'Avatar updated.';
     }
     private function updateAvatar($ID, $AVATAR)
     {
