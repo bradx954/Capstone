@@ -9,9 +9,9 @@ CREATE TABLE CS_Users
 	password VARCHAR(35) NOT NULL,
 	question VARCHAR(50) NOT NULL,
 	answer VARCHAR(35) NOT NULL,
-	quota BIGINT,
-	salt MEDIUMINT,
-	active TINYINT,
+	quota BIGINT NOT NULL,
+	salt MEDIUMINT NOT NULL,
+	active TINYINT NOT NULL,
 	rank VARCHAR(10) NOT NULL,
 	reg_date TIMESTAMP
 );
