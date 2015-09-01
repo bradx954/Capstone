@@ -55,8 +55,8 @@ class M_Users extends Model {
 		else
 		{
 			$salt = mt_rand(0, 1000000);
-			$password = hash("sha1", hash("md5", $password) + $salt);
-			$answer = hash("sha1", hash("md5", $answer) + $salt);
+			$password = hash("sha1", hash("sha1", $password) + $salt);
+			$answer = hash("sha1", hash("sha1", $answer) + $salt);
 			//$sql = "insert into CS_Users(firstname,lastname,email,password, question, answer, quota, salt, rank, active) values ('".mysql_escape_string($firstname)."','".mysql_escape_string($lastname)."','".mysql_escape_string($email)."','".$password."','".mysql_escape_string($question)."','".$answer."',".$quota.",'".$salt."','".$rank."', ".$active.");";
 			try 
 			{
