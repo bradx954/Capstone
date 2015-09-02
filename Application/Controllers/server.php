@@ -20,5 +20,17 @@ class Server extends Controller
     {
         return $this->M_Users->resetUsers();
     }
+    function resetAvatars()
+    {
+        return "Not implemented.";
+    }
+    function resetFiles()
+    {
+        return "Not implemented.";
+    }
+    function resetFolders()
+    {
+        return "Not implemented.";
+    }
 }
 ?>
