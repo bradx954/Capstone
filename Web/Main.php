@@ -74,6 +74,8 @@ require_once  ROOT . '/Application/Controllers/' . 'files' . '.php';
 require_once  ROOT . '/Application/Models/' . 'M_Users' . '.php';
 require_once  ROOT . '/Application/Models/' . 'userauth' . '.php';
 require_once  ROOT . '/Application/Models/' . 'M_Avatars' . '.php';
+require_once  ROOT . '/Application/Models/' . 'M_Files' . '.php';
+require_once  ROOT . '/Application/Models/' . 'M_Folders' . '.php';
 //require_once  ROOT . '/application/models/' . 'phonebook' . '.php'; 
  
  

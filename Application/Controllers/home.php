@@ -10,7 +10,7 @@ class Home extends Controller
 	}
 	function index()
 	{
-		$TPL['Users'] = $this->M_Users->getUserCount();
+		$TPL['Users'] = $this->M_Users->getCount();
 		$TPL['Login_Page'] = $this->MUserAuth->login_page;
 		$this->view->render('home',$TPL);
 	}

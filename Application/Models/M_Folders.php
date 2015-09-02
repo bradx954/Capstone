@@ -11,7 +11,7 @@ class M_Folders extends Model {
 	     $this->DBO = Database::getInstance();
 	     $this->DBH = $this->DBO->getPDOConnection();
 	}
-    function getFolderCount()
+    function getCount()
     {
         $sql = "SELECT COUNT(*) FROM CS_Folders";
 		try 

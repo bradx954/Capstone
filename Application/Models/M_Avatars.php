@@ -11,7 +11,7 @@ class M_Avatars extends Model {
 	     $this->DBO = Database::getInstance();
 	     $this->DBH = $this->DBO->getPDOConnection();
 	}
-    function getAvatarCount()
+    function getCount()
     {
         $sql = "SELECT COUNT(*) FROM CS_Avatars";
 		try 

@@ -11,7 +11,7 @@ class M_Files extends Model {
 	     $this->DBO = Database::getInstance();
 	     $this->DBH = $this->DBO->getPDOConnection();
 	}
-    function getFileCount()
+    function getCount()
     {
         $sql = "SELECT COUNT(*) FROM CS_Files";
 		try 

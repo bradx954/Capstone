@@ -29,7 +29,7 @@ class M_Users extends Model {
 			} 
 			return $arr;
 	}
-	public function getUserCount()
+	public function getCount()
 	{
 		$sql = "SELECT COUNT(*) FROM CS_Users";
 		try 
