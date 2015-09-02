@@ -12,10 +12,10 @@ class Server extends Controller
 	}
 	function index()
 	{
-        $TPL['users'] = $this->M_Users->getCount();
-        $TPL['avatars'] = $this->M_Avatars->getCount();
-        $TPL['files'] = $this->M_Files->getCount();
-        $TPL['folders'] = $this->M_Folders->getCount();
+        //$TPL['users'] = $this->M_Users->getCount();
+        //$TPL['avatars'] = $this->M_Avatars->getCount();
+        //$TPL['files'] = $this->M_Files->getCount();
+        //$TPL['folders'] = $this->M_Folders->getCount();
 		$this->view->render('server',$TPL);
 	}
     function resetUsers()
