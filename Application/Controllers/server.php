@@ -7,15 +7,16 @@ class Server extends Controller
 	{
 		parent::__construct(); 
 		$this->M_Users = new M_Users();
+        $this->M_Avatars = new M_Avatars();
         $this->M_Files = new M_Files();
         $this->M_Folders = new M_Folders();
 	}
 	function index()
 	{
-        //$TPL['users'] = $this->M_Users->getCount();
-        //$TPL['avatars'] = $this->M_Avatars->getCount();
-        //$TPL['files'] = $this->M_Files->getCount();
-        //$TPL['folders'] = $this->M_Folders->getCount();
+        $TPL['users'] = $this->M_Users->getCount();
+        $TPL['avatars'] = $this->M_Avatars->getCount();
+        $TPL['files'] = $this->M_Files->getCount();
+        $TPL['folders'] = $this->M_Folders->getCount();
 		$this->view->render('server',$TPL);
 	}
     function resetUsers()
