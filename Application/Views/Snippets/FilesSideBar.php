@@ -8,8 +8,6 @@
                 <?php echo $_SESSION['auth']['email'];?>
             </a>
         </li>
-        <li>
-            <button class="btn btn-primary" id="New" style="width: 100%;">New</button>
-        </li>
     </ul>
+    <button class="btn btn-primary" id="New" style="width: 100%;">New</button>
 </div>
