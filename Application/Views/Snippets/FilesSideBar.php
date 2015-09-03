@@ -5,7 +5,7 @@
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
             <a href="#">
-                Start Bootstrap
+                <?php echo $_SESSION['auth']['email'];?>
             </a>
         </li>
         <li>
