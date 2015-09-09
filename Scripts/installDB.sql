@@ -2,7 +2,7 @@ CREATE DATABASE Capstone;
 USE Capstone;
 
 CREATE USER 'Capstone'@'localhost' IDENTIFIED BY 'Capstone';
-GRANT ALL PRIVILEGES ON Capstone TO 'Capstone'@'localhost';
+GRANT ALL PRIVILEGES ON Capstone.* TO 'Capstone'@'localhost';
 
 CREATE TABLE CS_Users
 (
