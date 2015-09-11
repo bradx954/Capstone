@@ -17,21 +17,9 @@ h1
 {
     font-size: 500%;
 }
-#SignUp
+.modal
 {
 	color: black;
-}
-#Login
-{
-	color: black;
-}
-#changePicture
-{
-    color: black;
-}
-#confirm-delete-avatar
-{
-    color: black;
 }
 .module-container
 {
@@ -41,4 +29,24 @@ h1
     padding: 5px;
     display: block;
     float: left;
+}
+.FileIcon
+{
+    display: block;
+	float: left;
+	margin: 5px;
+    padding: 5px;
+	text-align: center;
+}
+.FileIconSelect
+{
+	background-color: #E8E8E8;
+}
+.FileIcon:hover
+{
+	background-color: #C8C8C8;
+}
+.clear
+{
+  clear: both;
 }
