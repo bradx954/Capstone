@@ -3,10 +3,17 @@
 class Files extends Controller 
 {
 	private $M_Users;
+	private $M_Files;
+	private $M_Folders;
+	private $UserID;
+	
 	function __construct() 
 	{
 		parent::__construct(); 
 		$this->M_Users = new M_Users();
+		$this->M_Files = new M_Files();
+		$this->M_Folders = new M_Folders();
+		$this->UserID = $this->M_Users->getUserID($_SESSION['auth']['email']);
 	}
 	function index()
 	{
@@ -14,11 +21,11 @@ class Files extends Controller
 	}
 	function newFile()
 	{
-		return $_POST["filename"]." ".$_POST["directory"];
+		return $this->M_Files->newFile($_POST['filename'], $this->UserID);
 	}
 	function newFolder()
 	{
-		return $_POST["filename"]." ".$_POST["directory"]." folder";
+		return $this->M_Folders->newFolder($_POST['filename'], $this->UserID);
 	}
 }
 ?>

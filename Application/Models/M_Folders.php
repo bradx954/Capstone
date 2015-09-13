@@ -26,5 +26,19 @@ class M_Folders extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
     }
+	function newFolder($FolderName, $UserID, $ParentID=0)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("insert into CS_Folders(name,userid,folderid) values(:foldername,:userid,:parentid);");
+			$rs->execute(array(':foldername' => $FolderName, ':userid' => $UserID, ':parentid' => $ParentID));
+		}
+		catch (PDOException $e)
+		{
+			return "Error creating folder: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return 'Folder Created.';
+	}
 }
 ?>
