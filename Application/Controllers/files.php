@@ -12,5 +12,13 @@ class Files extends Controller
 	{
 		$this->view->render('files',$TPL);
 	}
+	function newFile()
+	{
+		return $_POST["filename"]." ".$_POST["directory"];
+	}
+	function newFolder()
+	{
+		return $_POST["filename"]." ".$_POST["directory"]." folder";
+	}
 }
 ?>

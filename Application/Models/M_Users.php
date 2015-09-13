@@ -55,8 +55,8 @@ class M_Users extends Model {
 		else
 		{
 			$salt = mt_rand(0, 1000000);
-			$password = hash("sha1", hash("sha1", $password) + $salt);
-			$answer = hash("sha1", hash("sha1", $answer) + $salt);
+			$password = hash("sha1", $salt.$password);
+			$answer = hash("sha1", $salt.$answer);
 			//$sql = "insert into CS_Users(firstname,lastname,email,password, question, answer, quota, salt, rank, active) values ('".mysql_escape_string($firstname)."','".mysql_escape_string($lastname)."','".mysql_escape_string($email)."','".$password."','".mysql_escape_string($question)."','".$answer."',".$quota.",'".$salt."','".$rank."', ".$active.");";
 			try 
 			{
@@ -307,7 +307,7 @@ class M_Users extends Model {
     {
         $SALT = $this->getUserSalt($ID);
         if($this->verifyAnswer($ID, $ANSWER) == false){return "Reset request denied.";}
-        $PASSWORD = hash("md5", hash("md5", $PASSWORD) + $SALT);
+        $PASSWORD = hash("sha1", $SALT.$PASSWORD);
         $sql = "UPDATE CS_Users SET password=:password WHERE id = :id;";
 		try 
         {
@@ -324,7 +324,7 @@ class M_Users extends Model {
     public function verifyAnswer($ID, $ANSWER)
     {
         $SALT = $this->getUserSalt($ID);
-        $ANSWER = hash("md5", hash("md5", $ANSWER) + $SALT);
+        $ANSWER = hash("sha1", $SALT.$ANSWER);
         if($ANSWER != $this->getUserAnswer($ID)){return false;}
         else{return true;}
     }

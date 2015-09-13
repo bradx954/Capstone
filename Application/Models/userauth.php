@@ -141,7 +141,7 @@ class UserAuth extends Model {
 			return 'Database Error: '.$e.' Please contact brad.baago@linux.com';						
 		}
 		$salt = $value[0][0];
-		$this->password = hash("sha1", hash("sha1", $this->password) + $salt);
+		$this->password = hash("sha1", $salt.$this->password);
 		$sql = "SELECT * FROM CS_Users WHERE email = :email AND password = :password;";
 		$rs = NULL;
 		try 

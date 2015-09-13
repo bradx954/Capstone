@@ -40,11 +40,11 @@ h1
 }
 .FileIconSelect
 {
-	background-color: #E8E8E8;
+	background-color: #C8C8C8; 
 }
 .FileIcon:hover
 {
-	background-color: #C8C8C8;
+	background-color: #A8A8A8;
 }
 .clear
 {
