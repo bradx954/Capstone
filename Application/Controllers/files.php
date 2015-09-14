@@ -17,6 +17,7 @@ class Files extends Controller
 	}
 	function index()
 	{
+		$TPL['UserID'] = $this->UserID;
 		$this->view->render('files',$TPL);
 	}
 	function newFile()
@@ -26,6 +27,13 @@ class Files extends Controller
 	function newFolder()
 	{
 		return $this->M_Folders->newFolder($_POST['filename'], $this->UserID);
+	}
+	function getDirectoryContents()
+	{
+		$USERID = $_POST['UserID'];
+		$DIRECTORY = $_POST['Directory'];
+		if($this->UserID == $USERID){return json_encode(array_merge($this->M_Folders->getFolders($USERID, $DIRECTORY),$this->M_Files->getFiles($USERID, $DIRECTORY)));}
+		else {return "Access Denied.";}
 	}
 }
 ?>

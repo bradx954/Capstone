@@ -62,5 +62,21 @@ class M_Files extends Model {
 		}
 		else{return "Error creating file please contact brad.baago@linux.com.";}
 	}
+	function getFiles($UserID, $FolderID=0)
+	{
+		$sql = "SELECT * from CS_Files WHERE userid = :userid AND folderid = :folderid;";
+		try {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':userid' => $UserID, ':folderid' => $FolderID));
+			foreach ($rs->fetchAll() as $row): 
+					$arr[]  =  $row;  
+			endforeach;
+		}
+		catch (PDOException $e){
+			return "Failed to retrieve files.";							
+		} 
+		return $arr;
+	}
 }
 ?>

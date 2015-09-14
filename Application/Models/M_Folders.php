@@ -40,5 +40,21 @@ class M_Folders extends Model {
 		} 
 		return 'Folder Created.';
 	}
+	function getFolders($UserID, $FolderID=0)
+	{
+		$sql = "SELECT * from CS_Folders WHERE userid = :userid AND folderid = :folderid;";
+		try {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':userid' => $UserID, ':folderid' => $FolderID));
+			foreach ($rs->fetchAll() as $row): 
+					$arr[]  =  $row;  
+			endforeach;
+		}
+		catch (PDOException $e){
+			return "Failed to retrieve folders.";
+		} 
+		return $arr;
+	}
 }
 ?>

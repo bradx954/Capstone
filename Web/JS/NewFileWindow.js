@@ -16,6 +16,7 @@ $(document).ready(function () {
 				success: function (data, textStatus, jqXHR) {
 					if (data == "Folder Created.") {
 						$("#FormMessage").html('<div class="alert alert-success">' + data + '</div>');
+						refreshDirectoryWindow();
 					}
 					else { $("#FormMessage").html('<div class="alert alert-danger">' + data + '</div>'); }
 				},
@@ -34,6 +35,7 @@ $(document).ready(function () {
 				success: function (data, textStatus, jqXHR) {
 					if (data == "File Created.") {
 						$("#FormMessage").html('<div class="alert alert-success">' + data + '</div>');
+						refreshDirectoryWindow();
 					}
 					else { $("#FormMessage").html('<div class="alert alert-danger">' + data + '</div>'); }
 				},
