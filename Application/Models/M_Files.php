@@ -75,8 +75,38 @@ class M_Files extends Model {
 		}
 		catch (PDOException $e){
 			return "Failed to retrieve files.";							
+		}
+		if(is_array($arr)){return $arr;}
+		else{return array();}
+	}
+	function getFileOwner($ID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT userid FROM CS_Files WHERE id = :id;");
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return -1;							
 		} 
-		return $arr;
+		$array = $rs->fetchAll();
+		return $array[0][0];
+	}
+	function deleteFile($ID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("DELETE FROM CS_Files WHERE id = :id;");
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e)
+		{
+			return "Error deleting file: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return 'File deleted.';
 	}
 }
 ?>

@@ -22,7 +22,7 @@
 		<form class="form-inline">
 			<table style="color: black;">
 				<tr><td><b>File Name:</b></td> <td><input type="text" class="form-control" id="newFileName" name="FileName" placeholder="New File" style="width: 400px;"><span id="FileTypeExtension"></span></td></tr>
-				<tr><td><b>Directory:</b></td> <td><input type="text" class="form-control" id="newDirectory" name="Directory" value="/" style="width: 400px;" disabled></td></tr>
+				<tr><td><b>Directory:</b></td> <td><input type="text" class="form-control" id="newDirectory" name="Directory" value="/" style="width: 400px;" actual="0" disabled></td></tr>
 			</table>
 		</form>
       </div>

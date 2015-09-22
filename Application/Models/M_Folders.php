@@ -54,7 +54,37 @@ class M_Folders extends Model {
 		catch (PDOException $e){
 			return "Failed to retrieve folders.";
 		} 
-		return $arr;
+		if(is_array($arr)){return $arr;}
+		else{return array();}
+	}
+	function getFolderOwner($ID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT userid FROM CS_Folders WHERE id = :id;");
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+	}
+	function deleteFolder($ID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("DELETE FROM CS_Folders WHERE id = :id;");
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e)
+		{
+			return "Error deleting folder: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return 'Folder deleted.';
 	}
 }
 ?>

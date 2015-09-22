@@ -22,11 +22,35 @@ class Files extends Controller
 	}
 	function newFile()
 	{
-		return $this->M_Files->newFile($_POST['filename'], $this->UserID);
+		return $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
 	}
 	function newFolder()
 	{
-		return $this->M_Folders->newFolder($_POST['filename'], $this->UserID);
+		return $this->M_Folders->newFolder($_POST['filename'], $this->UserID, $_POST['directory']);
+	}
+	function deleteFolder()
+	{
+		$ID = $_POST['ID'];
+		if($this->UserID == $this->M_Folders->getFolderOwner($ID))
+		{
+			return $this->M_Folders->deleteFolder($ID);
+		}
+		else
+		{
+			return "Access denied.";
+		}
+	}
+	function deleteFile()
+	{
+		$ID = $_POST['ID'];
+		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		{
+			return $this->M_Files->deleteFile($ID);
+		}
+		else
+		{
+			return "Access denied.";
+		}
 	}
 	function getDirectoryContents()
 	{
