@@ -86,5 +86,28 @@ class M_Folders extends Model {
 		} 
 		return 'Folder deleted.';
 	}
+	function getFolderPath($ID=0)
+	{
+		$PATH = "/";
+		if($ID == 0){return $PATH;}
+		while($ID != 0)
+		{
+			try 
+			{
+				$rs = NULL;
+				$rs = $this->DBH->prepare("SELECT name,folderid FROM CS_Folders WHERE id = :id;");
+				$rs->execute(array(':id' => $ID));
+			}
+			catch (PDOException $e){
+				//$this->DBO->showErrorPage($sql,$e );
+				return "Error getting file path ".$e." please contact brad.baago@linux.com.";							
+			} 
+			$array = $rs->fetchAll();
+			$NAME = $array[0][0];
+			$PATH = $PATH.$NAME."/";
+			$ID = $array[0][1];
+		}
+		return $PATH;
+	}
 }
 ?>

@@ -28,12 +28,24 @@ function refreshDirectoryWindow()
 			else 
 			{ 
 				$('#DirectoryTable').html('<tr id="headrow">'+$('tr[id=headrow]').html()+'</tr>');
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFolderPath",
+					type: "POST",
+					data: {ID: $('#directory').attr('value')},
+					success: function (data, textStatus, jqXHR) {
+						$('#newDirectory').attr('value', data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
 				var rows = JSON.parse(data);
 				for(var x in rows)
 				{
 					var file_type = "Unknown";
 					var file_size = "?";
-					if(typeof rows[x]['filelocation'] === 'undefined'){file_type = "Folder";}
+					if(typeof rows[x]['filesize'] === 'undefined'){file_type = "Folder";}
 					else{
 						var extension = rows[x]['name'].split(".");
 						extension = extension[extension.length-1];

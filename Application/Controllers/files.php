@@ -52,6 +52,10 @@ class Files extends Controller
 			return "Access denied.";
 		}
 	}
+	function getFolderPath()
+	{
+		return $this->M_Folders->getFolderPath($_POST['ID']);
+	}
 	function getDirectoryContents()
 	{
 		$USERID = $_POST['UserID'];

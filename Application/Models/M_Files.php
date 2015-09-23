@@ -43,24 +43,18 @@ class M_Files extends Model {
 	}
 	function newFile($FileName, $UserID, $ParentID=0)
 	{
-		$filelocation = $this->getUserCount($UserID);
-		if(!file_exists(ROOT.'/Files/'.$UserID)){mkdir(ROOT.'/Files/'.$UserID,0777);}
-		if($filelocation != -1)
+		try 
 		{
-			try 
-			{
-				$rs = NULL;
-				$rs = $this->DBH->prepare("insert into CS_Files(name,filelocation,filesize,userid,folderid) values(:filename,:filelocation,:filesize,:userid,:parentid);");
-				$rs->execute(array(':filename' => $FileName, ':filelocation' => $filelocation, ':filesize' => 0, ':userid' => $UserID, ':parentid' => $ParentID));
-			}
-			catch (PDOException $e)
-			{
-				return "Error creating file: ".$e." please contact brad.baago@linux.com.";							
-			} 
-			file_put_contents(ROOT.'/Files/'.$UserID.'/'.$filelocation, "");
-			return 'File Created.';
+			$rs = NULL;
+			$rs = $this->DBH->prepare("insert into CS_Files(name,filesize,userid,folderid) values(:filename,:filesize,:userid,:parentid);");
+			$rs->execute(array(':filename' => $FileName, ':filesize' => 0, ':userid' => $UserID, ':parentid' => $ParentID));
+			file_put_contents(ROOT.'/Files/'.$this->DBH->lastInsertId(), "");
 		}
-		else{return "Error creating file please contact brad.baago@linux.com.";}
+		catch (PDOException $e)
+		{
+			return "Error creating file: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return 'File Created.';
 	}
 	function getFiles($UserID, $FolderID=0)
 	{
@@ -101,6 +95,7 @@ class M_Files extends Model {
 			$rs = NULL;
 			$rs = $this->DBH->prepare("DELETE FROM CS_Files WHERE id = :id;");
 			$rs->execute(array(':id' => $ID));
+			unlink(ROOT.'/Files/'.$ID);
 		}
 		catch (PDOException $e)
 		{
