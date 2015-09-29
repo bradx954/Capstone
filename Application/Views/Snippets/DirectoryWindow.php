@@ -7,7 +7,7 @@
 		<th>File Type</th>
 		<th>File Size</th>
 		<th>Creation Date</th>
-		<th><a id="previousDirectoy" href="#" value="0">BACK</a></th>
+		<th><a id="previousDirectory" href="#" value="0">BACK</a> <a id="upDirectory" href="#">UP</a></th>
 	</tr>
 </table>
 <form id="DirectoryWindowTarget" name="DirectoryWindowTarget">

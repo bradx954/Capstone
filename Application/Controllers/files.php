@@ -63,5 +63,16 @@ class Files extends Controller
 		if($this->UserID == $USERID){return json_encode(array_merge($this->M_Folders->getFolders($USERID, $DIRECTORY),$this->M_Files->getFiles($USERID, $DIRECTORY)));}
 		else {return "Access Denied.";}
 	}
+	function getDirectoryFolders()
+	{
+		$USERID = $_POST['UserID'];
+		$DIRECTORY = $_POST['Directory'];
+		if($this->UserID == $USERID){return json_encode($this->M_Folders->getFolders($USERID, $DIRECTORY));}
+		else {return "Access Denied.";}
+	}
+	function getFolderParent()
+	{
+		return $this->M_Folders->getFolderParent($_POST['ID']);
+	}
 }
 ?>

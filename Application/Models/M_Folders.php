@@ -109,5 +109,21 @@ class M_Folders extends Model {
 		}
 		return $PATH;
 	}
+	function getFolderParent($ID)
+	{
+		if($ID == 0){return 0;}
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT folderid FROM CS_Folders WHERE id = :id;");
+			$rs->execute(array(':id' => $ID));
+			$array = $rs->fetchAll();
+			return $array[0][0];
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return "Error getting file path ".$e." please contact brad.baago@linux.com.";							
+		} 
+	}
 }
 ?>

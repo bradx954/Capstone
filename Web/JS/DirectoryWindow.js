@@ -45,7 +45,10 @@ function refreshDirectoryWindow()
 				{
 					var file_type = "Unknown";
 					var file_size = "?";
-					if(typeof rows[x]['filesize'] === 'undefined'){file_type = "Folder";}
+					if(typeof rows[x]['filesize'] === 'undefined')
+					{
+						file_type = "Folder";
+					}
 					else{
 						var extension = rows[x]['name'].split(".");
 						extension = extension[extension.length-1];
@@ -104,12 +107,30 @@ function refreshDirectoryWindow()
 				$('#newDirectory').attr('actual', $(this).attr('id'));
 				refreshDirectoryWindow();
 			});
-			$('#previousDirectoy').click(function () {
+			$('#previousDirectory').click(function () {
 				var temp = $('#directory').attr('value');
 				$('#directory').attr('value', $(this).attr('value'));
 				$('#newDirectory').attr('actual', $(this).attr('value'));
 				$(this).attr('value', temp);
 				refreshDirectoryWindow();
+			});
+			$('#upDirectory').click(function () {
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFolderParent",
+					type: "POST",
+					data: {ID: $('#directory').attr('value')},
+					success: function (data, textStatus, jqXHR) {
+						if(data >= 0){
+							$('#directory').attr('value', data);
+							refreshDirectoryWindow();
+						}
+						else{showError(data);}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
 			});
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
