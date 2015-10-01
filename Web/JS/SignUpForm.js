@@ -1,4 +1,9 @@
 $(document).ready(function () {
+	$('#answer').keypress(function(e){
+		if(e.which == 13) {
+			$("#SubmitForm").click();
+		}
+	});
     //borrowed heavely from http://css.dzone.com/articles/create-password-strength
     $('#password1, #password2').on('keyup', function (e) {
         if ($('#password1').val() != '' && $('#password2').val() != '' && $('#password1').val() != $('#password2').val()) {

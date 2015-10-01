@@ -1,2 +1,4 @@
 Folder.png: http://3.bp.blogspot.com/-NrxH5a0v4pg/UqIk7aC3wAI/AAAAAAAAhE0/JhZ0GjjsEkE/s1600/Folder.png
 Text.png: http://files.softicons.com/download/internet-icons/di-black-symbol-icons-by-drew-maughan/png/256/text.png
+FolderUpload.png: http://files.softicons.com/download/system-icons/ikons-icons-by-studiotwentyeight/png/256/Folder%20Up.png
+FolderUp.png: http://www2.psd100.com/ppp/2013/11/0601/Up-folder-icon-1106085553.png

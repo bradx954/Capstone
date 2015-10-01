@@ -8,7 +8,7 @@
 		<th>File Type</th>
 		<th>File Size</th>
 		<th>Creation Date</th>
-		<th><a id="previousDirectory" href="#" value="0">BACK</a> <a id="upDirectory" href="#">UP</a></th>
+		<th><a id="upDirectory" href="#"><img width="24" src="Web/Images/FolderUp.png"/></a></th>
 	</tr>
 </table>
 <form id="DirectoryWindowTarget" name="DirectoryWindowTarget">

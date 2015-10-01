@@ -28,6 +28,21 @@ class M_Folders extends Model {
     }
 	function newFolder($FolderName, $UserID, $ParentID=0)
 	{
+		if($FolderName == ""){return "Folder name blank.";}
+		$sql = "SELECT COUNT(*) FROM CS_Folders WHERE userid = :userid AND name = :name;";
+		try {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':userid' => $UserID, ':name' => $FolderName));
+		}
+		catch (PDOException $e){
+			return "Failed to create folder.";
+		}
+		$array = $rs->fetchAll();
+		if($array[0][0] > 0)
+		{
+			return "Folder already exists.";
+		}
 		try 
 		{
 			$rs = NULL;

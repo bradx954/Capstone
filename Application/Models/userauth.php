@@ -6,7 +6,7 @@ class UserAuth extends Model {
 	
 	private $DB_users =  ''; 
 
-	public $login_page = 'index.php?c=home';   
+	public $login_page = 'index.php?c=files';   
 	private $logout_page = "index.php?c=home";
 	private $error_page = 'errorpage';
 

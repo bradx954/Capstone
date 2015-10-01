@@ -30,7 +30,7 @@
                 <div class="form-group" id="emailGroup">
                   <label for="Email">Email address</label>
                   <div class="" id="emailValidation"></div>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" style="width: 100%;">
+                  <input type="email" class="form-control focus-control" id="email" name="email" placeholder="Email" style="width: 100%;">
                 </div>
             </form>
             <button class="btn btn-primary" id="SubmitLoginFormEmail" style="width: 100%;">Next</button>

@@ -1,4 +1,10 @@
 $(document).ready(function () {
+	$('#email.focus-control').focus();
+	$('#password').keypress(function(e){
+		if(e.which == 13) {
+			$("#SubmitLoginForm").click();
+		}
+	});
     $('#newpassword1, #newpassword2').on('keyup', function (e) {
         if ($('#newpassword1').val() != '' && $('#newpassword2').val() != '' && $('#newpassword1').val() != $('#newpassword2').val()) {
             $('#newpasswordStrength').removeClass().addClass('alert alert-danger').html('Passwords do not match!');
@@ -40,7 +46,7 @@ $(document).ready(function () {
                 type: "POST",
                 data: postData,
                 success: function (data, textStatus, jqXHR) {
-                    if (data == "Login Success") { window.location.assign("index.php"); }
+                    if (data == "Login Success") { window.location.assign("index.php?c=files"); }
                     else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
