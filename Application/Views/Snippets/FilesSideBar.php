@@ -9,6 +9,7 @@
             </a>
         </li>
         <li><button class="btn btn-primary" id="New" data-toggle="modal" data-target="#NewFileWindow" style="width: 80%; margin: auto;">New</button></li>
-	<li id="FilesBarFolderTree"></li>
+	<li id="FilesBarFolderTree">
+	</li>
     </ul>
 </div>

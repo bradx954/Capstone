@@ -6,7 +6,7 @@
 });
 function refreshSideBarFileTree()
 {
-	$('#FilesBarFolderTree').html('<ul id="TreeFolders" style="color: black;"></ul>');
+	$('#FilesBarFolderTree').html('<ul><li id="0" class="FolderItem" data-open=1 data-name="/"><a href="#" class="FolderOpen" id="0">/</a></li><ul id="TreeFolders" style="color: black;"></ul></ul>');
 	$.ajax(
 	{
 		url: "index.php?c=files&m=getDirectoryFolders",
@@ -21,7 +21,7 @@ function refreshSideBarFileTree()
 				var rows = JSON.parse(data);
 				for(var x in rows)
 				{
-					$('#FilesBarFolderTree ul').append('<li id="'+rows[x]['id']+'" class="FolderItem" data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a></li>');
+					$('#FilesBarFolderTree ul#TreeFolders').append('<li id="'+rows[x]['id']+'" class="FolderItem" data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">+ </a><a href="#" class="FolderOpen" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a></li>');
 				}
 				setBranches();
 			}
@@ -33,6 +33,12 @@ function refreshSideBarFileTree()
 }
 function setBranches()
 {
+	$('.FolderOpen').click(function () {
+		var id=$(this).attr('id');
+		$('#directory').attr('value', id);
+		$('#newDirectory').attr('actual', id);
+		refreshDirectoryWindow();
+	});
 	$('.FolderBranch').click(function () {
 		var id=$(this).attr('id');
 		var open = $('#'+id+'.FolderItem').data('open');
@@ -48,14 +54,15 @@ function setBranches()
 						$('#'+id+'.FolderItem').html('<div class="alert alert-danger">' + data + '</div>');
 					}
 					else 
-					{ 
+					{
 						$('#'+id+'.FolderItem').html($('#'+id+'.FolderItem').html()+'<ul style="color: black;" id="'+id+'"></ul>');
 						$('#'+id+'.FolderItem').data('open', 1);
 						var rows = JSON.parse(data);
 						for(var x in rows)
 						{
-							$('#'+id+' ul').append('<li id="'+rows[x]['id']+'" class="FolderItem"  data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a></li>');
+							$('#'+id+' ul').append('<li id="'+rows[x]['id']+'" class="FolderItem"  data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">+ </a><a href="#" class="FolderOpen" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a>');
 						}
+						$('#'+id+".FolderBranch" ).html('- ');
 						$( ".FolderBranch" ).unbind();
 						setBranches();
 					}
@@ -67,12 +74,10 @@ function setBranches()
 		}
 		else
 		{
-			$('#'+id+'.FolderItem').html('<a href="#" class="FolderBranch" id="'+id+'">'+$('#'+id+'.FolderItem').data('name')+'</a>');
+			$('#'+id+'.FolderItem').html('<a href="#" class="FolderBranch" id="'+id+'">+ </a><a href="#" class="FolderOpen" id="'+id+'">'+$('#'+id+'.FolderItem').data('name')+'</a>');
 			$('#'+id+'.FolderItem').data('open', 0);
 			$( ".FolderBranch" ).unbind();
 			setBranches();
 		}
-		$('#directory').attr('value', id);
-		refreshDirectoryWindow();
 	});
 }

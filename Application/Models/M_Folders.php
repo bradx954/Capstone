@@ -88,7 +88,6 @@ class M_Folders extends Model {
 	}
 	function getFolderPath($ID=0)
 	{
-		$PATH = "/";
 		if($ID == 0){return $PATH;}
 		while($ID != 0)
 		{
@@ -104,10 +103,10 @@ class M_Folders extends Model {
 			} 
 			$array = $rs->fetchAll();
 			$NAME = $array[0][0];
-			$PATH = $PATH.$NAME."/";
+			$PATH = $NAME."/".$PATH;
 			$ID = $array[0][1];
 		}
-		return $PATH;
+		return "/".$PATH;
 	}
 	function getFolderParent($ID)
 	{

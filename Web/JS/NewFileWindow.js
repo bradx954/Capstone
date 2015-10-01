@@ -17,6 +17,7 @@ $(document).ready(function () {
 					if (data == "Folder Created.") {
 						$("#FormMessage").html('<div class="alert alert-success">' + data + '</div>');
 						refreshDirectoryWindow();
+						refreshSideBarFileTree();
 						showMessage(data);
 						$('#NewFileWindow').modal('toggle');
 					}
