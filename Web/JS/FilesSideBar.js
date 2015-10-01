@@ -11,7 +11,7 @@ function refreshSideBarFileTree()
 	{
 		url: "index.php?c=files&m=getDirectoryFolders",
 		type: "POST",
-		data: {UserID: $('#DirectoryWindowTarget').find('input[name="userid"]').val(), Directory: $('#directory').attr('value')},
+		data: {UserID: $('#DirectoryWindowTarget').find('input[name="userid"]').val(), Directory: 0},
 		success: function (data, textStatus, jqXHR) {
 			if (data == "Access Denied.") {
 				$("#FilesBarFolderTree").html('<div class="alert alert-danger">' + data + '</div>');
