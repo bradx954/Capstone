@@ -74,5 +74,30 @@ class Files extends Controller
 	{
 		return $this->M_Folders->getFolderParent($_POST['ID']);
 	}
+	function getFile()
+	{
+		$ID = $_POST['ID'];
+		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		{
+			return $this->M_Files->getFileContents($ID);
+		}
+		else
+		{
+			return "Access denied.";
+		}
+	}
+	function updateFile()
+	{
+		$ID = $_POST['ID'];
+		$Contents = $_POST['Contents'];
+		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		{
+			return $this->M_Files->updateFileContents($ID, $Contents);
+		}
+		else
+		{
+			return "Access denied.";
+		}
+	}
 }
 ?>

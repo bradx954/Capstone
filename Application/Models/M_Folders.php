@@ -124,5 +124,20 @@ class M_Folders extends Model {
 			return "Error getting file path ".$e." please contact brad.baago@linux.com.";							
 		} 
 	}
+	function getUserCount($UserID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT COUNT(*) FROM CS_Folders WHERE userid = :userid;");
+			$rs->execute(array(':userid' => $UserID));
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+	}
 }
 ?>

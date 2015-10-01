@@ -56,7 +56,7 @@ function refreshDirectoryWindow()
 						{
 							case 'txt': file_type = "Text";
 						}
-						file_size = rows[x]['filesize'];
+						file_size = getByteString(rows[x]['filesize']);
 					}
 					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+'"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'">'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"/></a></td></tr>');
 				}
@@ -106,6 +106,30 @@ function refreshDirectoryWindow()
 				$('#directory').attr('value', $(this).attr('id'));
 				$('#newDirectory').attr('actual', $(this).attr('id'));
 				refreshDirectoryWindow();
+			});
+			$('a[class=Text]').click(function () {
+				var id = $(this).attr('id');
+				
+				$('#DirectoryTable').css('display','none');
+				$('#sideBarNewFile').css('display','none');
+				$('#FilesBarFolderTree').css('display','none');
+				$('#sideBarSaveFile').css('display','block');
+				$('#sideBarCancelFile').css('display','block');
+				$('.CodeMirror').css('display','block');
+				$('.CodeMirror').data('fileid', id);
+				
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFile",
+					type: "POST",
+					data: {ID: id},
+					success: function (data, textStatus, jqXHR) {
+						editor.setValue(data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
 			});
 			$('#previousDirectory').click(function () {
 				var temp = $('#directory').attr('value');

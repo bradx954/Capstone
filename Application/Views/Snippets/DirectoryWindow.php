@@ -1,5 +1,6 @@
 <script src='Web/JS/notify.min.js'></script>
 <script src="Web/JS/BootBox.js"></script>
+<script src="Web/JS/ByteStringFunctions.js"></script>
 <script src="Web/JS/DirectoryWindow.js"></script>
 <table class="table table-hover" id="DirectoryTable" style="background-color: white; color: black;">
 	<tr id="headrow">

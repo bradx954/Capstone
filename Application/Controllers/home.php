@@ -3,14 +3,17 @@
 class Home extends Controller 
 {
 	private $M_Users;
+	private $M_Files;
 	function __construct() 
 	{
 		parent::__construct(); 
 		$this->M_Users = new M_Users();
+		$this->M_Files = new M_Files();
 	}
 	function index()
 	{
 		$TPL['Users'] = $this->M_Users->getCount();
+		$TPL['Bytes'] = $this->M_Files->getUsedSpace();
 		$TPL['Login_Page'] = $this->MUserAuth->login_page;
 		$this->view->render('home',$TPL);
 	}

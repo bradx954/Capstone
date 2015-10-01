@@ -4,12 +4,16 @@ class Settings extends Controller
 {
 	private $M_Users;
     private $M_Avatars;
+	private $M_Files;
+	private $M_Folders;
     private $UserID;
 	function __construct() 
 	{
 		parent::__construct(); 
 		$this->M_Users = new M_Users();
         $this->M_Avatars = new M_Avatars();
+		$this->M_Files = new M_Files();
+		$this->M_Folders = new M_Folders();
         $this->UserID = $_SESSION['auth']['id'];
 
 	}
@@ -22,10 +26,10 @@ class Settings extends Controller
         $TPL['quota'] = $this->M_Users->getUserQuota($this->UserID);
         $TPL['rdate'] = $this->M_Users->getUserRegisterDate($this->UserID);
 
-        $TPL['files'] = 0;
-        $TPL['folders'] = 0;
-        $TPL['usedspace'] = 1000;
-        $TPL['freespace'] = $TPL['quota']-1000;
+        $TPL['files'] = $this->M_Files->getUserCount($this->UserID);
+        $TPL['folders'] = $this->M_Folders->getUserCount($this->UserID);
+        $TPL['usedspace'] = $this->M_Files->getUserUsedSpace($this->UserID);
+        $TPL['freespace'] = $TPL['quota']-$TPL['usedspace'];
 
 		$this->view->render('settings',$TPL);
 	}

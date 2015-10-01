@@ -103,5 +103,55 @@ class M_Files extends Model {
 		} 
 		return 'File deleted.';
 	}
+	function getFileContents($ID)
+	{
+		return file_get_contents(ROOT.'/Files/'.$ID);
+	}
+	function updateFileContents($ID, $Contents)
+	{
+		$FileSize = file_put_contents(ROOT.'/Files/'.$ID, $Contents);
+		if($FileSize == false){ return "File Update Failed.";}
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("UPDATE CS_Files SET filesize = :filesize WHERE id = :id;");
+			$rs->execute(array(':id' => $ID, ':filesize' => $FileSize));
+		}
+		catch (PDOException $e)
+		{
+			return "Error deleting file: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return 'File Updated.';
+	}
+	function getUserUsedSpace($UserID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT SUM(filesize) FROM CS_Files WHERE userid = :userid;");
+			$rs->execute(array(':userid' => $UserID));
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+	}
+	function getUsedSpace()
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT SUM(filesize) FROM CS_Files;");
+			$rs->execute();
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+	}
 }
 ?>
