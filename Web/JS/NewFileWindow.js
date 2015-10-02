@@ -1,4 +1,9 @@
 $(document).ready(function () {
+	$('#newFileName').keypress(function(e){
+		if(e.which == 13) {
+			$("#SubmitNewFile").click();
+		}
+	});
 	$(".FileIcon").click(function () {
 		$(".FileIconSelect").removeClass("FileIconSelect");
 		$(this).addClass( "FileIconSelect" );

@@ -9,19 +9,22 @@
 			type: "POST",
 			data: {ID: $('.CodeMirror').data('fileid'), Contents: editor.getValue()},
 			success: function (data, textStatus, jqXHR) {
-				if(data == 'File Updated.'){showMessage(data);refreshDirectoryWindow();}
+				if(data == 'File Updated.'){
+						showMessage(data);
+						$('#DirectoryTable').css('display','block');
+						$('#sideBarNewFile').css('display','block');
+						$('#FilesBarFolderTree').css('display','block');
+						$('#sideBarSaveFile').css('display','none');
+						$('#sideBarCancelFile').css('display','none');
+						$('.CodeMirror').css('display','none');
+						refreshDirectoryWindow();
+					}
 				else{showError(data);}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				showError(data);
 			}
 		});
-		$('#DirectoryTable').css('display','block');
-		$('#sideBarNewFile').css('display','block');
-		$('#FilesBarFolderTree').css('display','block');
-		$('#sideBarSaveFile').css('display','none');
-		$('#sideBarCancelFile').css('display','none');
-		$('.CodeMirror').css('display','none');
 	});
 	$('#CancelFile').click(function () {
 		bootbox.confirm("Are you sure you want to discard changes?", function(result) {

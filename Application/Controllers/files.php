@@ -90,6 +90,12 @@ class Files extends Controller
 	{
 		$ID = $_POST['ID'];
 		$Contents = $_POST['Contents'];
+		
+		if(strlen($Contents) > ($this->M_Users->getUserQuota($this->UserID) - $this->M_Files->getUserUsedSpace($this->UserID)))
+		{
+			return "Insufficient storage space.";
+		}
+		
 		if($this->UserID == $this->M_Files->getFileOwner($ID))
 		{
 			return $this->M_Files->updateFileContents($ID, $Contents);

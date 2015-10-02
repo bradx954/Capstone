@@ -147,6 +147,7 @@ function refreshDirectoryWindow()
 					success: function (data, textStatus, jqXHR) {
 						if(data >= 0){
 							$('#directory').attr('value', data);
+							$('#newDirectory').attr('actual', data);
 							refreshDirectoryWindow();
 						}
 						else{showError(data);}
