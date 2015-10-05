@@ -74,7 +74,7 @@ function refreshDirectoryWindow()
 								type: "POST",
 								data: {ID: id},
 								success: function (data, textStatus, jqXHR) {
-									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+id+']').remove();}
+									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+id+']').remove(); refreshSideBarFileTree();}
 									else{showError(data);}
 								},
 								error: function (jqXHR, textStatus, errorThrown) {

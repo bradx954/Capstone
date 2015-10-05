@@ -118,6 +118,21 @@ class M_Files extends Model {
 		} 
 		return 'File deleted.';
 	}
+	function deleteFiles($IDS)
+	{
+		foreach($IDS as $ID)
+		{
+			try
+			{
+				$this->deleteFile($ID);
+			}
+			catch(PDOException $e)
+			{
+				return "Error deleting files.";
+			}
+		}
+		return "Files ".implode(',',$IDS)." deleted.";
+	}
 	function getFileContents($ID)
 	{
 		return file_get_contents(ROOT.'/Files/'.$ID);
@@ -167,6 +182,24 @@ class M_Files extends Model {
 		} 
 		$array = $rs->fetchAll();
 		return $array[0][0];
+	}
+	function deleteDirectoryFiles($IDS)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT id FROM CS_Files WHERE FIND_IN_SET(folderid, :ids);");
+			$rs->execute(array(':ids' => implode(',', $IDS)));
+			$DeleteIDS = array();
+			foreach ($rs->fetchAll() as $row): 
+					array_push($DeleteIDS, $row[0]);
+			endforeach;
+		}
+		catch (PDOException $e)
+		{
+			return "Error deleteing sub folders: ".$e." please contact brad.baago@linux.com.";							
+		}
+		return $this->deleteFiles($DeleteIDS);
 	}
 }
 ?>

@@ -87,6 +87,34 @@ class M_Folders extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
 	}
+	//Deletes specified folder and subfolders
+	//Takes folder ID to delete.
+	//Returns folders deleted array.
+	function deleteDirectory($ID)
+	{
+		$IDS = array($ID);
+		$newIDS = $IDS;
+		while(count($newIDS) > 0)
+		{
+			try 
+			{
+				$rs = NULL;
+				$rs = $this->DBH->prepare("SELECT ID FROM CS_Folders WHERE FIND_IN_SET(folderid, :ids);");
+				$rs->execute(array(':ids' => implode(',', $newIDS)));
+				$newIDS = array();
+				foreach ($rs->fetchAll() as $row): 
+					array_push($newIDS,$row[0]);
+				endforeach;
+				$IDS = array_merge($IDS, $newIDS);
+			}
+			catch (PDOException $e)
+			{
+				return "Error selecting sub folders: ".$e." please contact brad.baago@linux.com.";							
+			}
+		}
+		$this->deleteFolders($IDS);
+		return $IDS;
+	}
 	function deleteFolder($ID)
 	{
 		try 
@@ -98,8 +126,23 @@ class M_Folders extends Model {
 		catch (PDOException $e)
 		{
 			return "Error deleting folder: ".$e." please contact brad.baago@linux.com.";							
-		} 
-		return 'Folder deleted.';
+		}
+		return "Folder deleted.";
+	}
+	function deleteFolders($IDS)
+	{
+		foreach($IDS as $ID)
+		{
+			try
+			{
+				$this->deleteFolder($ID);
+			}
+			catch(PDOException $e)
+			{
+				return "Error deleting folders.";
+			}
+		}
+		return "Folders ".implode(',',$IDS)." deleted.";
 	}
 	function getFolderPath($ID=0)
 	{

@@ -33,7 +33,9 @@ class Files extends Controller
 		$ID = $_POST['ID'];
 		if($this->UserID == $this->M_Folders->getFolderOwner($ID))
 		{
-			return $this->M_Folders->deleteFolder($ID);
+			$DeleteArray = $this->M_Folders->deleteDirectory($ID);
+			$this->M_Files->deleteDirectoryFiles($DeleteArray);
+			return "Folder deleted.";
 		}
 		else
 		{
