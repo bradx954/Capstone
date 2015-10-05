@@ -17,6 +17,22 @@
 			<img src="Web/Images/Text.png" width="128"/></br>
 			Text
 		</div></a>
+		<a href="#"><div id="HTML" class="FileIcon"  extension=".html">
+			<img src="Web/Images/HTML.png" width="128"/></br>
+			HTML
+		</div></a>
+		<a href="#"><div id="CSS" class="FileIcon"  extension=".css">
+			<img src="Web/Images/CSS.png" width="128"/></br>
+			CSS
+		</div></a>
+		<a href="#"><div id="Javascript" class="FileIcon"  extension=".js">
+			<img src="Web/Images/Javascript.png" width="128"/></br>
+			Javascript
+		</div></a>
+		<a href="#"><div id="PHP" class="FileIcon"  extension=".php">
+			<img src="Web/Images/PHP.png" width="128"/></br>
+			PHP
+		</div></a>
 		<div class="clear"></div>
 		<hr>
 		<form class="form-inline">

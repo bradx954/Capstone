@@ -54,7 +54,21 @@ function refreshDirectoryWindow()
 						extension = extension[extension.length-1];
 						switch(extension)
 						{
-							case 'txt': file_type = "Text";
+							case 'txt':
+								file_type = "Text";
+							break;
+							case 'html':
+								file_type = "HTML";
+							break;
+							case 'css':
+								file_type = "CSS";
+							break;
+							case 'js':
+								file_type = "Javascript";
+							break;
+							case 'php':
+								file_type = "PHP";
+							break;
 						}
 						file_size = getByteString(rows[x]['filesize']);
 					}
@@ -117,6 +131,112 @@ function refreshDirectoryWindow()
 				$('#sideBarCancelFile').css('display','block');
 				$('.CodeMirror').css('display','block');
 				$('.CodeMirror').data('fileid', id);
+				
+				editor.setOption('mode','simplemode');
+				
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFile",
+					type: "POST",
+					data: {ID: id},
+					success: function (data, textStatus, jqXHR) {
+						editor.setValue(data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
+			});
+			$('a[class=HTML]').click(function () {
+				var id = $(this).attr('id');
+				
+				$('#DirectoryTable').css('display','none');
+				$('#sideBarNewFile').css('display','none');
+				$('#FilesBarFolderTree').css('display','none');
+				$('#sideBarSaveFile').css('display','block');
+				$('#sideBarCancelFile').css('display','block');
+				$('.CodeMirror').css('display','block');
+				$('.CodeMirror').data('fileid', id);
+				
+				editor.setOption('mode','text/html');
+				
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFile",
+					type: "POST",
+					data: {ID: id},
+					success: function (data, textStatus, jqXHR) {
+						editor.setValue(data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
+			});
+			$('a[class=Javascript]').click(function () {
+				var id = $(this).attr('id');
+				
+				$('#DirectoryTable').css('display','none');
+				$('#sideBarNewFile').css('display','none');
+				$('#FilesBarFolderTree').css('display','none');
+				$('#sideBarSaveFile').css('display','block');
+				$('#sideBarCancelFile').css('display','block');
+				$('.CodeMirror').css('display','block');
+				$('.CodeMirror').data('fileid', id);
+				
+				editor.setOption('mode','text/javascript');
+				
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFile",
+					type: "POST",
+					data: {ID: id},
+					success: function (data, textStatus, jqXHR) {
+						editor.setValue(data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
+			});
+			$('a[class=CSS]').click(function () {
+				var id = $(this).attr('id');
+				
+				$('#DirectoryTable').css('display','none');
+				$('#sideBarNewFile').css('display','none');
+				$('#FilesBarFolderTree').css('display','none');
+				$('#sideBarSaveFile').css('display','block');
+				$('#sideBarCancelFile').css('display','block');
+				$('.CodeMirror').css('display','block');
+				$('.CodeMirror').data('fileid', id);
+				
+				editor.setOption('mode','text/css');
+				
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFile",
+					type: "POST",
+					data: {ID: id},
+					success: function (data, textStatus, jqXHR) {
+						editor.setValue(data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
+			});
+			$('a[class=PHP]').click(function () {
+				var id = $(this).attr('id');
+				
+				$('#DirectoryTable').css('display','none');
+				$('#sideBarNewFile').css('display','none');
+				$('#FilesBarFolderTree').css('display','none');
+				$('#sideBarSaveFile').css('display','block');
+				$('#sideBarCancelFile').css('display','block');
+				$('.CodeMirror').css('display','block');
+				$('.CodeMirror').data('fileid', id);
+				
+				editor.setOption('mode','application/x-httpd-php');
 				
 				$.ajax(
 				{

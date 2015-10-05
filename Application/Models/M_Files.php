@@ -44,11 +44,11 @@ class M_Files extends Model {
 	function newFile($FileName, $UserID, $ParentID=0)
 	{
 		if($FileName == ""){return "File name blank.";}
-		$sql = "SELECT COUNT(*) FROM CS_Files WHERE userid = :userid AND name = :name;";
+		$sql = "SELECT COUNT(*) FROM CS_Files WHERE userid = :userid AND name = :name AND folderid = :folderid;";
 		try {
 			$rs = NULL;
 			$rs = $this->DBH->prepare($sql);
-			$rs->execute(array(':userid' => $UserID, ':name' => $FileName));
+			$rs->execute(array(':userid' => $UserID, ':name' => $FileName, ':folderid' => $ParentID));
 		}
 		catch (PDOException $e){
 			return "Failed to create file.";

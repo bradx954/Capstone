@@ -29,11 +29,11 @@ class M_Folders extends Model {
 	function newFolder($FolderName, $UserID, $ParentID=0)
 	{
 		if($FolderName == ""){return "Folder name blank.";}
-		$sql = "SELECT COUNT(*) FROM CS_Folders WHERE userid = :userid AND name = :name;";
+		$sql = "SELECT COUNT(*) FROM CS_Folders WHERE userid = :userid AND name = :name AND folderid = :folderid;";
 		try {
 			$rs = NULL;
 			$rs = $this->DBH->prepare($sql);
-			$rs->execute(array(':userid' => $UserID, ':name' => $FolderName));
+			$rs->execute(array(':userid' => $UserID, ':name' => $FolderName, ':folderid' => $ParentID));
 		}
 		catch (PDOException $e){
 			return "Failed to create folder.";

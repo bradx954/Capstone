@@ -2,3 +2,7 @@ Folder.png: http://3.bp.blogspot.com/-NrxH5a0v4pg/UqIk7aC3wAI/AAAAAAAAhE0/JhZ0Gj
 Text.png: http://files.softicons.com/download/internet-icons/di-black-symbol-icons-by-drew-maughan/png/256/text.png
 FolderUpload.png: http://files.softicons.com/download/system-icons/ikons-icons-by-studiotwentyeight/png/256/Folder%20Up.png
 FolderUp.png: http://www2.psd100.com/ppp/2013/11/0601/Up-folder-icon-1106085553.png
+HTML.png: https://cdn4.iconfinder.com/data/icons/eldorado-documents/40/html-512.png
+CSS.png: https://cdn0.iconfinder.com/data/icons/document-file-types/512/css-512.png
+Javascript: https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/File%20Types/JS.png
+PHP.png: https://cdn0.iconfinder.com/data/icons/document-file-types/512/php-512.png
