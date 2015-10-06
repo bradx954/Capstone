@@ -11,7 +11,7 @@
 			success: function (data, textStatus, jqXHR) {
 				if(data == 'File Updated.'){
 						showMessage(data);
-						$('#DirectoryTable').css('display','block');
+						$('#DirectoryTable').css('display','table');
 						$('#sideBarNewFile').css('display','block');
 						$('#FilesBarFolderTree').css('display','block');
 						$('#sideBarSaveFile').css('display','none');
@@ -29,7 +29,7 @@
 	$('#CancelFile').click(function () {
 		bootbox.confirm("Are you sure you want to discard changes?", function(result) {
 				if(result == true){
-					$('#DirectoryTable').css('display','block');
+					$('#DirectoryTable').css('display','table');
 					$('#sideBarNewFile').css('display','block');
 					$('#FilesBarFolderTree').css('display','block');
 					$('#sideBarSaveFile').css('display','none');
