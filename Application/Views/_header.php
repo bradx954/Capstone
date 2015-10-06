@@ -2,6 +2,7 @@
 <head>
 	<link href="Web/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="Web/CSS/theme.css">
+	<link rel="shortcut icon" href="Web/Images/LogoIcon.ico" />
     <script src='Web/JS/jquery-1.11.3.min.js'></script>
     <script src='Web/bootstrap-3.3.5-dist/js/bootstrap.js'></script>
 	<title>Storacloud</title>

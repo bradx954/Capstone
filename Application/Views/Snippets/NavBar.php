@@ -7,7 +7,7 @@
 			<span class='icon-bar'></span>
 			<span class='icon-bar'></span>
 			</button>
-			<a class='navbar-brand' href='index.php'>Storacloud</a>
+			<a class='navbar-brand' href='index.php'><img alt="logo" width='28' src='Web/Images/LogoIcon.ico'></a>
 		</div>
         <div class="collapse navbar-collapse" id="links">
             <div class='nav navbar-nav'>
