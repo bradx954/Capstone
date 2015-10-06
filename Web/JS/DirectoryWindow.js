@@ -72,7 +72,7 @@ function refreshDirectoryWindow()
 						}
 						file_size = getByteString(rows[x]['filesize']);
 					}
-					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+'"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"/></a></td></tr>');
+					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+'"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
 				}
 			}
 			$('.delete-file-row').click(function () {
