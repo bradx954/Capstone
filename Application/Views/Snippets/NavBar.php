@@ -1,4 +1,4 @@
-<nav class='navbar navbar-default'>
+<nav id="NavBar" class='navbar navbar-default navbar-fixed-top'>
 	<div class='container-fluid'>
 		<div class='navbar-header'>
 			<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#links' aria-expanded='false'>
@@ -7,6 +7,7 @@
 			<span class='icon-bar'></span>
 			<span class='icon-bar'></span>
 			</button>
+			<?php if($TPL['page'] == 'files'){echo '<a class="navbar-brand" href="#menu-toggle" class="btn btn-primary" id="menu-show">>></a>';}?>
 			<a class='navbar-brand' href='index.php'><img alt="logo" width='28' src='Web/Images/LogoIcon.ico'></a>
 		</div>
         <div class="collapse navbar-collapse" id="links">

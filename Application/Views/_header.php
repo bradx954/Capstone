@@ -8,7 +8,7 @@
     <script src='Web/bootstrap-3.3.5-dist/js/bootstrap.js'></script>
 	<title>Storacloud</title>
 </head>
-<body>
+<body style='padding-top: 50px;'>
 <?php 
 	if(isset($_SESSION['auth']['email']))
 	{
