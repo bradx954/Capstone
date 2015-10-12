@@ -7,6 +7,7 @@
             <a href="#">
                 <?php echo $_SESSION['auth']['email'];?>
             </a>
+			<a href="#menu-hide" class="btn btn-primary" id="menu-hide" style="color: white;"><<</a>
         </li>
         <li id="sideBarNewFile">
 			<button class="btn btn-primary" id="New" data-toggle="modal" data-target="#NewFileWindow" style="width: 80%; margin: auto;">New</button>

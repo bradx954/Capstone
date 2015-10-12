@@ -99,7 +99,6 @@
     color: black;
     background: none;
 }
-
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
@@ -115,6 +114,13 @@
 
     #wrapper.toggled #sidebar-wrapper {
         width: 0;
+    }
+	
+	#menu-show {
+        display: none;
+    }
+	#menu-hide {
+        display: none;
     }
 
     #page-content-wrapper {

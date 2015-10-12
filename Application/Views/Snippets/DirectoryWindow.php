@@ -2,6 +2,7 @@
 <script src="Web/JS/BootBox.js"></script>
 <script src="Web/JS/ByteStringFunctions.js"></script>
 <script src="Web/JS/DirectoryWindow.js"></script>
+<a href="#menu-toggle" class="btn btn-primary" id="menu-show">>></a>
 <table class="table table-hover" id="DirectoryTable" style="background-color: white; color: black;">
 	<tr id="headrow">
 		<th>Name</th>

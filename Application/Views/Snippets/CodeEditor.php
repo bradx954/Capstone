@@ -25,3 +25,4 @@
   });
   $('.CodeMirror').css('display','none');
 </script>
+<script src="Web/JS/CodeEditor.js"></script>

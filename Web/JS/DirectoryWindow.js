@@ -1,5 +1,10 @@
 $(document).ready(function () {
 	refreshDirectoryWindow();
+    $("#menu-show").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+		$("#menu-show").css('display','none');
+    });
 });
 function showError(postError) {
     $.notify(

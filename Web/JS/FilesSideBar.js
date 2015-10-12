@@ -38,6 +38,11 @@
 				}
 			});
 	});
+	$("#menu-hide").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+		$("#menu-show").css('display','table');
+    });
 	refreshSideBarFileTree();
 });
 function refreshSideBarFileTree()
@@ -57,7 +62,7 @@ function refreshSideBarFileTree()
 				var rows = JSON.parse(data);
 				for(var x in rows)
 				{
-					$('#FilesBarFolderTree ul#TreeFolders').append('<li id="'+rows[x]['id']+'" class="FolderItem" data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">+ </a><a href="#" class="FolderOpen" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a></li>');
+					$('#FilesBarFolderTree ul#TreeFolders').append('<li id="'+rows[x]['id']+'" class="FolderItem" data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">+ </a><img width="16" src="Web/Images/Folder.png"/><a href="#" class="FolderOpen" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a></li>');
 				}
 				setBranches();
 			}
@@ -96,7 +101,7 @@ function setBranches()
 						var rows = JSON.parse(data);
 						for(var x in rows)
 						{
-							$('#'+id+' ul').append('<li id="'+rows[x]['id']+'" class="FolderItem"  data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">+ </a><a href="#" class="FolderOpen" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a>');
+							$('#'+id+' ul').append('<li id="'+rows[x]['id']+'" class="FolderItem"  data-open=0 data-name="'+rows[x]['name']+'"><a href="#" class="FolderBranch" id="'+rows[x]['id']+'">+ </a><img width="16" src="Web/Images/Folder.png"/><a href="#" class="FolderOpen" id="'+rows[x]['id']+'">'+rows[x]['name']+'</a>');
 						}
 						$('#'+id+".FolderBranch" ).html('- ');
 						$( ".FolderBranch" ).unbind();
@@ -110,7 +115,7 @@ function setBranches()
 		}
 		else
 		{
-			$('#'+id+'.FolderItem').html('<a href="#" class="FolderBranch" id="'+id+'">+ </a><a href="#" class="FolderOpen" id="'+id+'">'+$('#'+id+'.FolderItem').data('name')+'</a>');
+			$('#'+id+'.FolderItem').html('<a href="#" class="FolderBranch" id="'+id+'">+ </a><img width="16" src="Web/Images/Folder.png"/><a href="#" class="FolderOpen" id="'+id+'">'+$('#'+id+'.FolderItem').data('name')+'</a>');
 			$('#'+id+'.FolderItem').data('open', 0);
 			$( ".FolderBranch" ).unbind();
 			setBranches();
