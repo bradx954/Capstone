@@ -27,6 +27,7 @@ function refreshDirectoryWindow()
 		type: "POST",
 		data: {UserID: $('#DirectoryWindowTarget').find('input[name="userid"]').val(), Directory: $('#directory').attr('value')},
 		success: function (data, textStatus, jqXHR) {
+			displayNoneSelect();
 			if (data == "Access Denied.") {
 				$("#DirectoryTable").html('<div class="alert alert-danger">' + data + '</div>');
 			}
