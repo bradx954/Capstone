@@ -197,5 +197,19 @@ class M_Folders extends Model {
 		$array = $rs->fetchAll();
 		return $array[0][0];
 	}
+	function updateFolderName($ID, $Contents)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("UPDATE CS_Folders SET name = :name WHERE id = :id;");
+			$rs->execute(array(':id' => $ID, ':name' => $Contents));
+		}
+		catch (PDOException $e)
+		{
+			return "Error renaming folder: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return "Folder Renamed.";
+	}
 }
 ?>

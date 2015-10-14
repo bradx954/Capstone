@@ -51,3 +51,16 @@ h1
 {
   clear: both;
 }
+.RowSelect
+{
+	background-color: blue;
+	color: white;
+}
+.RowSelect a
+{
+	color: white;
+}
+.RowSelect:hover
+{
+	background-color: blue !important;
+}

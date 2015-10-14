@@ -80,9 +80,21 @@ function refreshDirectoryWindow()
 					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+'"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
 				}
 			}
-			$('.delete-file-row').click(function () {
+			$("table > tbody > tr").click(function () {
+				if($(this).attr('id') == 'headrow'){return;}
+				if($(this).hasClass( "RowSelect" )){$(this).removeClass('RowSelect');}
+				else{$(this).addClass('RowSelect');}
+				var rows = $('.RowSelect');
+				if(rows.length == 0){displayNoneSelect();}
+				else if(rows.length == 1){displaySingleSelect();}
+				else{displayMultiSelect();}
+				if($('#menu-show').css('display') != 'none'){$('#menu-show').click();}
+			});
+				
+			$('.delete-file-row').click(function (event) {
+				event.stopPropagation();
 				var id = $(this).attr('id');
-				var type = $('tr[id='+id+']').attr('class');
+				var type = $('tr[id='+id+']').attr('class').replace(" RowSelect", "");
 				bootbox.confirm("Are you sure you want to delete this "+type+"?", function(result) {
 					if(result == true){
 						if(type == "Folder")
@@ -95,6 +107,9 @@ function refreshDirectoryWindow()
 								success: function (data, textStatus, jqXHR) {
 									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+id+']').remove(); refreshSideBarFileTree();}
 									else{showError(data);}
+									if(rows.length == 0){displayNoneSelect();}
+									else if(rows.length == 1){displaySingleSelect();}
+									else{displayMultiSelect();}
 								},
 								error: function (jqXHR, textStatus, errorThrown) {
 									showError(data);
@@ -111,6 +126,9 @@ function refreshDirectoryWindow()
 								success: function (data, textStatus, jqXHR) {
 									if(data == 'File deleted.'){showMessage(data); $('tr[id='+id+']').remove();}
 									else{showError(data);}
+									if(rows.length == 0){displayNoneSelect();}
+									else if(rows.length == 1){displaySingleSelect();}
+									else{displayMultiSelect();}
 								},
 								error: function (jqXHR, textStatus, errorThrown) {
 									showError(data);
@@ -120,20 +138,20 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
-			$('a[class=Folder]').click(function () {
+			$('a[class=Folder]').click(function (event) {
+				event.stopPropagation();
 				$('#previousDirectoy').attr('value', $('#directory').attr('value'));
 				$('#directory').attr('value', $(this).attr('id'));
 				$('#newDirectory').attr('actual', $(this).attr('id'));
 				refreshDirectoryWindow();
 			});
-			$('a[class=Text]').click(function () {
+			$('a[class=Text]').click(function (event) {
+				event.stopPropagation();
+				
 				var id = $(this).attr('id');
 				
 				$('#DirectoryTable').css('display','none');
-				$('#sideBarNewFile').css('display','none');
-				$('#FilesBarFolderTree').css('display','none');
-				$('#sideBarSaveFile').css('display','block');
-				$('#sideBarCancelFile').css('display','block');
+				displayEdit();
 				$('.CodeMirror').css('display','block');
 				$('.CodeMirror').data('fileid', id);
 				
@@ -152,14 +170,12 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
-			$('a[class=HTML]').click(function () {
+			$('a[class=HTML]').click(function (event) {
+				event.stopPropagation();
 				var id = $(this).attr('id');
 				
 				$('#DirectoryTable').css('display','none');
-				$('#sideBarNewFile').css('display','none');
-				$('#FilesBarFolderTree').css('display','none');
-				$('#sideBarSaveFile').css('display','block');
-				$('#sideBarCancelFile').css('display','block');
+				displayEdit();
 				$('.CodeMirror').css('display','block');
 				$('.CodeMirror').data('fileid', id);
 				
@@ -178,14 +194,12 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
-			$('a[class=Javascript]').click(function () {
+			$('a[class=Javascript]').click(function (event) {
+				event.stopPropagation();
 				var id = $(this).attr('id');
 				
 				$('#DirectoryTable').css('display','none');
-				$('#sideBarNewFile').css('display','none');
-				$('#FilesBarFolderTree').css('display','none');
-				$('#sideBarSaveFile').css('display','block');
-				$('#sideBarCancelFile').css('display','block');
+				displayEdit();
 				$('.CodeMirror').css('display','block');
 				$('.CodeMirror').data('fileid', id);
 				
@@ -204,14 +218,12 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
-			$('a[class=CSS]').click(function () {
+			$('a[class=CSS]').click(function (event) {
+				event.stopPropagation();
 				var id = $(this).attr('id');
 				
 				$('#DirectoryTable').css('display','none');
-				$('#sideBarNewFile').css('display','none');
-				$('#FilesBarFolderTree').css('display','none');
-				$('#sideBarSaveFile').css('display','block');
-				$('#sideBarCancelFile').css('display','block');
+				displayEdit();
 				$('.CodeMirror').css('display','block');
 				$('.CodeMirror').data('fileid', id);
 				
@@ -230,14 +242,12 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
-			$('a[class=PHP]').click(function () {
+			$('a[class=PHP]').click(function (event) {
+				event.stopPropagation();
 				var id = $(this).attr('id');
 				
 				$('#DirectoryTable').css('display','none');
-				$('#sideBarNewFile').css('display','none');
-				$('#FilesBarFolderTree').css('display','none');
-				$('#sideBarSaveFile').css('display','block');
-				$('#sideBarCancelFile').css('display','block');
+				displayEdit();
 				$('.CodeMirror').css('display','block');
 				$('.CodeMirror').data('fileid', id);
 				

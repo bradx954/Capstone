@@ -2,6 +2,87 @@
 	$('#New').click(function () {
 		$('#FormMessage').html('');
 	});
+	$('#DeleteFile').click(function () {
+		var rows = $('.RowSelect');
+		if(rows.length == 1){$('#'+$('.RowSelect').attr('id')+'.delete-file-row').click();}
+		else if(rows.length == 0){return;}
+		else
+		{
+			bootbox.confirm("Are you sure you want to delete these "+rows.length+" items?", function(result) {
+				if(result == true){
+					$('.RowSelect').each(function (i, row) {
+						if($(row).hasClass('Folder') == true)
+						{
+							$.ajax(
+							{
+								url: "index.php?c=files&m=deleteFolder",
+								type: "POST",
+								data: {ID: $(row).attr('id')},
+								success: function (data, textStatus, jqXHR) {
+									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+$(row).attr('id')+']').remove(); refreshSideBarFileTree();}
+									else{showError(data);}
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									showError(errorThrown);
+								}
+							});
+						}
+						else
+						{
+							$.ajax(
+							{
+								url: "index.php?c=files&m=deleteFile",
+								type: "POST",
+								data: {ID: $(row).attr('id')},
+								success: function (data, textStatus, jqXHR) {
+									if(data == 'File deleted.'){showMessage(data); $('tr[id='+$(row).attr('id')+']').remove();}
+									else{showError(data);}
+								},
+								error: function (jqXHR, textStatus, errorThrown) {
+									showError(errorThrown);
+								}
+							});
+						}
+						displayNoneSelect();
+					});
+				}
+			});
+		}
+	});
+	$('#OpenFile').click(function () {
+		var rows = $('.RowSelect');
+		if(rows.length == 1){$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').replace(' RowSelect','')).click();}
+		else{return;}
+	});
+	$('#RenameFile').click(function () {
+		var Name = $('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').replace(' RowSelect','')).html();
+		var Type = $('.RowSelect').attr('class').replace(' RowSelect','');
+		if(Type != 'Folder'){Type = 'File';}
+		bootbox.prompt("Enter new "+Type+" name.", function(result) 
+		{                
+		  if (result === null) {
+			  
+		  } else {
+			$.ajax(
+			{
+				url: "index.php?c=files&m=rename"+Type,
+				type: "POST",
+				data: {ID: $('.RowSelect').attr('id'), Contents: result},
+				success: function (data, textStatus, jqXHR) {
+					if(data == 'File Renamed.' || data == 'Folder Renamed.'){
+							showMessage(data);
+							refreshDirectoryWindow();
+						}
+					else{showError(data);}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					showError(errorThrown);
+				}
+			});
+		  }
+		});
+		
+	});
 	$('#SaveFile').click(function () {
 		$.ajax(
 		{
@@ -11,29 +92,31 @@
 			success: function (data, textStatus, jqXHR) {
 				if(data == 'File Updated.'){
 						showMessage(data);
+						var rows = $('.RowSelect');
+						if(rows.length == 0){displayNoneSelect();}
+						else if(rows.length == 1){displaySingleSelect();}
+						else{displayMultiSelect();}
+						
 						$('#DirectoryTable').css('display','table');
-						$('#sideBarNewFile').css('display','block');
-						$('#FilesBarFolderTree').css('display','block');
-						$('#sideBarSaveFile').css('display','none');
-						$('#sideBarCancelFile').css('display','none');
 						$('.CodeMirror').css('display','none');
 						refreshDirectoryWindow();
 					}
 				else{showError(data);}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				showError(data);
+				showError(errorThrown);
 			}
 		});
 	});
 	$('#CancelFile').click(function () {
 		bootbox.confirm("Are you sure you want to discard changes?", function(result) {
 				if(result == true){
+					var rows = $('.RowSelect');
+					if(rows.length == 0){displayNoneSelect();}
+					else if(rows.length == 1){displaySingleSelect();}
+					else{displayMultiSelect();}
+					
 					$('#DirectoryTable').css('display','table');
-					$('#sideBarNewFile').css('display','block');
-					$('#FilesBarFolderTree').css('display','block');
-					$('#sideBarSaveFile').css('display','none');
-					$('#sideBarCancelFile').css('display','none');
 					$('.CodeMirror').css('display','none');
 				}
 			});
@@ -45,6 +128,58 @@
     });
 	refreshSideBarFileTree();
 });
+function displayEdit()
+{
+	$('#sideBarNewFile').css('display','none');
+	$('#sideBarUploadFile').css('display','none');
+	$('#sideBarMoveFile').css('display','none');
+	$('#sideBarDownloadFile').css('display','none');
+	$('#FilesBarFolderTree').css('display','none');
+	$('#sideBarSaveFile').css('display','block');
+	$('#sideBarCancelFile').css('display','block');
+	$('#sideBarRenameFile').css('display','none');
+	$('#sideBarOpenFile').css('display','none');
+	$('#sideBarDeleteFile').css('display','none');
+}
+function displayNoneSelect()
+{
+	$('#sideBarNewFile').css('display','block');
+	$('#sideBarUploadFile').css('display','block');
+	$('#sideBarMoveFile').css('display','none');
+	$('#sideBarDownloadFile').css('display','none');
+	$('#FilesBarFolderTree').css('display','block');
+	$('#sideBarSaveFile').css('display','none');
+	$('#sideBarCancelFile').css('display','none');
+	$('#sideBarRenameFile').css('display','none');
+	$('#sideBarOpenFile').css('display','none');
+	$('#sideBarDeleteFile').css('display','none');
+}
+function displaySingleSelect()
+{
+	$('#sideBarNewFile').css('display','none');
+	$('#sideBarUploadFile').css('display','none');
+	$('#sideBarMoveFile').css('display','block');
+	$('#sideBarDownloadFile').css('display','block');
+	$('#FilesBarFolderTree').css('display','block');
+	$('#sideBarSaveFile').css('display','none');
+	$('#sideBarCancelFile').css('display','none');
+	$('#sideBarRenameFile').css('display','block');
+	$('#sideBarOpenFile').css('display','block');
+	$('#sideBarDeleteFile').css('display','block');
+}
+function displayMultiSelect()
+{
+	$('#sideBarNewFile').css('display','none');
+	$('#sideBarUploadFile').css('display','none');
+	$('#sideBarMoveFile').css('display','none');
+	$('#sideBarDownloadFile').css('display','none');
+	$('#FilesBarFolderTree').css('display','block');
+	$('#sideBarSaveFile').css('display','none');
+	$('#sideBarCancelFile').css('display','none');
+	$('#sideBarRenameFile').css('display','none');
+	$('#sideBarOpenFile').css('display','none');
+	$('#sideBarDeleteFile').css('display','block');
+}
 function refreshSideBarFileTree()
 {
 	$('#FilesBarFolderTree').html('<ul><li id="0" class="FolderItem" data-open=1 data-name="/"><a href="#" class="FolderOpen" id="0">/</a></li><ul id="TreeFolders" style="color: black;"></ul></ul>');

@@ -201,5 +201,19 @@ class M_Files extends Model {
 		}
 		return $this->deleteFiles($DeleteIDS);
 	}
+	function updateFileName($ID, $Contents)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("UPDATE CS_Files SET name = :name WHERE id = :id;");
+			$rs->execute(array(':id' => $ID, ':name' => $Contents));
+		}
+		catch (PDOException $e)
+		{
+			return "Error renaming file: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return "File Renamed.";
+	}
 }
 ?>

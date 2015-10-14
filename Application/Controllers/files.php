@@ -107,5 +107,33 @@ class Files extends Controller
 			return "Access denied.";
 		}
 	}
+	function renameFile()
+	{
+		$ID = $_POST['ID'];
+		$Contents = $_POST['Contents'];
+		
+		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		{
+			return $this->M_Files->updateFileName($ID, $Contents);
+		}
+		else
+		{
+			return "Access denied.";
+		}
+	}
+	function renameFolder()
+	{
+		$ID = $_POST['ID'];
+		$Contents = $_POST['Contents'];
+		
+		if($this->UserID == $this->M_Folders->getFolderOwner($ID))
+		{
+			return $this->M_Folders->updateFolderName($ID, $Contents);
+		}
+		else
+		{
+			return "Access denied.";
+		}
+	}
 }
 ?>
