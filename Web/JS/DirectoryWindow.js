@@ -5,6 +5,40 @@ $(document).ready(function () {
         $("#wrapper").toggleClass("toggled");
 		$("#menu-show").css('display','none');
     });
+	$.contextMenu({
+        selector: '.RowItem', 
+        build: function($trigger, e) {
+			var rows = $('.RowSelect');
+			if(rows.length == 0){return;}
+			else if(rows.length == 1)
+			{
+				return {
+					callback: function(key, options) {
+						$('#'+key).click();
+					},
+					items: {
+						"OpenFile": {name: "Open", icon: "edit"},
+						"DownloadFile": {name: "Download", icon: "cut"},
+						"MoveFile": {name: "Copy/Move", icon: "copy"},
+						"RenameFile": {name: "Rename", icon: "paste"},
+						"DeleteFile": {name: "Delete", icon: "delete"},
+					}
+				};
+			}
+			else
+			{
+				return {
+					callback: function(key, options) {
+						$('#'+key).click();
+					},
+					items: {
+						"DeleteFile": {name: "Delete", icon: "delete"},
+					}
+				};
+			}
+            
+        }
+    });
 });
 function showError(postError) {
     $.notify(
@@ -78,20 +112,50 @@ function refreshDirectoryWindow()
 						}
 						file_size = getByteString(rows[x]['filesize']);
 					}
-					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+'"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
+					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+' RowItem"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
 				}
 			}
-			$("table > tbody > tr").click(function () {
-				if($(this).attr('id') == 'headrow'){return;}
-				if($(this).hasClass( "RowSelect" )){$(this).removeClass('RowSelect');}
-				else{$(this).addClass('RowSelect');}
-				var rows = $('.RowSelect');
-				if(rows.length == 0){displayNoneSelect();}
-				else if(rows.length == 1){displaySingleSelect();}
-				else{displayMultiSelect();}
-				if($('#menu-show').css('display') != 'none'){$('#menu-show').click();}
+			$("table > tbody > tr").mousedown(function(event) {
+				switch (event.which) {
+					case 1:
+						if($(this).attr('id') == 'headrow'){return;}
+						if (window.event.ctrlKey) {
+							if($(this).hasClass( "RowSelect" )){$(this).removeClass('RowSelect');}
+							else{$(this).addClass('RowSelect');}
+						}
+						else
+						{
+							$('.Rowselect').removeClass('RowSelect');
+							if($(this).hasClass( "RowSelect" )){}
+							else{$(this).addClass('RowSelect');}
+						}
+						var rows = $('.RowSelect');
+						if(rows.length == 0){displayNoneSelect();}
+						else if(rows.length == 1){displaySingleSelect();}
+						else{displayMultiSelect();}
+						if($('#menu-show').css('display') != 'none'){$('#menu-show').click();}
+						break;
+					case 2:
+						break;
+					case 3:
+						if($(this).attr('id') == 'headrow'){return;}
+						if($(this).hasClass( "RowSelect" )){}
+						else{$('.Rowselect').removeClass('RowSelect');$(this).addClass('RowSelect');}
+						var rows = $('.RowSelect');
+						if(rows.length == 0){displayNoneSelect();}
+						else if(rows.length == 1){displaySingleSelect();}
+						else{displayMultiSelect();}
+						break;
+					default:
+				}
 			});
-				
+			$("table > tbody > tr").dblclick(function() {
+			  if (window.event.ctrlKey) {return;}
+			  else
+			  {
+				$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();
+			  }
+			});
 			$('.delete-file-row').click(function (event) {
 				event.stopPropagation();
 				var id = $(this).attr('id');

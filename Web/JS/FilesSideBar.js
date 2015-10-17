@@ -51,12 +51,12 @@
 	});
 	$('#OpenFile').click(function () {
 		var rows = $('.RowSelect');
-		if(rows.length == 1){$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').replace(' RowSelect','')).click();}
+		if(rows.length == 1){$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();}
 		else{return;}
 	});
 	$('#RenameFile').click(function () {
-		var Name = $('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').replace(' RowSelect','')).html();
-		var Type = $('.RowSelect').attr('class').replace(' RowSelect','');
+		var Name = $('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).html();
+		var Type = $('.RowSelect').attr('class').split(' ')[0];
 		if(Type != 'Folder'){Type = 'File';}
 		bootbox.prompt("Enter new "+Type+" name.", function(result) 
 		{                

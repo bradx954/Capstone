@@ -2,6 +2,9 @@
 <script src="Web/JS/BootBox.js"></script>
 <script src="Web/JS/ByteStringFunctions.js"></script>
 <script src="Web/JS/DirectoryWindow.js"></script>
+<link rel="stylesheet" href="Web/jQuery-contextMenu-master/dist/jquery.contextMenu.min.css" type='text/css'/>
+<script src="Web/jQuery-contextMenu-master/dist/jquery.contextMenu.min.js"></script>
+<script src="Web/jQuery-contextMenu-master/dist/jquery.ui.position.min.js"></script>
 <table class="table table-hover table-condensed table-responsive" id="DirectoryTable" style="background-color: white; color: black;">
 	<tr id="headrow">
 		<th>Name</th>
