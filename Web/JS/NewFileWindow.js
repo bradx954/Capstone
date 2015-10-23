@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	$("#SelectDirectory").click(function(e) {
 		e.preventDefault();
+		e.stopPropagation();
 		$('.DirectorySelectPending').removeClass('DirectorySelectPending');
 		$('#newDirectory').addClass('DirectorySelectPending');
 		$('#DirectoryBrowser').modal();
@@ -11,13 +12,15 @@ $(document).ready(function () {
 			$("#SubmitNewFile").click();
 		}
 	});
-	$(".FileIcon").click(function () {
+	$(".FileIcon").click(function (e) {
+		e.stopPropagation();
 		$(".FileIconSelect").removeClass("FileIconSelect");
 		$(this).addClass( "FileIconSelect" );
 		$("#FileTypeExtension").html($(this).attr("extension"));
 		checkNewFileValid();
 	});
-	$("#SubmitNewFile").click(function() {
+	$("#SubmitNewFile").click(function(e) {
+		e.stopPropagation();
 		if($(".FileIconSelect").attr('id') == "Folder")
 		{
 			$.ajax(

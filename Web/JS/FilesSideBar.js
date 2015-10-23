@@ -60,7 +60,8 @@
 	});
 	$('#MoveFile').click(function (e) {
 		e.stopPropagation();
-		
+		$('#MoveFileWindow').modal();
+		$('#MoveFileFormMessage').html('');
 	});
 	$('#RenameFile').click(function (e) {
 		e.stopPropagation();

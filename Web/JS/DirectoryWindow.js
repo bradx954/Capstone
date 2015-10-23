@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	refreshDirectoryWindow();
 	$("body").click(function(e) {
-		if($('#sideBarSaveFile').css('display') == 'none')
+		if($('#sideBarSaveFile').css('display') == 'none' && $('.context-menu-list').css('display') != "block")
 		{
 			$('.Rowselect').removeClass('RowSelect');
 			displayNoneSelect();
@@ -172,6 +172,9 @@ function refreshDirectoryWindow()
 				event.stopPropagation();
 				var id = $(this).attr('id');
 				var type = $('tr[id='+id+']').attr('class').replace(" RowSelect", "");
+				var type = type.replace(" RowItem", "");
+				var type = type.replace(" context-menu-active", "");
+				if(type != "Folder"){type = type+' file';}
 				bootbox.confirm("Are you sure you want to delete this "+type+"?", function(result) {
 					if(result == true){
 						if(type == "Folder")
