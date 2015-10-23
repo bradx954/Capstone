@@ -19,6 +19,41 @@ $(document).ready(function () {
 		});
 	});
 });
+(function($){
+    // Determine if we on iPhone or iPad
+    var isiOS = false;
+    var agent = navigator.userAgent.toLowerCase();
+    if(agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0){
+           isiOS = true;
+    }
+ 
+    $.fn.doubletap = function(onDoubleTapCallback, onTapCallback, delay){
+        var eventName, action;
+        delay = delay == null? 500 : delay;
+        eventName = isiOS == true? 'touchend' : 'click';
+ 
+        $(this).bind(eventName, function(event){
+            var now = new Date().getTime();
+            var lastTouch = $(this).data('lastTouch') || now + 1 /** the first time this will make delta a negative number */;
+            var delta = now - lastTouch;
+            clearTimeout(action);
+            if(delta<500 && delta>0){
+                if(onDoubleTapCallback != null && typeof onDoubleTapCallback == 'function'){
+                    onDoubleTapCallback(event);
+                }
+            }else{
+                $(this).data('lastTouch', now);
+                action = setTimeout(function(evt){
+                    if(onTapCallback != null && typeof onTapCallback == 'function'){
+                        onTapCallback(evt);
+                    }
+                    clearTimeout(action);   // clear the timeout
+                }, delay, [event]);
+            }
+            $(this).data('lastTouch', now);
+        });
+    };
+})(jQuery);
 function updateDirectoryBrowserTable(selectID)
 {
 	selectID = typeof selectID !== 'undefined' ? selectID : 0;
@@ -64,25 +99,28 @@ function updateDirectoryBrowserTable(selectID)
 					$('#DirectoryBrowserTable tr:last').after('<tr id="'+rows[x]['id']+'"><td><img width="64" src="Web/Images/Folder.png"/>'+rows[x]['name']+'</td></tr>');
 				}
 			}
-			$("#DirectoryBrowserTable > tbody > tr").click(function(event) {event.stopPropagation();});
-			$("#DirectoryBrowserTable > tbody > tr").mousedown(function(event) {
+			$("#DirectoryBrowserTable > tbody > tr").click(function(event) {
+				event.stopPropagation();
+				});
+			$("#DirectoryBrowserTable > tbody > tr").bind('mousedown',function(event) {
 				event.stopPropagation();
 				switch (event.which) {
 					case 1:
 						if($(this).attr('id') == 'browserheadrow'){return;}
-						$('#DirectoryBrowserTable > tbody > .Rowselect').removeClass('RowSelect');
 						if($(this).hasClass( "RowSelect" )){}
-						else{$(this).addClass('RowSelect');$('#ConfirmDirectory').prop('disabled', false);}
+						else{$('#DirectoryBrowserTable > tbody > .Rowselect').removeClass('RowSelect');$(this).addClass('RowSelect');$('#ConfirmDirectory').prop('disabled', false);}
 						break;
 					case 2:
 						break;
 					case 3:
-						if($(this).attr('id') == 'browserheadrow'){return;}
-						if($(this).hasClass( "RowSelect" )){}
-						else{$('#DirectoryBrowserTable > tbody > .Rowselect').removeClass('RowSelect');$(this).addClass('RowSelect');}
 						break;
 					default:
 				}
+			});
+			$("#DirectoryBrowserTable > tbody > tr").doubletap(function() {
+			  $('#ConfirmDirectory').prop('disabled', true);
+			  updateDirectoryBrowserTable($('.RowSelect').attr('id'));
+			  return false;
 			});
 			$("#DirectoryBrowserTable > tbody > tr").dblclick(function(e) {
 			  e.stopPropagation();

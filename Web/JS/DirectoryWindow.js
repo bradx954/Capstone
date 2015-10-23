@@ -1,11 +1,15 @@
 $(document).ready(function () {
 	refreshDirectoryWindow();
 	$("body").click(function(e) {
-        $('.Rowselect').removeClass('RowSelect');
-		displayNoneSelect();
+		if($('#sideBarSaveFile').css('display') == 'none')
+		{
+			$('.Rowselect').removeClass('RowSelect');
+			displayNoneSelect();
+		}
     });
     $("#menu-show").click(function(e) {
         e.preventDefault();
+		e.stopPropagation();
         $("#wrapper").toggleClass("toggled");
 		$("#menu-show").css('display','none');
     });
@@ -119,8 +123,10 @@ function refreshDirectoryWindow()
 					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+' RowItem"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
 				}
 			}
-			$("#DirectoryTable > tbody > tr").click(function(event) {event.stopPropagation();});
-			$("#DirectoryTable > tbody > tr").mousedown(function(event) {
+			$("#DirectoryTable > tbody > tr").click(function(event) {
+				event.stopPropagation();
+				});
+			$("#DirectoryTable > tbody > tr").bind('mousedown', function(event) {
 				event.stopPropagation();
 				switch (event.which) {
 					case 1:

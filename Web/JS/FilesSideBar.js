@@ -134,6 +134,7 @@
 	});
 	$("#menu-hide").click(function(e) {
         e.preventDefault();
+		e.stopPropagation();
         $("#wrapper").toggleClass("toggled");
 		$("#menu-show").css('display','table');
     });
