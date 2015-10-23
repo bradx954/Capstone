@@ -1,8 +1,11 @@
 ﻿$(document).ready(function () {
-	$('#New').click(function () {
+	$('#New').click(function (e) {
+		e.stopPropagation();
+		$('#NewFileWindow').modal();
 		$('#FormMessage').html('');
 	});
-	$('#DeleteFile').click(function () {
+	$('#DeleteFile').click(function (e) {
+		e.stopPropagation();
 		var rows = $('.RowSelect');
 		if(rows.length == 1){$('#'+$('.RowSelect').attr('id')+'.delete-file-row').click();}
 		else if(rows.length == 0){return;}
@@ -49,12 +52,18 @@
 			});
 		}
 	});
-	$('#OpenFile').click(function () {
+	$('#OpenFile').click(function (e) {
+		e.stopPropagation();
 		var rows = $('.RowSelect');
 		if(rows.length == 1){$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();}
 		else{return;}
 	});
-	$('#RenameFile').click(function () {
+	$('#MoveFile').click(function (e) {
+		e.stopPropagation();
+		
+	});
+	$('#RenameFile').click(function (e) {
+		e.stopPropagation();
 		var Name = $('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).html();
 		var Type = $('.RowSelect').attr('class').split(' ')[0];
 		if(Type != 'Folder'){Type = 'File';}
@@ -83,7 +92,8 @@
 		});
 		
 	});
-	$('#SaveFile').click(function () {
+	$('#SaveFile').click(function (e) {
+		e.stopPropagation();
 		$.ajax(
 		{
 			url: "index.php?c=files&m=updateFile",
@@ -108,7 +118,8 @@
 			}
 		});
 	});
-	$('#CancelFile').click(function () {
+	$('#CancelFile').click(function (e) {
+		e.stopPropagation();
 		bootbox.confirm("Are you sure you want to discard changes?", function(result) {
 				if(result == true){
 					var rows = $('.RowSelect');

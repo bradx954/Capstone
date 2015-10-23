@@ -1,5 +1,9 @@
 $(document).ready(function () {
 	refreshDirectoryWindow();
+	$("body").click(function(e) {
+        $('.Rowselect').removeClass('RowSelect');
+		displayNoneSelect();
+    });
     $("#menu-show").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
@@ -115,7 +119,9 @@ function refreshDirectoryWindow()
 					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+' RowItem"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
 				}
 			}
-			$("table > tbody > tr").mousedown(function(event) {
+			$("#DirectoryTable > tbody > tr").click(function(event) {event.stopPropagation();});
+			$("#DirectoryTable > tbody > tr").mousedown(function(event) {
+				event.stopPropagation();
 				switch (event.which) {
 					case 1:
 						if($(this).attr('id') == 'headrow'){return;}
@@ -149,7 +155,7 @@ function refreshDirectoryWindow()
 					default:
 				}
 			});
-			$("table > tbody > tr").dblclick(function() {
+			$("#DirectoryTable > tbody > tr").dblclick(function() {
 			  if (window.event.ctrlKey) {return;}
 			  else
 			  {
@@ -207,7 +213,7 @@ function refreshDirectoryWindow()
 				event.stopPropagation();
 				$('#previousDirectoy').attr('value', $('#directory').attr('value'));
 				$('#directory').attr('value', $(this).attr('id'));
-				$('#newDirectory').attr('actual', $(this).attr('id'));
+				$('#newDirectory').data('actual', $(this).attr('id'));
 				refreshDirectoryWindow();
 			});
 			$('a[class=Text]').click(function (event) {
@@ -331,14 +337,16 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
-			$('#previousDirectory').click(function () {
+			$('#previousDirectory').click(function (e) {
+				e.stopPropagation();
 				var temp = $('#directory').attr('value');
 				$('#directory').attr('value', $(this).attr('value'));
-				$('#newDirectory').attr('actual', $(this).attr('value'));
+				$('#newDirectory').data('actual', $(this).attr('value'));
 				$(this).attr('value', temp);
 				refreshDirectoryWindow();
 			});
-			$('#upDirectory').click(function () {
+			$('#upDirectory').click(function (e) {
+				e.stopPropagation();
 				$.ajax(
 				{
 					url: "index.php?c=files&m=getFolderParent",
@@ -347,7 +355,7 @@ function refreshDirectoryWindow()
 					success: function (data, textStatus, jqXHR) {
 						if(data >= 0){
 							$('#directory').attr('value', data);
-							$('#newDirectory').attr('actual', data);
+							$('#newDirectory').data('actual', data);
 							refreshDirectoryWindow();
 						}
 						else{showError(data);}

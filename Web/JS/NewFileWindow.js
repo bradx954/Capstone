@@ -1,4 +1,11 @@
 $(document).ready(function () {
+	$("#SelectDirectory").click(function(e) {
+		e.preventDefault();
+		$('.DirectorySelectPending').removeClass('DirectorySelectPending');
+		$('#newDirectory').addClass('DirectorySelectPending');
+		$('#DirectoryBrowser').modal();
+		updateDirectoryBrowserTable(0);
+	});
 	$('#newFileName').keypress(function(e){
 		if(e.which == 13) {
 			$("#SubmitNewFile").click();
@@ -17,7 +24,7 @@ $(document).ready(function () {
 			{
 				url: "index.php?c=files&m=newFolder",
 				type: "POST",
-				data: {filename: $("#newFileName").val(), directory: $("#newDirectory").attr('actual')},
+				data: {filename: $("#newFileName").val(), directory: $("#newDirectory").data('actual')},
 				success: function (data, textStatus, jqXHR) {
 					if (data == "Folder Created.") {
 						$("#FormMessage").html('<div class="alert alert-success">' + data + '</div>');
@@ -39,7 +46,7 @@ $(document).ready(function () {
 			{
 				url: "index.php?c=files&m=newFile",
 				type: "POST",
-				data: {filename: $("#newFileName").val()+$("#FileTypeExtension").html(), directory: $("#newDirectory").attr('actual')},
+				data: {filename: $("#newFileName").val()+$("#FileTypeExtension").html(), directory: $("#newDirectory").data('actual')},
 				success: function (data, textStatus, jqXHR) {
 					if (data == "File Created.") {
 						$("#FormMessage").html('<div class="alert alert-success">' + data + '</div>');
