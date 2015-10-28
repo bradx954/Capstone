@@ -2,6 +2,7 @@
 <script src="Web/JS/BootBox.js"></script>
 <script src="Web/JS/ByteStringFunctions.js"></script>
 <script src="Web/JS/DirectoryWindow.js"></script>
+<script src="Web/JS/doubleTap.js"></script>
 <link rel="stylesheet" href="Web/jQuery-contextMenu-master/dist/jquery.contextMenu.min.css" type='text/css'/>
 <script src="Web/jQuery-contextMenu-master/dist/jquery.contextMenu.min.js"></script>
 <script src="Web/jQuery-contextMenu-master/dist/jquery.ui.position.min.js"></script>

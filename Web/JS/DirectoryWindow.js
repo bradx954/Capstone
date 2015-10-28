@@ -161,12 +161,16 @@ function refreshDirectoryWindow()
 					default:
 				}
 			});
-			$("#DirectoryTable > tbody > tr").dblclick(function() {
-			  if (window.event.ctrlKey) {return;}
+			$("#DirectoryTable > tbody > tr").dblclick(function(e) {
+				e.stopPropagation();
+			  if (e.ctrlKey) {return;}
 			  else
 			  {
 				$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();
 			  }
+			});
+			$("#DirectoryTable > tbody > tr").doubletap(function() {
+			  $('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();
 			});
 			$('.delete-file-row').click(function (event) {
 				event.stopPropagation();
