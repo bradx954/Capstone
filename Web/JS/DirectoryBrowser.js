@@ -2,12 +2,12 @@ $(document).ready(function () {
 	$("#ConfirmDirectory").click(function(event) 
 	{
 		event.stopPropagation();
-		$('.DirectorySelectPending').data('actual',$('#DirectoryBrowserTable > tbody > .Rowselect').attr('id'));
+		$('.DirectorySelectPending').data('actual',$('#DirectoryBrowserTable > tbody > .RowSelect').attr('id'));
 		$.ajax(
 		{
 					url: "index.php?c=files&m=getFolderPath",
 					type: "POST",
-					data: {ID: $('#DirectoryBrowserTable > tbody > .Rowselect').attr('id')},
+					data: {ID: $('#DirectoryBrowserTable > tbody > .RowSelect').attr('id')},
 					success: function (data, textStatus, jqXHR) {
 						$('.DirectorySelectPending').attr('value', data);
 						$('.DirectorySelectPending').removeClass('DirectorySelectPending');
@@ -108,7 +108,7 @@ function updateDirectoryBrowserTable(selectID)
 					case 1:
 						if($(this).attr('id') == 'browserheadrow'){return;}
 						if($(this).hasClass( "RowSelect" )){}
-						else{$('#DirectoryBrowserTable > tbody > .Rowselect').removeClass('RowSelect');$(this).addClass('RowSelect');$('#ConfirmDirectory').prop('disabled', false);}
+						else{$('#DirectoryBrowserTable > tbody > .RowSelect').removeClass('RowSelect');$(this).addClass('RowSelect');$('#ConfirmDirectory').prop('disabled', false);}
 						break;
 					case 2:
 						break;
