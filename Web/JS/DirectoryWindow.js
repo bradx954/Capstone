@@ -3,7 +3,7 @@ $(document).ready(function () {
 	$("body").click(function(e) {
 		if($('#sideBarSaveFile').css('display') == 'none' && $('.context-menu-list').css('display') != "block")
 		{
-			$('.Rowselect').removeClass('RowSelect');
+			$('.RowSelect').removeClass('RowSelect');
 			displayNoneSelect();
 		}
     });
@@ -126,18 +126,18 @@ function refreshDirectoryWindow()
 			$("#DirectoryTable > tbody > tr").click(function(event) {
 				event.stopPropagation();
 				});
-			$("#DirectoryTable > tbody > tr").bind('mousedown', function(event) {
-				event.stopPropagation();
-				switch (event.which) {
+			$("#DirectoryTable > tbody > tr").bind('mousedown', function(e) {
+				e.stopPropagation();
+				switch (e.which) {
 					case 1:
 						if($(this).attr('id') == 'headrow'){return;}
-						if (window.event.ctrlKey) {
+						if (e.ctrlKey) {
 							if($(this).hasClass( "RowSelect" )){$(this).removeClass('RowSelect');}
 							else{$(this).addClass('RowSelect');}
 						}
 						else
 						{
-							$('.Rowselect').removeClass('RowSelect');
+							$('.RowSelect').removeClass('RowSelect');
 							if($(this).hasClass( "RowSelect" )){}
 							else{$(this).addClass('RowSelect');}
 						}
