@@ -28,7 +28,9 @@ class Files extends Controller
 	}
 	function newFolder()
 	{
-		return $this->M_Folders->newFolder($_POST['filename'], $this->UserID, $_POST['directory']);
+		$result = $this->M_Folders->newFolder($_POST['filename'], $this->UserID, $_POST['directory']);
+		if($result > 0){return 'Folder Created.';}
+		else{return $result;}
 	}
 	function deleteFolder()
 	{
@@ -175,17 +177,6 @@ class Files extends Controller
 		{
 			return "Access denied.";
 		}
-		/*$Filename = $this->M_Files->getFileName($_POST['ID']);
-		if($Filename == -1){return "Thats not a valid file.";}
-		$Filecontents = $this->M_Files->getFileContents($_POST['ID']);
-		if(strlen($Filecontents) > ($this->M_Users->getUserQuota($_POST['UserID']) - $this->M_Files->getUserUsedSpace($_POST['UserID'])))
-		{
-			return "Insufficient storage space.";
-		}
-		$newFileID = $this->M_Files->newFile($Filename, $_POST['UserID'], $_POST['Destination']);
-		if($newFileID < 1){return $newFileID;}
-		$this->M_Files->updateFileContents($newFileID, $Filecontents);
-		return "File Copy completed.";*/
 		$Filecontents = $this->M_Files->getFileContents($_POST['ID']);
 		if(strlen($Filecontents) > ($this->M_Users->getUserQuota($_POST['UserID']) - $this->M_Files->getUserUsedSpace($_POST['UserID'])))
 		{
@@ -199,7 +190,31 @@ class Files extends Controller
 		{
 			return "Access denied.";
 		}
-		return "Folder ".$_POST['ID']." not copied.";
+		return $this->copyDirectory($_POST['ID'],$_POST['UserID'],$_POST['Destination']);
+	}
+	private function copyDirectory($DirectoryID, $UserID, $Destination)
+	{
+		$NewFolderID = $this->M_Folders->newFolder($this->M_Folders->getFolderName($DirectoryID), $UserID, $Destination);
+		
+		$Folders = $this->M_Folders->getFolders($UserID, $DirectoryID);
+		$Files = $this->M_Files->getFiles($UserID, $DirectoryID);
+		
+		foreach($Folders as $Folder)
+		{
+			$result = $this->copyDirectory($Folder['id'],$UserID,$NewFolderID);
+			if($result != "Directory Copied."){return $result;}
+		}
+		foreach($Files as $File)
+		{
+			$Filecontents = $this->M_Files->getFileContents($File['id']);
+			if(strlen($Filecontents) > ($this->M_Users->getUserQuota($UserID) - $this->M_Files->getUserUsedSpace($UserID)))
+			{
+				return "Insufficient storage space.";
+			}
+			$this->M_Files->copyFile($File['id'],$UserID,$NewFolderID);
+		}
+		
+		return "Directory Copied.";
 	}
 }
 ?>

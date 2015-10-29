@@ -53,7 +53,7 @@ class M_Folders extends Model {
 		{
 			return "Error creating folder: ".$e." please contact brad.baago@linux.com.";							
 		} 
-		return 'Folder Created.';
+		return $this->DBH->lastInsertId();
 	}
 	function getFolders($UserID, $FolderID=0)
 	{
