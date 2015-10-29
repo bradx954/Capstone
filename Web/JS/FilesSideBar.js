@@ -195,7 +195,6 @@ function displayMultiSelect()
 }
 function refreshSideBarFileTree()
 {
-	$('#FilesBarFolderTree').html('<ul><li id="0" class="FolderItem" data-open=1 data-name="/"><a href="#" class="FolderOpen" id="0">/</a></li><ul id="TreeFolders" style="color: black;"></ul></ul>');
 	$.ajax(
 	{
 		url: "index.php?c=files&m=getDirectoryFolders",
@@ -207,6 +206,7 @@ function refreshSideBarFileTree()
 			}
 			else 
 			{ 
+				$('#FilesBarFolderTree').html('<ul><li id="0" class="FolderItem" data-open=1 data-name="/"><a href="#" class="FolderOpen" id="0">/</a></li><ul id="TreeFolders" style="color: black;"></ul></ul>');
 				var rows = JSON.parse(data);
 				for(var x in rows)
 				{

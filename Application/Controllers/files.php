@@ -175,7 +175,7 @@ class Files extends Controller
 		{
 			return "Access denied.";
 		}
-		$Filename = $this->M_Files->getFileName($_POST['ID']);
+		/*$Filename = $this->M_Files->getFileName($_POST['ID']);
 		if($Filename == -1){return "Thats not a valid file.";}
 		$Filecontents = $this->M_Files->getFileContents($_POST['ID']);
 		if(strlen($Filecontents) > ($this->M_Users->getUserQuota($_POST['UserID']) - $this->M_Files->getUserUsedSpace($_POST['UserID'])))
@@ -185,7 +185,13 @@ class Files extends Controller
 		$newFileID = $this->M_Files->newFile($Filename, $_POST['UserID'], $_POST['Destination']);
 		if($newFileID < 1){return $newFileID;}
 		$this->M_Files->updateFileContents($newFileID, $Filecontents);
-		return "File Copy completed.";
+		return "File Copy completed.";*/
+		$Filecontents = $this->M_Files->getFileContents($_POST['ID']);
+		if(strlen($Filecontents) > ($this->M_Users->getUserQuota($_POST['UserID']) - $this->M_Files->getUserUsedSpace($_POST['UserID'])))
+		{
+			return "Insufficient storage space.";
+		}
+		return $this->M_Files->copyFile($_POST['ID'],$_POST['UserID'],$_POST['Destination']);
 	}
 	function copyFolder()
 	{

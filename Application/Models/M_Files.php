@@ -258,5 +258,15 @@ class M_Files extends Model {
 		} 
 		return "File parent updated.";
 	}
+	function copyFile($ID, $UserID, $Destination)
+	{
+		$Filename = $this->getFileName($ID);
+		if($Filename == -1){return "Thats not a valid file.";}
+		$Filecontents = $this->getFileContents($ID);
+		$newFileID = $this->newFile($Filename, $UserID, $Destination);
+		if($newFileID < 1){return $newFileID;}
+		$this->updateFileContents($newFileID, $Filecontents);
+		return "File Copy completed.";
+	}
 }
 ?>
