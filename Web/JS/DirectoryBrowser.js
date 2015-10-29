@@ -1,59 +1,37 @@
 $(document).ready(function () {
+	$('#DirectoryBrowser').click(function(e){e.stopPropagation();});
 	$("#ConfirmDirectory").click(function(event) 
 	{
 		event.stopPropagation();
-		$('.DirectorySelectPending').data('actual',$('#DirectoryBrowserTable > tbody > .RowSelect').attr('id'));
-		$.ajax(
+		
+		if($('#DirectoryBrowserTable > tbody > .RowSelect').length != 0)
 		{
-					url: "index.php?c=files&m=getFolderPath",
-					type: "POST",
-					data: {ID: $('#DirectoryBrowserTable > tbody > .RowSelect').attr('id')},
-					success: function (data, textStatus, jqXHR) {
-						$('.DirectorySelectPending').attr('value', data);
-						$('.DirectorySelectPending').removeClass('DirectorySelectPending');
-						$('#DirectoryBrowser').modal('toggle');
-					},
-					error: function (jqXHR, textStatus, errorThrown) {
-						showError(data);
-					}
-		});
+			$('.DirectorySelectPending').data('actual',$('#DirectoryBrowserTable > tbody > .RowSelect').attr('id'));
+			$.ajax(
+			{
+						url: "index.php?c=files&m=getFolderPath",
+						type: "POST",
+						data: {ID: $('#DirectoryBrowserTable > tbody > .RowSelect').attr('id')},
+						success: function (data, textStatus, jqXHR) {
+							$('.DirectorySelectPending').attr('value', data);
+							$('.DirectorySelectPending').removeClass('DirectorySelectPending');
+							$('#DirectoryBrowser').modal('toggle');
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							showError(data);
+						}
+			});
+		}
+		else
+		{
+		$('.DirectorySelectPending').data('actual',0);
+		$('.DirectorySelectPending').attr('value', '/');
+		$('.DirectorySelectPending').removeClass('DirectorySelectPending');
+		$('#DirectoryBrowser').modal('toggle');
+		}
+		$('#excludeDirectories').attr('value','');
 	});
 });
-(function($){
-    // Determine if we on iPhone or iPad
-    var isiOS = false;
-    var agent = navigator.userAgent.toLowerCase();
-    if(agent.indexOf('iphone') >= 0 || agent.indexOf('ipad') >= 0){
-           isiOS = true;
-    }
- 
-    $.fn.doubletap = function(onDoubleTapCallback, onTapCallback, delay){
-        var eventName, action;
-        delay = delay == null? 500 : delay;
-        eventName = isiOS == true? 'touchend' : 'click';
- 
-        $(this).bind(eventName, function(event){
-            var now = new Date().getTime();
-            var lastTouch = $(this).data('lastTouch') || now + 1 /** the first time this will make delta a negative number */;
-            var delta = now - lastTouch;
-            clearTimeout(action);
-            if(delta<500 && delta>0){
-                if(onDoubleTapCallback != null && typeof onDoubleTapCallback == 'function'){
-                    onDoubleTapCallback(event);
-                }
-            }else{
-                $(this).data('lastTouch', now);
-                action = setTimeout(function(evt){
-                    if(onTapCallback != null && typeof onTapCallback == 'function'){
-                        onTapCallback(evt);
-                    }
-                    clearTimeout(action);   // clear the timeout
-                }, delay, [event]);
-            }
-            $(this).data('lastTouch', now);
-        });
-    };
-})(jQuery);
 function updateDirectoryBrowserTable(selectID)
 {
 	selectID = typeof selectID !== 'undefined' ? selectID : 0;
@@ -96,7 +74,7 @@ function updateDirectoryBrowserTable(selectID)
 				var rows = JSON.parse(data);
 				for(var x in rows)
 				{
-					$('#DirectoryBrowserTable tr:last').after('<tr id="'+rows[x]['id']+'"><td><img width="64" src="Web/Images/Folder.png"/>'+rows[x]['name']+'</td></tr>');
+					if(jQuery.inArray(rows[x]['id'],excludeDirectories) == -1){$('#DirectoryBrowserTable tr:last').after('<tr id="'+rows[x]['id']+'"><td><img width="64" src="Web/Images/Folder.png"/>'+rows[x]['name']+'</td></tr>');}
 				}
 			}
 			$("#DirectoryBrowserTable > tbody > tr").click(function(event) {

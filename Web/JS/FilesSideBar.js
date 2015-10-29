@@ -184,7 +184,7 @@ function displayMultiSelect()
 {
 	$('#sideBarNewFile').css('display','none');
 	$('#sideBarUploadFile').css('display','none');
-	$('#sideBarMoveFile').css('display','none');
+	$('#sideBarMoveFile').css('display','block');
 	$('#sideBarDownloadFile').css('display','none');
 	$('#FilesBarFolderTree').css('display','block');
 	$('#sideBarSaveFile').css('display','none');

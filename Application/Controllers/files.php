@@ -22,7 +22,9 @@ class Files extends Controller
 	}
 	function newFile()
 	{
-		return $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
+		$result = $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
+		if($result > 0){return 'File Created.';}
+		else{return $result;}
 	}
 	function newFolder()
 	{
@@ -134,6 +136,64 @@ class Files extends Controller
 		{
 			return "Access denied.";
 		}
+	}
+	function moveFile()
+	{
+		if($_POST['UserID'] != $this->M_Files->getFileOwner($_POST['ID']))
+		{
+			return "Access denied.";
+		}
+		$result = $this->M_Files->updateParentID($_POST['ID'], $_POST['Destination']);
+		if($result == "File parent updated.")
+		{
+			return "File Move completed.";
+		}
+		else
+		{
+			return $result;
+		}
+	}
+	function moveFolder()
+	{
+		if($_POST['UserID'] != $this->M_Folders->getFolderOwner($_POST['ID']))
+		{
+			return "Access denied.";
+		}
+		$result = $this->M_Folders->updateParentID($_POST['ID'], $_POST['Destination']);
+		if($result == "Folder parent updated.")
+		{
+			return "Folder Move completed.";
+		}
+		else
+		{
+			return $result;
+		}
+	}
+	function copyFile()
+	{
+		if($_POST['UserID'] != $this->M_Files->getFileOwner($_POST['ID']))
+		{
+			return "Access denied.";
+		}
+		$Filename = $this->M_Files->getFileName($_POST['ID']);
+		if($Filename == -1){return "Thats not a valid file.";}
+		$Filecontents = $this->M_Files->getFileContents($_POST['ID']);
+		if(strlen($Filecontents) > ($this->M_Users->getUserQuota($_POST['UserID']) - $this->M_Files->getUserUsedSpace($_POST['UserID'])))
+		{
+			return "Insufficient storage space.";
+		}
+		$newFileID = $this->M_Files->newFile($Filename, $_POST['UserID'], $_POST['Destination']);
+		if($newFileID < 1){return $newFileID;}
+		$this->M_Files->updateFileContents($newFileID, $Filecontents);
+		return "File Copy completed.";
+	}
+	function copyFolder()
+	{
+		if($_POST['UserID'] != $this->M_Folders->getFolderOwner($_POST['ID']))
+		{
+			return "Access denied.";
+		}
+		return "Folder ".$_POST['ID']." not copied.";
 	}
 }
 ?>

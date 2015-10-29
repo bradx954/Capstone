@@ -4,6 +4,7 @@ $(document).ready(function () {
 		e.stopPropagation();
 		$('.DirectorySelectPending').removeClass('DirectorySelectPending');
 		$('#newDirectory').addClass('DirectorySelectPending');
+		$('#excludeDirectories').attr('value','');
 		$('#DirectoryBrowser').modal();
 		updateDirectoryBrowserTable(0);
 	});

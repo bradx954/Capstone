@@ -211,5 +211,48 @@ class M_Folders extends Model {
 		} 
 		return "Folder Renamed.";
 	}
+	function getFolderName($ID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT name FROM CS_Folders WHERE id = :id;");
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+	}
+	function updateParentID($ID, $ParentID)
+	{
+		$sql = "SELECT COUNT(*) FROM CS_Folders WHERE name = :name AND folderid = :folderid;";
+		try {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':name' => $this->getFolderName($ID), ':folderid' => $ParentID));
+		}
+		catch (PDOException $e){
+			return "Failed to move folder.";
+		}
+		$array = $rs->fetchAll();
+		if($array[0][0] > 0)
+		{
+			return "Folder already exists.";
+		}
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("UPDATE CS_Folders SET folderid = :parent WHERE id = :id;");
+			$rs->execute(array(':id' => $ID, ':parent' => $ParentID));
+		}
+		catch (PDOException $e)
+		{
+			return "Error updating folder: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return "Folder parent updated.";
+	}
 }
 ?>

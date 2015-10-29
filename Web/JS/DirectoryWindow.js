@@ -40,6 +40,7 @@ $(document).ready(function () {
 						$('#'+key).click();
 					},
 					items: {
+						"MoveFile": {name: "Copy/Move", icon: "copy"},
 						"DeleteFile": {name: "Delete", icon: "delete"},
 					}
 				};

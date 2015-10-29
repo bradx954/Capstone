@@ -69,7 +69,7 @@ class M_Files extends Model {
 		{
 			return "Error creating file: ".$e." please contact brad.baago@linux.com.";							
 		} 
-		return 'File Created.';
+		return $this->DBH->lastInsertId();
 	}
 	function getFiles($UserID, $FolderID=0)
 	{
@@ -94,6 +94,21 @@ class M_Files extends Model {
 		{
 			$rs = NULL;
 			$rs = $this->DBH->prepare("SELECT userid FROM CS_Files WHERE id = :id;");
+			$rs->execute(array(':id' => $ID));
+		}
+		catch (PDOException $e){
+			//$this->DBO->showErrorPage($sql,$e );
+			return -1;							
+		} 
+		$array = $rs->fetchAll();
+		return $array[0][0];
+	}
+	function getFileName($ID)
+	{
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("SELECT name FROM CS_Files WHERE id = :id;");
 			$rs->execute(array(':id' => $ID));
 		}
 		catch (PDOException $e){
@@ -214,6 +229,34 @@ class M_Files extends Model {
 			return "Error renaming file: ".$e." please contact brad.baago@linux.com.";							
 		} 
 		return "File Renamed.";
+	}
+	function updateParentID($ID, $ParentID)
+	{
+		$sql = "SELECT COUNT(*) FROM CS_Files WHERE name = :name AND folderid = :folderid;";
+		try {
+			$rs = NULL;
+			$rs = $this->DBH->prepare($sql);
+			$rs->execute(array(':name' => $this->getFileName($ID), ':folderid' => $ParentID));
+		}
+		catch (PDOException $e){
+			return "Failed to move file.";
+		}
+		$array = $rs->fetchAll();
+		if($array[0][0] > 0)
+		{
+			return "File already exists.";
+		}
+		try 
+		{
+			$rs = NULL;
+			$rs = $this->DBH->prepare("UPDATE CS_Files SET folderid = :parent WHERE id = :id;");
+			$rs->execute(array(':id' => $ID, ':parent' => $ParentID));
+		}
+		catch (PDOException $e)
+		{
+			return "Error updating file: ".$e." please contact brad.baago@linux.com.";							
+		} 
+		return "File parent updated.";
 	}
 }
 ?>

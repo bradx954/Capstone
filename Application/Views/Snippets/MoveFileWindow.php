@@ -12,7 +12,7 @@
 		<form class="form-inline">
 			<table style="color: black; width: 100%;">
 				<tr><td><b>Destination Directory:</b></td> <td><input type="text" class="form-control" id="newMoveDirectory" name="Directory" value="/" style="width: 100%;" data-actual="0" disabled><button class="btn btn-primary" id="SelectMoveDirectory" style="width: 100%;">Browse</button></td></tr>
-				<tr><td><b>Operation:</b></td><td><input type="radio" name="operation" value="copy" class="radio" checked>Copy<input type="radio" name="operation" value="move" class="radio">Move</td></tr>
+				<tr><td><b>Operation:</b></td><td><input type="radio" name="operation" value="Copy" class="radio" checked>Copy<input type="radio" name="operation" value="Move" class="radio">Move</td></tr>
 			</table>
 		</form>
       </div>

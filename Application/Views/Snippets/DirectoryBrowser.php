@@ -16,7 +16,7 @@
       </div>
 	  <div class="modal-footer">
 	  <input type="hidden" id="excludeDirectories" name="excludeDirectories" value="">
-	  <button class="btn btn-primary" id="ConfirmDirectory" style="width:100%;" disabled>Confirm</button>
+	  <button class="btn btn-primary" id="ConfirmDirectory" style="width:100%;">Confirm</button>
 	  </div>
     </div>
   </div>
