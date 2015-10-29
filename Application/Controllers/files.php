@@ -190,7 +190,9 @@ class Files extends Controller
 		{
 			return "Access denied.";
 		}
-		return $this->copyDirectory($_POST['ID'],$_POST['UserID'],$_POST['Destination']);
+		$result = $this->copyDirectory($_POST['ID'],$_POST['UserID'],$_POST['Destination']);
+		if($result == "Directory Copied."){return "Folder Copy completed.";}
+		else{return $result;}
 	}
 	private function copyDirectory($DirectoryID, $UserID, $Destination)
 	{
