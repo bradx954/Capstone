@@ -26,6 +26,38 @@ class Files extends Controller
 		if($result > 0){return 'File Created.';}
 		else{return $result;}
 	}
+	function uploadFile()
+	{
+		$Contents = trim(($_POST['content']));
+		$ID = $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
+		if($ID > 0)
+		{
+			if(strlen($Contents) > ($this->M_Users->getUserQuota($this->UserID) - $this->M_Files->getUserUsedSpace($this->UserID)))
+			{
+				return "Insufficient storage space.";
+			}
+			if($this->UserID == $this->M_Files->getFileOwner($ID))
+			{
+				$result = $this->M_Files->updateFileContents($ID, $Contents);
+				if($result == 'File Updated.')
+				{
+					return 'File Uploaded.';
+				}
+				else
+				{
+					return $result.$ID.$Contents;
+				}
+			}
+			else
+			{
+				return "Access denied.";
+			}
+		}
+		else
+		{
+			return $result;
+		}
+	}
 	function newFolder()
 	{
 		$result = $this->M_Folders->newFolder($_POST['filename'], $this->UserID, $_POST['directory']);

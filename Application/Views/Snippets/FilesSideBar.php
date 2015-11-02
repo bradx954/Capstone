@@ -14,6 +14,7 @@
 		</li>
 		<li id="sideBarUploadFile">
 			<button class="btn btn-primary" id="UploadFile" data-toggle="modal" data-target="#UploadFileWindow" style="width: 80%; margin-top: 5px;">Upload</button>
+			<form id="uploadFileForm" method="post" enctype="multipart/form-data"><input type="file" id="uploadFile" name="uploadFile[]" style="display:none"></form>
 		</li>
 		<li id="sideBarOpenFile" style="display: none; margin-top: 5px;">
 			<button class="btn btn-primary" id="OpenFile" style="width: 80%; margin: auto;">Open</button>

@@ -58,6 +58,31 @@
 		if(rows.length == 1){$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();}
 		else{return;}
 	});
+	$('#UploadFile').click(function (e) {
+		e.stopPropagation();
+		$('#uploadFile').click();
+	});
+	$('#uploadFile').change(function (e) {
+		e.stopPropagation();
+		var name = $('#uploadFile').prop('files')[0]['name'];
+		var reader = new FileReader();
+		reader.onloadend = function () {
+			$.ajax(
+			{
+				url: "index.php?c=files&m=uploadFile",
+				type: "POST",
+				data: {filename: name, content: reader.result, directory: $("#newDirectory").data('actual')},
+				success: function (data, textStatus, jqXHR) {
+					if(data == 'File Uploaded.'){showMessage(data); refreshDirectoryWindow();}
+					else{showError(data);}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					showError(errorThrown);
+				}
+			});
+		}
+		reader.readAsBinaryString($('#uploadFile').prop('files')[0]);
+	});
 	$('#DownloadFile').click(function (e) {
 		e.stopPropagation();
 		if($('.RowSelect').hasClass('Folder'))

@@ -194,7 +194,7 @@ function refreshDirectoryWindow()
 									else{showError(data);}
 									if(rows.length == 0){displayNoneSelect();}
 									else if(rows.length == 1){displaySingleSelect();}
-									else{displayMultiSelect();}
+									else{displayNoneSelect();}
 								},
 								error: function (jqXHR, textStatus, errorThrown) {
 									showError(data);
@@ -213,7 +213,7 @@ function refreshDirectoryWindow()
 									else{showError(data);}
 									if(rows.length == 0){displayNoneSelect();}
 									else if(rows.length == 1){displaySingleSelect();}
-									else{displayMultiSelect();}
+									else{displayNoneSelect();}
 								},
 								error: function (jqXHR, textStatus, errorThrown) {
 									showError(data);
