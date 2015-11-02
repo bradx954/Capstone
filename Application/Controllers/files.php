@@ -92,6 +92,77 @@ class Files extends Controller
 			return "Access denied.";
 		}
 	}
+	function getFolderDownload()
+	{
+		$ID = $_POST['ID'];
+		if($this->UserID == $this->M_Folders->getFolderOwner($ID))
+		{
+			$name = $this->M_Folders->getFolderName($ID);
+			$zip = new ZipArchive();
+			if ($zip->open(ROOT.'/Files/'.$name.'.zip', ZIPARCHIVE::CREATE)!==TRUE) 
+			{
+				exit("cannot compress file\n");
+			}
+			$this->zipFolder($zip, $ID, $this->UserID);
+			$zip->close();
+			$name = $name.'.zip';
+			$length = filesize(ROOT.'/Files/'.$name);
+			header('Content-Description: File Transfer');
+			header('Content-Type: text/plain');//<<<<
+			header('Content-Disposition: attachment; filename='.$name);
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Length: ' . $length);
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Expires: 0');
+			header('Pragma: public');
+			readfile(ROOT.'/Files/'.$name);
+			unlink(ROOT.'/Files/'.$name);
+			exit;
+		}
+		else
+		{
+			return "Access denied.";
+		}
+	}
+	function getFileDownload()
+	{
+		$ID = $_POST['ID'];
+		$COMPRESS = $_POST['COMPRESS'];
+		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		{
+			$content = $this->M_Files->getFileContents($ID);
+			$name = $this->M_Files->getFileName($ID);
+			$length = strlen($content);
+			if($COMPRESS == 'true')
+			{
+				$zip = new ZipArchive();
+				if ($zip->open(ROOT.'/Files/'.$name.'.zip', ZIPARCHIVE::CREATE)!==TRUE) 
+				{
+					exit("cannot compress file\n");
+				}
+				$zip->addFromString($name, $content);
+				$zip->close();
+				$name = $name.'.zip';
+				$length = filesize(ROOT.'/Files/'.$name);
+			}
+			header('Content-Description: File Transfer');
+			header('Content-Type: text/plain');//<<<<
+			header('Content-Disposition: attachment; filename='.$name);
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Length: ' . $length);
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Expires: 0');
+			header('Pragma: public');
+
+			if($COMPRESS == 'true'){readfile(ROOT.'/Files/'.$name);unlink(ROOT.'/Files/'.$name);}
+			else{echo $content;}
+			exit;
+		}
+		else
+		{
+			return "Access denied.";
+		}
+	}
 	function updateFile()
 	{
 		$ID = $_POST['ID'];
@@ -217,6 +288,20 @@ class Files extends Controller
 		}
 		
 		return "Directory Copied.";
+	}
+	private function zipFolder($ZIPFILE, $DirectoryID, $UserID, $URL='')
+	{
+		$Folders = $this->M_Folders->getFolders($UserID, $DirectoryID);
+		$Files = $this->M_Files->getFiles($UserID, $DirectoryID);
+		foreach($Folders as $Folder)
+		{
+			$ZIPFILE->addEmptyDir($URL.$Folder['name'].'/');
+			$this->zipFolder($ZIPFILE, $Folder['id'], $UserID, $URL.$Folder['name'].'/');
+		}
+		foreach($Files as $File)
+		{
+			$ZIPFILE->addFromString($URL.$File['name'], $this->M_Files->getFileContents($File['id']));
+		}
 	}
 }
 ?>

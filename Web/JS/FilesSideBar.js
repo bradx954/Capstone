@@ -58,6 +58,39 @@
 		if(rows.length == 1){$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();}
 		else{return;}
 	});
+	$('#DownloadFile').click(function (e) {
+		e.stopPropagation();
+		if($('.RowSelect').hasClass('Folder'))
+		{
+			post('index.php?c=files&m=getFolderDownload', {ID: $('.RowSelect').attr('id')});
+		}
+		else
+		{
+			bootbox.dialog({
+			  message: "Compress as zip?",
+			  title: "Compress?",
+			  buttons: {
+				yes: {
+				  label: "Yes",
+				  className: "btn-success",
+				  callback: function() {
+					post('index.php?c=files&m=getFileDownload', {ID: $('.RowSelect').attr('id'), COMPRESS: 'true'});
+				  }
+				},
+				no: {
+				  label: "No",
+				  className: "btn-primary",
+				  callback: function() {
+					post('index.php?c=files&m=getFileDownload', {ID: $('.RowSelect').attr('id'), COMPRESS: 'false'});
+				  }
+				}
+			  }
+			});
+			$(".bootbox").click(function(e) {
+				e.stopPropagation();
+			});
+		}
+	});
 	$('#MoveFile').click(function (e) {
 		e.stopPropagation();
 		$('#MoveFileWindow').modal();
@@ -269,4 +302,30 @@ function setBranches()
 			setBranches();
 		}
 	});
+}
+//Source: http://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+	//window.open('', 'newWindow');
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+	//form.setAttribute("target", 'newWindow');
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
 }
