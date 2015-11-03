@@ -78,10 +78,19 @@
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					showError(errorThrown);
+				},
+				xhr: function() {  // Custom XMLHttpRequest
+					var myXhr = $.ajaxSettings.xhr();
+					if(myXhr.upload){ // Check if upload property exists
+						myXhr.upload.addEventListener('progress',progressHandlingFunction, false); // For handling the progress of the upload
+					}
+					return myXhr;
 				}
 			});
 		}
-		reader.readAsBinaryString($('#uploadFile').prop('files')[0]);
+		$('progress').attr({value: 0, max: 100});
+		$('#ProgressWindow').modal('show');
+		reader.readAsDataURL($('#uploadFile').prop('files')[0]);
 	});
 	$('#DownloadFile').click(function (e) {
 		e.stopPropagation();
@@ -353,4 +362,11 @@ function post(path, params, method) {
 
     document.body.appendChild(form);
     form.submit();
+}
+function progressHandlingFunction(e){
+    if(e.lengthComputable){
+        $('progress').attr({value:e.loaded,max:e.total});
+		if(e.loaded == e.total){$('#ProgressWindow').modal('hide');}
+		//showMessage(e.loaded);
+    }
 }
