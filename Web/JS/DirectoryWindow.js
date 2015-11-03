@@ -103,6 +103,35 @@ function refreshDirectoryWindow()
 						extension = extension[extension.length-1];
 						switch(extension)
 						{
+							case 'ppt':
+							case 'pptx':
+							case 'odp':
+								file_type = "Presentation";
+							break;
+							case 'xlsx':
+							case 'xls':
+								file_type = "Spreadsheet";
+							break;
+							case 'doc':
+							case 'docx':
+							case 'odp':
+								file_type = "Document";
+							break;
+							case 'zip':
+							case 'rar':
+							case 'gz':
+							case '7zip':
+								file_type = "Archive";
+							break;
+							case 'png':
+							case 'jpg':
+							case 'bmp':
+								file_type = "Image";
+							break;
+							case 'bat':
+							case 'sh':
+								file_type = "Bash";
+							break;
 							case 'txt':
 								file_type = "Text";
 							break;
@@ -241,6 +270,31 @@ function refreshDirectoryWindow()
 				$('.CodeMirror').data('fileid', id);
 				
 				editor.setOption('mode','simplemode');
+				
+				$.ajax(
+				{
+					url: "index.php?c=files&m=getFile",
+					type: "POST",
+					data: {ID: id},
+					success: function (data, textStatus, jqXHR) {
+						editor.setValue(data);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						showError(data);
+					}
+				});
+			});
+			$('a[class=Bash]').click(function (event) {
+				event.stopPropagation();
+				
+				var id = $(this).attr('id');
+				
+				$('#DirectoryTable').css('display','none');
+				displayEdit();
+				$('.CodeMirror').css('display','block');
+				$('.CodeMirror').data('fileid', id);
+				
+				editor.setOption('mode','text/x-sh');
 				
 				$.ajax(
 				{

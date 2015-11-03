@@ -7,3 +7,7 @@ CSS.png: https://cdn0.iconfinder.com/data/icons/document-file-types/512/css-512.
 Javascript: https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/File%20Types/JS.png
 PHP.png: https://cdn0.iconfinder.com/data/icons/document-file-types/512/php-512.png
 Unkown.png: http://findicons.com/files/icons/1671/simplicio/64/file.png
+Bash.png: http://findicons.com/files/icons/2773/pictonic_free/128/prog_bash02.png
+Image.png: http://cdn.wpeden.com/wp-content/themes/thenext/images/module-icons/image.png
+Archive.png: https://upload.wikimedia.org/wikipedia/en/e/e8/WinZip_icon.png
+Office Icons: https://wiki.documentfoundation.org/images/thumb/6/65/LibreOffice_icons_256.png/400px-LibreOffice_icons_256.png

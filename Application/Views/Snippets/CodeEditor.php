@@ -3,6 +3,7 @@
 <script src="Web/codemirror-5.7/mode/xml/xml.js"></script>
 <script src="Web/codemirror-5.7/mode/clike/clike.js"></script>
 <script src="Web/codemirror-5.7/mode/php/php.js"></script>
+<script src="Web/codemirror-5.7/mode/shell/shell.js"></script>
 <script src="Web/codemirror-5.7/mode/javascript/javascript.js"></script>
 <script src="Web/codemirror-5.7/mode/css/css.js"></script>
 <script src="Web/codemirror-5.7/mode/htmlmixed/htmlmixed.js"></script>

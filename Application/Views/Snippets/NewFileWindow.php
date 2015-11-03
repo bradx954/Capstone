@@ -33,6 +33,14 @@
 			<img src="Web/Images/PHP.png" width="128"/></br>
 			PHP
 		</div></a>
+		<a href="#"><div id="LINUX_BASH" class="FileIcon"  extension=".sh">
+			<img src="Web/Images/Bash.png" width="128"/></br>
+			Linux Shell
+		</div></a>
+		<a href="#"><div id="DOS_BASH" class="FileIcon"  extension=".bat">
+			<img src="Web/Images/Bash.png" width="128"/></br>
+			DOS Shell
+		</div></a>
 		<div class="clear"></div>
 		<hr>
 		<form class="form-inline">

@@ -28,7 +28,7 @@ class Files extends Controller
 	}
 	function uploadFile()
 	{
-		$Contents = substr(trim(base64_decode($_POST['content'])),15);
+		$Contents = trim($_POST['content']);
 		$ID = $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
 		if($ID > 0)
 		{

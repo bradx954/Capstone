@@ -8,6 +8,7 @@
         }
         else { divisible = false; }
     }
+	bytes = Math.round(bytes * 100) / 100;
     switch (divided) {
         case 0:
             return bytes + ' B';
