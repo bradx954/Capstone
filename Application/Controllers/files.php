@@ -55,7 +55,7 @@ class Files extends Controller
 		}
 		else
 		{
-			return $result;
+			return $ID;
 		}
 	}
 	function newFolder()
