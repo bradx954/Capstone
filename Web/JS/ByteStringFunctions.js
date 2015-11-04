@@ -2,8 +2,8 @@
     var divisible = true;
     var divided = 0;
     while (divisible) {
-        if (bytes > 999) {
-            bytes = bytes / 1000;
+        if (bytes > 1023) {
+            bytes = bytes / 1024;
             divided++;
         }
         else { divisible = false; }

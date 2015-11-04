@@ -90,7 +90,7 @@
 		}
 		$('progress').attr({value: 0, max: 100});
 		$('#ProgressWindow').modal('show');
-		reader.readAsBinaryString($('#uploadFile').prop('files')[0]);
+		reader.readAsDataURL($('#uploadFile').prop('files')[0]);
 		$('#uploadFileForm')[0].reset();
 	});
 	$('#DownloadFile').click(function (e) {

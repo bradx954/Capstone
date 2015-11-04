@@ -29,6 +29,8 @@ class Files extends Controller
 	function uploadFile()
 	{
 		$Contents = trim($_POST['content']);
+		$offset = strpos($Contents, ',');
+		$Contents = substr($Contents, $offset);
 		$ID = $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
 		if($ID > 0)
 		{
@@ -117,7 +119,7 @@ class Files extends Controller
 		$ID = $_POST['ID'];
 		if($this->UserID == $this->M_Files->getFileOwner($ID))
 		{
-			return $this->M_Files->getFileContents($ID);
+			return base64_decode($this->M_Files->getFileContents($ID));
 		}
 		else
 		{
@@ -162,7 +164,7 @@ class Files extends Controller
 		$COMPRESS = $_POST['COMPRESS'];
 		if($this->UserID == $this->M_Files->getFileOwner($ID))
 		{
-			$content = $this->M_Files->getFileContents($ID);
+			$content = base64_decode($this->M_Files->getFileContents($ID));
 			$name = $this->M_Files->getFileName($ID);
 			$length = strlen($content);
 			if($COMPRESS == 'true')
@@ -198,7 +200,7 @@ class Files extends Controller
 	function updateFile()
 	{
 		$ID = $_POST['ID'];
-		$Contents = $_POST['Contents'];
+		$Contents = base64_encode($_POST['Contents']);
 		
 		if(strlen($Contents) > ($this->M_Users->getUserQuota($this->UserID) - $this->M_Files->getUserUsedSpace($this->UserID)))
 		{

@@ -150,11 +150,11 @@ class M_Files extends Model {
 	}
 	function getFileContents($ID)
 	{
-		return file_get_contents(ROOT.'/Files/'.$ID);
+		return base64_encode(file_get_contents(ROOT.'/Files/'.$ID));
 	}
 	function updateFileContents($ID, $Contents)
 	{
-		$FileSize = file_put_contents(ROOT.'/Files/'.$ID, $Contents);
+		$FileSize = file_put_contents(ROOT.'/Files/'.$ID, base64_decode($Contents));
 		if($FileSize == false){ return "File Update Failed.";}
 		try 
 		{
