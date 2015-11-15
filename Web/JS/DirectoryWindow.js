@@ -219,7 +219,7 @@ function refreshDirectoryWindow()
 								type: "POST",
 								data: {ID: id},
 								success: function (data, textStatus, jqXHR) {
-									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+id+']').remove(); refreshSideBarFileTree();}
+									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+id+']').remove(); refreshSideBarFileTree();refreshStorageUsed();}
 									else{showError(data);}
 									if(rows.length == 0){displayNoneSelect();}
 									else if(rows.length == 1){displaySingleSelect();}
@@ -238,7 +238,7 @@ function refreshDirectoryWindow()
 								type: "POST",
 								data: {ID: id},
 								success: function (data, textStatus, jqXHR) {
-									if(data == 'File deleted.'){showMessage(data); $('tr[id='+id+']').remove();}
+									if(data == 'File deleted.'){showMessage(data); $('tr[id='+id+']').remove();refreshStorageUsed();}
 									else{showError(data);}
 									if(rows.length == 0){displayNoneSelect();}
 									else if(rows.length == 1){displaySingleSelect();}
