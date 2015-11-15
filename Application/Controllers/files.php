@@ -27,6 +27,18 @@ class Files extends Controller
 		}
 		$this->view->render('files',$TPL);
 	}
+	function getUserStorage()
+	{
+		$USERID = $_POST['UserID'];
+		if($GLOBALS['config']['ufel'][$this->M_Users->getUserRank($USERID)][$_SESSION['auth']['accesslevel']] || $this->UserID == $USERID)
+		{
+			return json_encode(array("used" => $this->M_Files->getUserUsedSpace($USERID),"total" => $this->M_Users->getUserQuota($USERID)));
+		}
+		else
+		{
+			return "Access denied";
+		}
+	}
 	function newFile()
 	{
 		$USERID = $_POST['UserID'];

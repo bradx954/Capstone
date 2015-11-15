@@ -10,6 +10,7 @@ $(document).ready(function () {
 			success: function (data, textStatus, jqXHR) {
 				if(data == 'File Updated.'){
 						showMessage(data);
+						refreshStorageUsed();
 					}
 				else{showError(data);}
 			},

@@ -93,7 +93,7 @@ function refreshDirectoryWindow()
 				for(var x in rows)
 				{
 					var file_type = "Unknown";
-					var file_size = "?";
+					var file_size = "";
 					if(typeof rows[x]['filesize'] === 'undefined')
 					{
 						file_type = "Folder";

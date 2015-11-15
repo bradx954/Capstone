@@ -4,6 +4,7 @@
 		$("#directory").attr('value', 0);
 		refreshDirectoryWindow();
 		refreshSideBarFileTree();
+		refreshStorageUsed();
 	});
 	$('#New').click(function (e) {
 		e.stopPropagation();
@@ -28,7 +29,7 @@
 								type: "POST",
 								data: {ID: $(row).attr('id')},
 								success: function (data, textStatus, jqXHR) {
-									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+$(row).attr('id')+']').remove(); refreshSideBarFileTree();}
+									if(data == 'Folder deleted.'){showMessage(data); $('tr[id='+$(row).attr('id')+']').remove(); refreshSideBarFileTree();refreshStorageUsed();}
 									else{showError(data);}
 								},
 								error: function (jqXHR, textStatus, errorThrown) {
@@ -44,7 +45,7 @@
 								type: "POST",
 								data: {ID: $(row).attr('id')},
 								success: function (data, textStatus, jqXHR) {
-									if(data == 'File deleted.'){showMessage(data); $('tr[id='+$(row).attr('id')+']').remove();}
+									if(data == 'File deleted.'){showMessage(data); $('tr[id='+$(row).attr('id')+']').remove();refreshStorageUsed();}
 									else{showError(data);}
 								},
 								error: function (jqXHR, textStatus, errorThrown) {
@@ -79,7 +80,7 @@
 				type: "POST",
 				data: {filename: name, content: reader.result, directory: $("#newDirectory").data('actual'), UserID: $("#userid").attr("value")},
 				success: function (data, textStatus, jqXHR) {
-					if(data == 'File Uploaded.'){showMessage(data); refreshDirectoryWindow();}
+					if(data == 'File Uploaded.'){showMessage(data); refreshDirectoryWindow();refreshStorageUsed();}
 					else{showError(data);}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
@@ -185,6 +186,7 @@
 						$('#DirectoryTable').css('display','table');
 						$('.CodeMirror').css('display','none');
 						refreshDirectoryWindow();
+						refreshStorageUsed();
 					}
 				else{showError(data);}
 			},
@@ -214,6 +216,7 @@
 		$("#menu-show").css('display','table');
     });
 	refreshSideBarFileTree();
+	refreshStorageUsed();
 });
 function displayEdit()
 {
@@ -266,6 +269,31 @@ function displayMultiSelect()
 	$('#sideBarRenameFile').css('display','none');
 	$('#sideBarOpenFile').css('display','none');
 	$('#sideBarDeleteFile').css('display','block');
+}
+function refreshStorageUsed()
+{
+	$.ajax(
+	{
+		url: "index.php?c=files&m=getUserStorage",
+		type: "POST",
+		data: {UserID: $('#DirectoryWindowTarget').find('input[name="userid"]').val()},
+		success: function (data, textStatus, jqXHR) {
+			if (data == "Access Denied.") {
+				showError(data);
+			}
+			else 
+			{
+				var myData = JSON.parse(data);
+				$("#bytesUsed").html(getByteString(myData.used)+"/"+getByteString(myData.total));
+				$("#storageUsed").html(Math.round((myData.used/myData.total)*100)+"%");
+				$("#storageUsed").attr("aria-valuenow", (myData.used/myData.total)*100);
+				$("#storageUsed").css("width",(myData.used/myData.total)*100+"%");
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			showError(errorThrown);
+		}
+	});
 }
 function refreshSideBarFileTree()
 {

@@ -2,7 +2,7 @@
 <link href='Web/startbootstrap-simple-sidebar-1.0.4/css/simple-sidebar.css' rel='stylesheet'>
 <div id="wrapper">
 <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
+    <ul class="sidebar-nav" style="height: 100%;">
         <li>
 		<a href="#menu-hide" class="btn btn-primary" id="menu-hide" style="color: grey; background-color: white; text-align: center;border: none; float: right;"><<</a>
 		</li>
@@ -40,6 +40,16 @@
 		</li>
 		<li id="sideBarCancelFile" style="display: none; margin-top: 5px;">
 			<button class="btn btn-primary" id="CancelFile" style="width: 80%; margin: auto;">Cancel</button>
+		</li>
+		<li style="position:absolute;left:10;right:10;bottom: 50;color: black">
+			<span id="bytesUsed" style=""></span>
+			<div class="progress">
+				
+				<div class="progress-bar" role="progressbar" id="storageUsed" aria-valuenow="0"
+				aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black;">
+				
+				</div>
+			</div>
 		</li>
     </ul>
 </div>
