@@ -18,28 +18,45 @@ class Files extends Controller
 	function index()
 	{
 		$TPL['UserID'] = $this->UserID;
+		foreach($this->M_Users->getUsers() as $User)
+		{
+			if($GLOBALS['config']['ufel'][$this->M_Users->getUserRank($User['id'])][$_SESSION['auth']['accesslevel']] || $this->UserID == $User['id'])
+			{
+				$TPL['Users'] .= "<option value='".$User['id']."'>".$User['email']."</option>";
+			}
+		}
 		$this->view->render('files',$TPL);
 	}
 	function newFile()
 	{
-		$result = $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
-		if($result > 0){return 'File Created.';}
-		else{return $result;}
+		$USERID = $_POST['UserID'];
+		if($GLOBALS['config']['ufel'][$this->M_Users->getUserRank($USERID)][$_SESSION['auth']['accesslevel']] || $this->UserID == $USERID)
+		{
+			$result = $this->M_Files->newFile($_POST['filename'], $USERID, $_POST['directory']);
+			if($result > 0){return 'File Created.';}
+			else{return $result;}
+		}
+		else
+		{
+			return "Access denied";
+		}
 	}
 	function uploadFile()
 	{
-		$Contents = trim($_POST['content']);
-		$offset = strpos($Contents, ',');
-		$Contents = substr($Contents, $offset);
-		$ID = $this->M_Files->newFile($_POST['filename'], $this->UserID, $_POST['directory']);
-		if($ID > 0)
+		$USERID = $_POST['UserID'];
+		if($GLOBALS['config']['ufel'][$this->M_Users->getUserRank($USERID)][$_SESSION['auth']['accesslevel']] || $this->UserID == $USERID)
 		{
-			if(strlen($Contents) > ($this->M_Users->getUserQuota($this->UserID) - $this->M_Files->getUserUsedSpace($this->UserID)))
+			$Contents = trim($_POST['content']);
+			$offset = strpos($Contents, ',');
+			$Contents = substr($Contents, $offset);
+			$ID = $this->M_Files->newFile($_POST['filename'], $USERID, $_POST['directory']);
+			if($ID > 0)
 			{
-				return "Insufficient storage space.";
-			}
-			if($this->UserID == $this->M_Files->getFileOwner($ID))
-			{
+				if(strlen($Contents) > ($this->M_Users->getUserQuota($USERID) - $this->M_Files->getUserUsedSpace($USERID)))
+				{
+					return "Insufficient storage space.";
+				}
+
 				$result = $this->M_Files->updateFileContents($ID, $Contents);
 				if($result == 'File Updated.')
 				{
@@ -52,24 +69,33 @@ class Files extends Controller
 			}
 			else
 			{
-				return "Access denied.";
+				return $ID;
 			}
 		}
 		else
 		{
-			return $ID;
+			return "Access denied";
 		}
 	}
 	function newFolder()
 	{
-		$result = $this->M_Folders->newFolder($_POST['filename'], $this->UserID, $_POST['directory']);
-		if($result > 0){return 'Folder Created.';}
-		else{return $result;}
+		$USERID = $_POST['UserID'];
+		if($GLOBALS['config']['ufel'][$this->M_Users->getUserRank($USERID)][$_SESSION['auth']['accesslevel']] || $this->UserID == $USERID)
+		{
+			$result = $this->M_Folders->newFolder($_POST['filename'], $USERID, $_POST['directory']);
+			if($result > 0){return 'Folder Created.';}
+			else{return $result;}
+		}
+		else
+		{
+			return "Access denied";
+		}
 	}
 	function deleteFolder()
 	{
 		$ID = $_POST['ID'];
-		if($this->UserID == $this->M_Folders->getFolderOwner($ID))
+		$Owner = $this->M_Folders->getFolderOwner($ID);
+		if($this->UserID == $this->M_Folders->getFolderOwner($ID) || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			$DeleteArray = $this->M_Folders->deleteDirectory($ID);
 			$this->M_Files->deleteDirectoryFiles($DeleteArray);
@@ -83,7 +109,8 @@ class Files extends Controller
 	function deleteFile()
 	{
 		$ID = $_POST['ID'];
-		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		$Owner = $this->M_Files->getFileOwner($ID);
+		if($this->UserID == $Owner || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return $this->M_Files->deleteFile($ID);
 		}
@@ -94,30 +121,55 @@ class Files extends Controller
 	}
 	function getFolderPath()
 	{
-		return $this->M_Folders->getFolderPath($_POST['ID']);
+		if($_POST['ID'] == 0)
+		{
+			return "/";
+		}
+		$Owner = $this->M_Folders->getFolderOwner($_POST['ID']);
+		if($this->UserID == $this->M_Folders->getFolderOwner($_POST['ID']) || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
+		{
+			return $this->M_Folders->getFolderPath($_POST['ID']);
+		}
+		else
+		{
+			return "Access denied.";
+		}
 	}
 	function getDirectoryContents()
 	{
 		$USERID = $_POST['UserID'];
 		$DIRECTORY = $_POST['Directory'];
-		if($this->UserID == $USERID){return json_encode(array_merge($this->M_Folders->getFolders($USERID, $DIRECTORY),$this->M_Files->getFiles($USERID, $DIRECTORY)));}
+		if($GLOBALS['config']['ufel'][$this->M_Users->getUserRank($USERID)][$_SESSION['auth']['accesslevel']] || $this->UserID == $USERID){return json_encode(array_merge($this->M_Folders->getFolders($USERID, $DIRECTORY),$this->M_Files->getFiles($USERID, $DIRECTORY)));}
 		else {return "Access Denied.";}
 	}
 	function getDirectoryFolders()
 	{
 		$USERID = $_POST['UserID'];
 		$DIRECTORY = $_POST['Directory'];
-		if($this->UserID == $USERID){return json_encode($this->M_Folders->getFolders($USERID, $DIRECTORY));}
+		if($GLOBALS['config']['ufel'][$this->M_Users->getUserRank($USERID)][$_SESSION['auth']['accesslevel']] || $this->UserID == $USERID){return json_encode($this->M_Folders->getFolders($USERID, $DIRECTORY));}
 		else {return "Access Denied.";}
 	}
 	function getFolderParent()
 	{
-		return $this->M_Folders->getFolderParent($_POST['ID']);
+		if($_POST['ID'] == 0)
+		{
+			return 0;
+		}
+		$Owner = $this->M_Folders->getFolderOwner($_POST['ID']);
+		if($this->UserID == $this->M_Folders->getFolderOwner($_POST['ID']) || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
+		{
+			return $this->M_Folders->getFolderParent($_POST['ID']);
+		}
+		else
+		{
+			return "Access denied.";
+		}
 	}
 	function getFile()
 	{
 		$ID = $_POST['ID'];
-		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		$Owner = $this->M_Files->getFileOwner($ID);
+		if($this->UserID == $Owner || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return base64_decode($this->M_Files->getFileContents($ID));
 		}
@@ -129,7 +181,8 @@ class Files extends Controller
 	function getFolderDownload()
 	{
 		$ID = $_POST['ID'];
-		if($this->UserID == $this->M_Folders->getFolderOwner($ID))
+		$Owner = $this->M_Folders->getFolderOwner($ID);
+		if($this->UserID == $this->M_Folders->getFolderOwner($ID) || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			$name = $this->M_Folders->getFolderName($ID);
 			$zip = new ZipArchive();
@@ -162,7 +215,8 @@ class Files extends Controller
 	{
 		$ID = $_POST['ID'];
 		$COMPRESS = $_POST['COMPRESS'];
-		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		$Owner = $this->M_Files->getFileOwner($ID);
+		if($this->UserID == $Owner || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			$content = base64_decode($this->M_Files->getFileContents($ID));
 			$name = $this->M_Files->getFileName($ID);
@@ -201,14 +255,13 @@ class Files extends Controller
 	{
 		$ID = $_POST['ID'];
 		$Contents = base64_encode($_POST['Contents']);
-		
-		if(strlen($Contents) > ($this->M_Users->getUserQuota($this->UserID) - $this->M_Files->getUserUsedSpace($this->UserID)))
+		$Owner = $this->M_Files->getFileOwner($ID);
+		if($this->UserID == $Owner || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
-			return "Insufficient storage space.";
-		}
-		
-		if($this->UserID == $this->M_Files->getFileOwner($ID))
-		{
+			if(strlen($Contents) > ($this->M_Users->getUserQuota($Owner) - $this->M_Files->getUserUsedSpace($Owner)))
+			{
+				return "Insufficient storage space.";
+			}
 			return $this->M_Files->updateFileContents($ID, $Contents);
 		}
 		else
@@ -220,8 +273,8 @@ class Files extends Controller
 	{
 		$ID = $_POST['ID'];
 		$Contents = $_POST['Contents'];
-		
-		if($this->UserID == $this->M_Files->getFileOwner($ID))
+		$Owner = $this->M_Files->getFileOwner($ID);
+		if($this->UserID == $Owner || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return $this->M_Files->updateFileName($ID, $Contents);
 		}
@@ -235,7 +288,8 @@ class Files extends Controller
 		$ID = $_POST['ID'];
 		$Contents = $_POST['Contents'];
 		
-		if($this->UserID == $this->M_Folders->getFolderOwner($ID))
+		$Owner = $this->M_Folders->getFolderOwner($ID);
+		if($this->UserID == $this->M_Folders->getFolderOwner($ID) || $GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return $this->M_Folders->updateFolderName($ID, $Contents);
 		}
@@ -246,7 +300,8 @@ class Files extends Controller
 	}
 	function moveFile()
 	{
-		if($_POST['UserID'] != $this->M_Files->getFileOwner($_POST['ID']))
+		$Owner = $this->M_Files->getFileOwner($_POST['ID']);
+		if($this->UserID != $Owner && !$GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return "Access denied.";
 		}
@@ -262,7 +317,8 @@ class Files extends Controller
 	}
 	function moveFolder()
 	{
-		if($_POST['UserID'] != $this->M_Folders->getFolderOwner($_POST['ID']))
+		$Owner = $this->M_Folders->getFolderOwner($_POST['ID']);
+		if($this->UserID != $this->M_Folders->getFolderOwner($ID) && !$GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return "Access denied.";
 		}
@@ -278,9 +334,14 @@ class Files extends Controller
 	}
 	function copyFile()
 	{
-		if($_POST['UserID'] != $this->M_Files->getFileOwner($_POST['ID']))
+		$Owner = $this->M_Files->getFileOwner($_POST['ID']);
+		if($this->UserID != $Owner && !$GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return "Access denied.";
+		}
+		if($_POST['ID'] == $_POST['Destination'])
+		{
+			return "Cant copy folder into same folder.";
 		}
 		$Filecontents = $this->M_Files->getFileContents($_POST['ID']);
 		if(strlen($Filecontents) > ($this->M_Users->getUserQuota($_POST['UserID']) - $this->M_Files->getUserUsedSpace($_POST['UserID'])))
@@ -291,7 +352,8 @@ class Files extends Controller
 	}
 	function copyFolder()
 	{
-		if($_POST['UserID'] != $this->M_Folders->getFolderOwner($_POST['ID']))
+		$Owner = $this->M_Folders->getFolderOwner($_POST['ID']);
+		if($this->UserID != $this->M_Folders->getFolderOwner($ID) && !$GLOBALS['config']['ufel'][$this->M_Users->getUserRank($Owner)][$_SESSION['auth']['accesslevel']])
 		{
 			return "Access denied.";
 		}

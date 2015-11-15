@@ -1,4 +1,10 @@
 ﻿$(document).ready(function () {
+	$("#UserIDDropDown").change(function (e){
+		$("#userid").attr('value', $(this).val());
+		$("#directory").attr('value', 0);
+		refreshDirectoryWindow();
+		refreshSideBarFileTree();
+	});
 	$('#New').click(function (e) {
 		e.stopPropagation();
 		$('#NewFileWindow').modal();
@@ -71,7 +77,7 @@
 			{
 				url: "index.php?c=files&m=uploadFile",
 				type: "POST",
-				data: {filename: name, content: reader.result, directory: $("#newDirectory").data('actual')},
+				data: {filename: name, content: reader.result, directory: $("#newDirectory").data('actual'), UserID: $("#userid").attr("value")},
 				success: function (data, textStatus, jqXHR) {
 					if(data == 'File Uploaded.'){showMessage(data); refreshDirectoryWindow();}
 					else{showError(data);}
