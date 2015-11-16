@@ -48,6 +48,7 @@ $(document).ready(function () {
             
         }
     });
+	//$("#DirectoryTable").tablesorter();
 });
 function showError(postError) {
     $.notify(
@@ -76,7 +77,7 @@ function refreshDirectoryWindow()
 			}
 			else 
 			{ 
-				$('#DirectoryTable').html('<tr id="headrow">'+$('tr[id=headrow]').html()+'</tr>');
+				$('#DirectoryTable').html('<thead><tr id="headrow">'+$('tr[id=headrow]').html()+'</tr></thead><tbody></tbody>');
 				$.ajax(
 				{
 					url: "index.php?c=files&m=getFolderPath",
@@ -150,7 +151,7 @@ function refreshDirectoryWindow()
 						}
 						file_size = getByteString(rows[x]['filesize']);
 					}
-					$('#DirectoryTable tr:last').after('<tr id="'+rows[x]['id']+'" class="'+file_type+' RowItem"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
+					$('#DirectoryTable > tbody:last-child').append('<tr id="'+rows[x]['id']+'" class="'+file_type+' RowItem"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
 				}
 			}
 			$("#DirectoryTable > tbody > tr").click(function(event) {
@@ -433,6 +434,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			$("#DirectoryTable").tablesorter();
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			$("#DirectoryTable").html('<div class="alert alert-danger">' + errorThrown + '</div>');
