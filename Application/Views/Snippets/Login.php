@@ -14,7 +14,7 @@
             <div class="form-group" id="emailGroup">
               <label for="Email">Email address</label>
               <div class="" id="emailValidation"></div>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Email" style="width: 100%;">
+              <input type="email" class="form-control focus-control" id="email" name="email" placeholder="Email" style="width: 100%;">
             </div>
             <div class="form-group"" id='passwordGroup'>
               <label for='Password'>Password</label>
@@ -47,7 +47,7 @@
             <button class="btn btn-primary" id="SubmitLoginFormAnswer" style="width: 100%;">Next</button>
         </div>
         <div id="LoginFormPasswordEnter" style="display: none;">
-        <h3>Answer Security Question.</h3>
+        <h3>Reset Your Password.</h3>
             <form action="index.php?c=home&m=updatePassword" method="post" name="LoginFormPassword" id="LoginFormPassword">
                 <div class="form-group" id='passwordGroup'>
                   <label for='Password'>Password</label>

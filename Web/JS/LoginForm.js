@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	$('#email.focus-control').focus();
 	$('#password').keypress(function(e){
 		if(e.which == 13) {
 			$("#SubmitLoginForm").click();
@@ -64,89 +63,100 @@ $(document).ready(function () {
         $("#LoginFormEmailEnter").css('display', 'block');
     });
     $("#SubmitLoginFormEmail").click(function () {
-        $("#LoginFormEmail").submit(function (e) {
-            var postData = $(this).serializeArray();
-            var formURL = $(this).attr("action");
-            $.ajax(
-            {
-                url: formURL,
-                type: "POST",
-                data: postData,
-                success: function (data, textStatus, jqXHR) {
-                    if (data != "Error retreiving user id." && data != "No user with specified email found.")
-                    {
-                        $("#LoginFormEmailEnter").css('display', 'none');
-                        $('#LoginFormAnswerEnter').css('display', 'block');
-                        $('#LoginFormQuestion').html(data);
-                        $('#LoginFormAnswer input[id=email]').val($('#LoginFormEmail input[id=email]').val());
-                        document.getElementById('LoginFormMessage').innerHTML = "";
-                    }
-                    else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
-                }
-            });
-            e.preventDefault();	//STOP default action
-            //e.unbind();
-            $("#LoginFormEmail").unbind('submit');
-        });
         $('#LoginFormEmail').submit();
     });
+	$("#LoginFormEmail").submit(function (e) {
+		var postData = $(this).serializeArray();
+		var formURL = $(this).attr("action");
+		$.ajax(
+		{
+			url: formURL,
+			type: "POST",
+			data: postData,
+			success: function (data, textStatus, jqXHR) {
+				if (data != "Error retreiving user id." && data != "No user with specified email found.")
+				{
+					$("#LoginFormEmailEnter").css('display', 'none');
+					$('#LoginFormAnswerEnter').css('display', 'block');
+					$('#LoginFormQuestion').html(data);
+					$('#LoginFormAnswer input[id=email]').val($('#LoginFormEmail input[id=email]').val());
+					document.getElementById('LoginFormMessage').innerHTML = "";
+				}
+				else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
+			}
+		});
+		e.preventDefault();	//STOP default action
+	});
+	$("#LoginFormAnswer").submit(function (e) {
+		e.preventDefault();
+		var postData = $(this).serializeArray();
+		var formURL = $(this).attr("action");
+		$.ajax(
+		{
+			url: formURL,
+			type: "POST",
+			data: postData,
+			success: function (data, textStatus, jqXHR) {
+				if (data == "Answer Correct.") {
+					$('#LoginFormAnswerEnter').css('display', 'none');
+					$('#LoginFormPasswordEnter').css('display', 'block');
+					$('#LoginFormPassword input[id=email]').val($('#LoginFormEmail input[id=email]').val());
+					$('#LoginFormPassword input[id=answer]').val($('#LoginFormAnswer input[id=answer]').val());
+					document.getElementById('LoginFormMessage').innerHTML = "";
+				}
+				else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
+			}
+		});
+		e.preventDefault();	//STOP default action
+		//e.unbind();
+	});
     $("#SubmitLoginFormAnswer").click(function () {
-        $("#LoginFormAnswer").submit(function (e) {
-            var postData = $(this).serializeArray();
-            var formURL = $(this).attr("action");
-            $.ajax(
-            {
-                url: formURL,
-                type: "POST",
-                data: postData,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == "Answer Correct.") {
-                        $('#LoginFormAnswerEnter').css('display', 'none');
-                        $('#LoginFormPasswordEnter').css('display', 'block');
-                        $('#LoginFormPassword input[id=email]').val($('#LoginFormEmail input[id=email]').val());
-                        $('#LoginFormPassword input[id=answer]').val($('#LoginFormAnswer input[id=answer]').val());
-                        document.getElementById('LoginFormMessage').innerHTML = "";
-                    }
-                    else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
-                }
-            });
-            e.preventDefault();	//STOP default action
-            //e.unbind();
-            $("#LoginFormAnswer").unbind('submit');
-        });
         $('#LoginFormAnswer').submit();
     });
     $("#SubmitLoginFormPassword").click(function () {
-        $("#LoginFormPassword").submit(function (e) {
-            var postData = $(this).serializeArray();
-            var formURL = $(this).attr("action");
-            $.ajax(
-            {
-                url: formURL,
-                type: "POST",
-                data: postData,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == "Password Updated.") {
-                        document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-success">' + data + '</div>';
-                        $('#LoginFormPasswordEnter').css('display', 'none');
-                        $('#LoginFormHome').css('display', 'block');
-                    }
-                    else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
-                }
-            });
-            e.preventDefault();	//STOP default action
-            //e.unbind();
-            $("#LoginFormPassword").unbind('submit');
-        });
         $('#LoginFormPassword').submit();
     });
+	$("#LoginFormPassword").submit(function (e) {
+		e.preventDefault();
+		var postData = $(this).serializeArray();
+		var formURL = $(this).attr("action");
+		$.ajax(
+		{
+			url: formURL,
+			type: "POST",
+			data: postData,
+			success: function (data, textStatus, jqXHR) {
+				if (data == "Password Updated.") {
+					document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-success">' + data + '</div>';
+					$('#LoginFormPasswordEnter').css('display', 'none');
+					$('#LoginFormHome').css('display', 'block');
+				}
+				else { document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>'; }
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
+			}
+		});
+	});
+	$('#newpassword1').keypress(function(e){
+		if(e.which == 13) {
+			$("#LoginFormPassword").submit();
+		}
+	});
+	$('#newpassword2').keypress(function(e){
+		if(e.which == 13) {
+			$("#LoginFormPassword").submit();
+		}
+	});
+	$("#LoginButton").click(function (e)
+	{
+		$('#email.focus-control').focus();
+	}
+	);
 });
