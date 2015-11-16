@@ -7,7 +7,7 @@
 		<a href="#menu-hide" class="btn btn-primary" id="menu-hide" style="color: grey; background-color: white; text-align: center;border: none; float: right;"><<</a>
 		</li>
 		<li>
-		<select class="form-control" id="UserIDDropDown" style="width: 80%; margin-top: 5px; margin-bottom: 5px; margin-left: auto; margin-right: auto;">
+		<select class="form-control" id="UserIDDropDown" style="width: 90%; margin-top: 5px; margin-bottom: 5px; margin-left: auto; margin-right: auto;">
 			<?php echo $TPL['Users'];?>
 		 </select>
         </li>

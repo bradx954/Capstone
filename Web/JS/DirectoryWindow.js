@@ -435,6 +435,7 @@ function refreshDirectoryWindow()
 				});
 			});
 			$("#DirectoryTable").tablesorter();
+			$('#DirectoryTable').filterTable({inputSelector: '#input-filter'});
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			$("#DirectoryTable").html('<div class="alert alert-danger">' + errorThrown + '</div>');
