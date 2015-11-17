@@ -1,5 +1,5 @@
 <script src='Web/JS/FilesSideBar.js'></script>
-<link href='Web/startbootstrap-simple-sidebar-1.0.4/css/simple-sidebar.css' rel='stylesheet'>
+<link href='Web/CSS/simple-sidebar.css' rel='stylesheet'>
 <div id="wrapper">
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav" style="height: 100%;">

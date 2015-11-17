@@ -2,11 +2,11 @@
 <head>
 	<meta charset="UTF-8"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-	<link href="Web/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="Web/CSS/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="Web/CSS/theme.css">
 	<link rel="shortcut icon" href="Web/Images/LogoIcon.ico" />
     <script src='Web/JS/jquery-1.11.3.min.js'></script>
-    <script src='Web/bootstrap-3.3.5-dist/js/bootstrap.js'></script>
+    <script src='Web/JS/bootstrap.min.js'></script>
 	<title>Storacloud</title>
 </head>
 <body style='padding-top: 50px;'>
