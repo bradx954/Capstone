@@ -94,16 +94,33 @@ function refreshDirectoryWindow()
 				for(var x in rows)
 				{
 					var file_type = "Unknown";
-					var file_size = "";
+					var file_size;
 					if(typeof rows[x]['filesize'] === 'undefined')
 					{
 						file_type = "Folder";
+						file_size = "";
 					}
 					else{
 						var extension = rows[x]['name'].split(".");
 						extension = extension[extension.length-1];
-						switch(extension)
+						switch(extension.toLowerCase())
 						{
+							case 'mp4':
+							case 'avi':
+							case 'mkv':
+							case 'flv':
+							case 'webm':
+							case 'vob':
+							case 'ogg':
+							case 'ogv':
+								file_type = "Video";
+							break;
+							case 'xml':
+								file_type = "XML";
+							break;
+							case 'pdf':
+								file_type = "PDF";
+							break;
 							case 'ppt':
 							case 'pptx':
 							case 'odp':
@@ -125,6 +142,7 @@ function refreshDirectoryWindow()
 								file_type = "Archive";
 							break;
 							case 'png':
+							case 'gif':
 							case 'jpg':
 							case 'bmp':
 								file_type = "Image";
@@ -434,7 +452,28 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
-			$("#DirectoryTable").tablesorter();
+			$.tablesorter.addParser({ 
+				// set a unique id 
+				id: 'size', 
+				is: function(s) { 
+					// return false so this parser is not auto detected 
+					return false; 
+				}, 
+				format: function(s) {
+					// format your data for normalization
+					if(s == ""){return 0;}
+					return getBytes(s)+1;
+				}, 
+				// set type, either numeric or text 
+				type: 'numeric' 
+			}); 
+			$("#DirectoryTable").tablesorter({ 
+            headers: { 
+                2: { 
+                    sorter:'size' 
+                } 
+            } 
+        });
 			$('#DirectoryTable').filterTable({inputSelector: '#input-filter'});
 		},
 		error: function (jqXHR, textStatus, errorThrown) {

@@ -10,4 +10,7 @@ Unkown.png: http://findicons.com/files/icons/1671/simplicio/64/file.png
 Bash.png: http://findicons.com/files/icons/2773/pictonic_free/128/prog_bash02.png
 Image.png: http://cdn.wpeden.com/wp-content/themes/thenext/images/module-icons/image.png
 Archive.png: https://upload.wikimedia.org/wikipedia/en/e/e8/WinZip_icon.png
+PDF.png: https://cdn4.iconfinder.com/data/icons/CS5/128/ACP_PDF%202_file_document.png
+XML.png: http://icons.iconarchive.com/icons/hopstarter/adobe-cs4/256/File-Adobe-Dreamweaver-XML-01-icon.png
+Video.png: http://files.softicons.com/download/system-icons/web0.2ama-icons-by-chrfb/png/256x256/File%20-%20Video.png
 Office Icons: https://wiki.documentfoundation.org/images/thumb/6/65/LibreOffice_icons_256.png/400px-LibreOffice_icons_256.png

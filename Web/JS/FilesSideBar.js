@@ -220,6 +220,7 @@
 });
 function displayEdit()
 {
+	$('#input-filter').css('display','none');
 	$('#sideBarNewFile').css('display','none');
 	$('#sideBarUploadFile').css('display','none');
 	$('#sideBarMoveFile').css('display','none');
@@ -233,6 +234,7 @@ function displayEdit()
 }
 function displayNoneSelect()
 {
+	$('#input-filter').css('display','block');
 	$('#sideBarNewFile').css('display','block');
 	$('#sideBarUploadFile').css('display','block');
 	$('#sideBarMoveFile').css('display','none');
@@ -246,6 +248,7 @@ function displayNoneSelect()
 }
 function displaySingleSelect()
 {
+	$('#input-filter').css('display','block');
 	$('#sideBarNewFile').css('display','none');
 	$('#sideBarUploadFile').css('display','none');
 	$('#sideBarMoveFile').css('display','block');
@@ -259,6 +262,7 @@ function displaySingleSelect()
 }
 function displayMultiSelect()
 {
+	$('#input-filter').css('display','block');
 	$('#sideBarNewFile').css('display','none');
 	$('#sideBarUploadFile').css('display','none');
 	$('#sideBarMoveFile').css('display','block');
