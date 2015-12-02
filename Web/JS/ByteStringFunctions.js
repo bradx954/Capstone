@@ -1,4 +1,5 @@
-﻿function getByteString(bytes) {
+//Converts byte count to readable string.
+function getByteString(bytes) {
     var divisible = true;
     var divided = 0;
     while (divisible) {
@@ -26,13 +27,14 @@
             return bytes + ' GB';
     }
 }
+//Converts a file size string to actual bytes.
 function getBytes(byteString) {
     var byteSplit = byteString.split(" ");
     switch (byteSplit[1]) {
         case 'B': return byteSplit[0];
-        case 'KB': return byteSplit[0] * 1000;
-        case 'MB': return byteSplit[0] * 1000 * 1000;
-        case 'GB': return byteSplit[0] * 1000 * 1000 * 1000;
+        case 'KB': return byteSplit[0] * 1024;
+        case 'MB': return byteSplit[0] * 1024 * 1024;
+        case 'GB': return byteSplit[0] * 1024 * 1024 * 1024;
         default: return byteSplit[0];
     }
 }
