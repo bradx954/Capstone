@@ -24,3 +24,9 @@ Bootstrap: http://getbootstrap.com/
 Simple Side Bar: http://startbootstrap.com/template-overviews/simple-sidebar/
 Code Mirror: https://codemirror.net/
 JQuery ContextMenu: https://github.com/swisnl/jQuery-contextMenu
+double tap : https://gist.github.com/attenzione/7098476
+notifaction pop ups: http://bootstrap-notify.remabledesigns.com/
+table sorter: http://tablesorter.com/docs/
+table filterer: https://sunnywalker.github.io/jQuery.FilterTable/
+charts: http://canvasjs.com/
+boot box: http://bootboxjs.com/
