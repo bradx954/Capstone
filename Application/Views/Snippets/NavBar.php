@@ -1,3 +1,4 @@
+<!-- Navigation bar. -->
 <nav id="NavBar" class='navbar navbar-default navbar-fixed-top'>
 	<div class='container-fluid'>
 		<div class='navbar-header'>

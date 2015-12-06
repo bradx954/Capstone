@@ -1,3 +1,4 @@
+<!-- HTML module for setting avatars.-->
 <script src='Web/JS/AvatarEditModule.js'></script>
 <div id="avatar" class="module-container" style="width: 300px;">
     <h2 style="text-align: center; margin: 0px;">Avatar</h2>

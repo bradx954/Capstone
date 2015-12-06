@@ -1,16 +1,20 @@
+<!-- Files side bar.-->
 <script src='Web/JS/FilesSideBar.js'></script>
 <link href='Web/CSS/simple-sidebar.css' rel='stylesheet'>
 <div id="wrapper">
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav" style="height: 100%;">
         <li>
+                <!-- Responsive hide button.-->
 		<a href="#menu-hide" class="btn btn-primary" id="menu-hide" style="color: grey; background-color: white; text-align: center;border: none; float: right;"><<</a>
 		</li>
 		<li>
+                <!-- User switcher. -->
 		<select class="form-control" id="UserIDDropDown" style="width: 90%; margin-top: 5px; margin-bottom: 5px; margin-left: auto; margin-right: auto;">
 			<?php echo $TPL['Users'];?>
 		 </select>
         </li>
+        <!-- Control buttons. -->
         <li id="sideBarNewFile">
 			<button class="btn btn-primary" id="New" data-toggle="modal" data-target="#NewFileWindow" style="width: 80%; margin: auto;">New</button>
 		</li>

@@ -1,3 +1,4 @@
+<!-- New file window. -->
 <script src="Web/JS/NewFileWindow.js"></script>
 <div id="NewFileWindow" class="modal fade" role="dialog">
   <div class="modal-dialog">

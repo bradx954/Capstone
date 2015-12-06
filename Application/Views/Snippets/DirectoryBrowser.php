@@ -1,3 +1,4 @@
+<!-- Directory browser. -->
 <script src='Web/JS/DirectoryBrowser.js'></script>
 <div id="DirectoryBrowser" class="modal fade" role="dialog">
   <div class="modal-dialog">

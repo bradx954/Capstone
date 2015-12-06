@@ -1,3 +1,4 @@
+<!-- Code editor window.-->
 <link rel=stylesheet href="Web/codemirror-5.7/lib/codemirror.css">
 <script src="Web/codemirror-5.7/lib/codemirror.js"></script>
 <script src="Web/codemirror-5.7/mode/xml/xml.js"></script>

@@ -1,3 +1,4 @@
+<!-- Login window. -->
 <script src="Web/JS/LoginForm.js"></script>
 <div id="Login" class="modal fade" role="dialog">
   <div class="modal-dialog">

@@ -1,3 +1,4 @@
+<!-- User details module.-->
 <script src='Web/JS/ByteStringFunctions.js'></script>
 <script type="text/javascript" src="Web/JS/canvasjs.min.js"></script>
 <script src='Web/JS/UserDetailsModule.js'></script>

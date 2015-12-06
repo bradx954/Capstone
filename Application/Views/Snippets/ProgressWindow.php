@@ -1,3 +1,4 @@
+<!-- Upload progress window. -->
 <div id="ProgressWindow" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->

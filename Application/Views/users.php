@@ -1,7 +1,9 @@
+<!-- Users page. -->
 <script src='Web/JS/notify.min.js'></script>
 <script src='Web/JS/ByteStringFunctions.js'></script>
 <script src='Web/JS/UsersTable.js'></script>
 <div class="table-responsive">
+    <!-- Users table. -->
     <table class='table table-bordered table-hover table-condensed' style="background-color:white;">
     <tr style="color: black;">
         <th>ID</th>

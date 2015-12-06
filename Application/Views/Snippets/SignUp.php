@@ -1,3 +1,4 @@
+<!-- Sign up window. -->
 <script src="Web/JS/SignUpForm.js"></script>
 <div id="SignUp" class="modal fade" role="dialog">
   <div class="modal-dialog">
