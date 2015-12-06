@@ -15,7 +15,7 @@
                 <li <?php if($TPL['page'] == 'home'){echo "class='active'";}?>><a href='index.php?c=home'>Home</a></li>
                 <li <?php if($TPL['page'] == 'files'){echo "class='active'";}?>><a href='index.php?c=files'>Files</a></li>
                 <?php if($GLOBALS['config']['acl']['users'][$_SESSION['auth']['accesslevel']] == true){echo "<li "; if($TPL['page'] == 'users'){echo "class='active'";}echo"><a href='index.php?c=users'>Users</a></li>";} ?>
-                <?php if($GLOBALS['config']['acl']['server'][$_SESSION['auth']['accesslevel']] == true){echo "<li "; if($TPL['page'] == 'server'){echo "class='active'";}echo"><a href='index.php?c=server'>Server</a></li>";} ?>
+                <!--<?php if($GLOBALS['config']['acl']['server'][$_SESSION['auth']['accesslevel']] == true){echo "<li "; if($TPL['page'] == 'server'){echo "class='active'";}echo"><a href='index.php?c=server'>Server</a></li>";} ?>-->
             </div>
             <div class='nav navbar-nav navbar-right'>
                 <li><a style='padding: 0px; margin: 7px;'><img id='avatar-icon-nav' height='36' width='36' src='<?php echo $_SESSION['auth']['avatar'];?>' /></a></li>

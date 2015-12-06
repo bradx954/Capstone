@@ -1,73 +1,76 @@
+/*
+ * I Brad Baago, 000306223 certify that this material is my original work. No other person's work has been used without due acknowledgement. I have not made my work available to anyone else.
+ */
 //Requires byte string functions.
 function showError(postError) {
     $.notify(
-  postError,
-  { position: "down" }
-);
+            postError,
+            {position: "down"}
+    );
 }
 //Show message to user.
 function showMessage(postMessage)
 {
     $.notify(
-  postMessage,
-  { position: "down", className: "info" }
-);
+            postMessage,
+            {position: "down", className: "info"}
+    );
 }
 $(document).ready(function () {
     //Toggles the user's account status
     $('.active').click(function () {
         if ($(this).html() == 'True') {
             $.ajax(
-            {
-                url: "index.php?c=users&m=deactivateUser",
-                type: "POST",
-                data: { id: $(this).attr('id') },
-                context: this,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == 'User Deactivated.') {
-                        showMessage(data);
-                        $(this).css('color', 'red');
-                        $(this).html("False");
-                    }
-                    else if (data == 'Record no longer exists.') {
-                        $('tr#' + $(this).attr('id')).remove();
-                        showError(data);
-                    }
-                    else {
-                        showError(data);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    showError(errorThrown);
-                }
-            });
+                    {
+                        url: "index.php?c=users&m=deactivateUser",
+                        type: "POST",
+                        data: {id: $(this).attr('id')},
+                        context: this,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data == 'User Deactivated.') {
+                                showMessage(data);
+                                $(this).css('color', 'red');
+                                $(this).html("False");
+                            }
+                            else if (data == 'Record no longer exists.') {
+                                $('tr#' + $(this).attr('id')).remove();
+                                showError(data);
+                            }
+                            else {
+                                showError(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            showError(errorThrown);
+                        }
+                    });
         }
         else {
             $.ajax(
-            {
-                url: "index.php?c=users&m=activateUser",
-                type: "POST",
-                data: { id: $(this).attr('id') },
-                context: this,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == 'User Activated.') {
-                        showMessage(data);
-                        $(this).css('color', 'green');
-                        $(this).html("True");
-                    }
-                    else if (data == 'Record no longer exists.')
                     {
-                        $('tr#' + $(this).attr('id')).remove();
-                        showError(data);
-                    }
-                    else {
-                        showError(data);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    showError(errorThrown);
-                }
-            });
+                        url: "index.php?c=users&m=activateUser",
+                        type: "POST",
+                        data: {id: $(this).attr('id')},
+                        context: this,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data == 'User Activated.') {
+                                showMessage(data);
+                                $(this).css('color', 'green');
+                                $(this).html("True");
+                            }
+                            else if (data == 'Record no longer exists.')
+                            {
+                                $('tr#' + $(this).attr('id')).remove();
+                                showError(data);
+                            }
+                            else {
+                                showError(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            showError(errorThrown);
+                        }
+                    });
         }
     });
     //Generates an input form for changing user quota.
@@ -80,29 +83,29 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.quotaUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
-            {
-                url: "index.php?c=users&m=updateUserQuota",
-                type: "POST",
-                data: { id: $(this).attr('id'), bytes: getBytes($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val()) },
-                context: this,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == 'Quota Updated.') {
-                        showMessage(data);
-                        $('#' + $(this).attr('id') + '.quota').html($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val());
-                        $(this).remove();
-                    }
-                    else if (data == 'Record no longer exists.') {
-                        $('tr#' + $(this).attr('id')).remove();
-                        showError(data);
-                    }
-                    else {
-                        showError(data);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    showError(errorThrown);
-                }
-            });
+                    {
+                        url: "index.php?c=users&m=updateUserQuota",
+                        type: "POST",
+                        data: {id: $(this).attr('id'), bytes: getBytes($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val())},
+                        context: this,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data == 'Quota Updated.') {
+                                showMessage(data);
+                                $('#' + $(this).attr('id') + '.quota').html($('#' + $(this).attr('id') + '.inputBytes').val() + ' ' + $('#' + $(this).attr('id') + '.byteString').val());
+                                $(this).remove();
+                            }
+                            else if (data == 'Record no longer exists.') {
+                                $('tr#' + $(this).attr('id')).remove();
+                                showError(data);
+                            }
+                            else {
+                                showError(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            showError(errorThrown);
+                        }
+                    });
         });
     });
     //Generate email edit form for user.
@@ -114,29 +117,29 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.emailUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
-            {
-                url: "index.php?c=users&m=updateUserEmail",
-                type: "POST",
-                data: { id: $(this).attr('id'), email: $('#' + $(this).attr('id') + '.inputEmail').val() },
-                context: this,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == 'Email Updated.') {
-                        showMessage(data);
-                        $('#' + $(this).attr('id') + '.email').html($('#' + $(this).attr('id') + '.inputEmail').val());
-                        $(this).remove();
-                    }
-                    else if (data == 'Record no longer exists.') {
-                        $('tr#' + $(this).attr('id')).remove();
-                        showError(data);
-                    }
-                    else {
-                        showError(data);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    showError(errorThrown);
-                }
-            });
+                    {
+                        url: "index.php?c=users&m=updateUserEmail",
+                        type: "POST",
+                        data: {id: $(this).attr('id'), email: $('#' + $(this).attr('id') + '.inputEmail').val()},
+                        context: this,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data == 'Email Updated.') {
+                                showMessage(data);
+                                $('#' + $(this).attr('id') + '.email').html($('#' + $(this).attr('id') + '.inputEmail').val());
+                                $(this).remove();
+                            }
+                            else if (data == 'Record no longer exists.') {
+                                $('tr#' + $(this).attr('id')).remove();
+                                showError(data);
+                            }
+                            else {
+                                showError(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            showError(errorThrown);
+                        }
+                    });
         });
     });
     //Generate firstname edit form.
@@ -148,31 +151,31 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.firstNameUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
-            {
-                url: "index.php?c=users&m=updateUserFirstName",
-                type: "POST",
-                data: { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() },
-                context: this,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == 'First Name Updated.') {
-                        showMessage(data);
-                        $('#' + $(this).attr('id') + '.firstName').html($('#' + $(this).attr('id') + '.inputFirstName').val());
-                        $(this).remove();
-                    }
-                    else if (data == 'Record no longer exists.') {
-                        $('tr#' + $(this).attr('id')).remove();
-                        showError(data);
-                    }
-                    else {
-                        showError(data);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    showError(errorThrown);
-                }
-            });
+                    {
+                        url: "index.php?c=users&m=updateUserFirstName",
+                        type: "POST",
+                        data: {id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val()},
+                        context: this,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data == 'First Name Updated.') {
+                                showMessage(data);
+                                $('#' + $(this).attr('id') + '.firstName').html($('#' + $(this).attr('id') + '.inputFirstName').val());
+                                $(this).remove();
+                            }
+                            else if (data == 'Record no longer exists.') {
+                                $('tr#' + $(this).attr('id')).remove();
+                                showError(data);
+                            }
+                            else {
+                                showError(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            showError(errorThrown);
+                        }
+                    });
             event.preventDefault();
-            $.post("index.php?c=users&m=updateUserFirstName", { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() });
+            $.post("index.php?c=users&m=updateUserFirstName", {id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val()});
         });
     });
     //Generate last name edit form for user.
@@ -184,80 +187,80 @@ $(document).ready(function () {
         $('#' + $(this).attr('id') + '.lastNameUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
-            {
-                url: "index.php?c=users&m=updateUserLastName",
-                type: "POST",
-                data: { id: $(this).attr('id'), lastName: $('#' + $(this).attr('id') + '.inputLastName').val() },
-                context: this,
-                success: function (data, textStatus, jqXHR) {
-                    if (data == 'Last Name Updated.') {
-                        showMessage(data);
-                        $('#' + $(this).attr('id') + '.lastName').html($('#' + $(this).attr('id') + '.inputLastName').val());
-                        $(this).remove();
-                    }
-                    else if (data == 'Record no longer exists.') {
-                        $('tr#' + $(this).attr('id')).remove();
-                        showError(data);
-                    }
-                    else {
-                        showError(data);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    showError(errorThrown);
-                }
-            });
+                    {
+                        url: "index.php?c=users&m=updateUserLastName",
+                        type: "POST",
+                        data: {id: $(this).attr('id'), lastName: $('#' + $(this).attr('id') + '.inputLastName').val()},
+                        context: this,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data == 'Last Name Updated.') {
+                                showMessage(data);
+                                $('#' + $(this).attr('id') + '.lastName').html($('#' + $(this).attr('id') + '.inputLastName').val());
+                                $(this).remove();
+                            }
+                            else if (data == 'Record no longer exists.') {
+                                $('tr#' + $(this).attr('id')).remove();
+                                showError(data);
+                            }
+                            else {
+                                showError(data);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            showError(errorThrown);
+                        }
+                    });
         });
     });
     //Update rank on server when changed by user.
     $('.rank').change(function () {
         $.ajax(
-        {
-            url: "index.php?c=users&m=updateUserRank",
-            type: "POST",
-            data: { id: $(this).attr('id'), rank: $(this).val() },
-            context: this,
-            success: function (data, textStatus, jqXHR) {
-                if (data == 'Rank Updated.') {
-                    showMessage(data);
-                }
-                else if (data == 'Record no longer exists.') {
-                    $('tr#' + $(this).attr('id')).remove();
-                    showError(data);
-                }
-                else {
-                    showError(data);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                showError(errorThrown);
-            }
-        });
+                {
+                    url: "index.php?c=users&m=updateUserRank",
+                    type: "POST",
+                    data: {id: $(this).attr('id'), rank: $(this).val()},
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+                        if (data == 'Rank Updated.') {
+                            showMessage(data);
+                        }
+                        else if (data == 'Record no longer exists.') {
+                            $('tr#' + $(this).attr('id')).remove();
+                            showError(data);
+                        }
+                        else {
+                            showError(data);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        showError(errorThrown);
+                    }
+                });
     });
     //Delete user.
     $('.delete').click(function () {
         $.ajax(
-        {
-            url: "index.php?c=users&m=deleteUser",
-            type: "POST",
-            data: { id: $(this).attr('id') },
-            context: this,
-            success: function (data, textStatus, jqXHR) {
-                if (data == 'User ' + $(this).attr('id') + ' deleted.') {
-                    showMessage(data);
-                    $('tr#' + $(this).attr('id')).remove();
-                }
-                else if (data == 'Record no longer exists.') {
-                    $('tr#' + $(this).attr('id')).remove();
-                    showError(data);
-                }
-                else {
-                    showError(data);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                showError(errorThrown);
-            }
-        });
+                {
+                    url: "index.php?c=users&m=deleteUser",
+                    type: "POST",
+                    data: {id: $(this).attr('id')},
+                    context: this,
+                    success: function (data, textStatus, jqXHR) {
+                        if (data == 'User ' + $(this).attr('id') + ' deleted.') {
+                            showMessage(data);
+                            $('tr#' + $(this).attr('id')).remove();
+                        }
+                        else if (data == 'Record no longer exists.') {
+                            $('tr#' + $(this).attr('id')).remove();
+                            showError(data);
+                        }
+                        else {
+                            showError(data);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        showError(errorThrown);
+                    }
+                });
     });
 });

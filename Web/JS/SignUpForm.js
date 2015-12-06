@@ -1,10 +1,13 @@
+/*
+ * I Brad Baago, 000306223 certify that this material is my original work. No other person's work has been used without due acknowledgement. I have not made my work available to anyone else.
+ */
 $(document).ready(function () {
-	//Submits form on enter key.
-	$('#answer').keypress(function(e){
-		if(e.which == 13) {
-			$("#SubmitForm").click();
-		}
-	});
+    //Submits form on enter key.
+    $('#answer').keypress(function (e) {
+        if (e.which == 13) {
+            $("#SubmitForm").click();
+        }
+    });
     //borrowed heavely from http://css.dzone.com/articles/create-password-strength
     $('#password1, #password2').on('keyup', function (e) {
         if ($('#password1').val() != '' && $('#password2').val() != '' && $('#password1').val() != $('#password2').val()) {
@@ -49,44 +52,70 @@ $(document).ready(function () {
     //Validates and cubmits form.
     $("#SubmitForm").click(function () {
         document.getElementById('FormMessage').innerHTML = '';
-	//Validation checks
+        //Validation checks
         var valid = true;
 
-        if ($('#email').keyup() == false) { valid = false; }
-        if ($('#password1, #password2').keyup() == false) { valid = false; }
+        if ($('#email').keyup() == false) {
+            valid = false;
+        }
+        if ($('#password1, #password2').keyup() == false) {
+            valid = false;
+        }
 
         Form = document.forms['SignUpForm'];
-        if (Form.elements['email'].value == '') { valid = false; $("#emailGroup").attr("class", "form-group has-error"); }
-        else { $("#emailGroup").attr("class", "form-group"); }
-        if (Form.elements['fName'].value == '' || Form.elements['lName'].value == '') { valid = false; $("#nameGroup").attr("class", "form-group has-error"); }
-        else { $("#nameGroup").attr("class", "form-group"); }
-        if (Form.elements['password'].value == '') { valid = false; $("#passwordGroup").attr("class", "form-group has-error"); }
-        else { $("#passwordGroup").attr("class", "form-group"); }
-        if (Form.elements['answer'].value == '') { valid = false; $("#questionGroup").attr("class", "form-group has-error"); }
-        else { $("#questionGroup").attr("class", "form-group"); }
-	//Submit form if valid
+        if (Form.elements['email'].value == '') {
+            valid = false;
+            $("#emailGroup").attr("class", "form-group has-error");
+        }
+        else {
+            $("#emailGroup").attr("class", "form-group");
+        }
+        if (Form.elements['fName'].value == '' || Form.elements['lName'].value == '') {
+            valid = false;
+            $("#nameGroup").attr("class", "form-group has-error");
+        }
+        else {
+            $("#nameGroup").attr("class", "form-group");
+        }
+        if (Form.elements['password'].value == '') {
+            valid = false;
+            $("#passwordGroup").attr("class", "form-group has-error");
+        }
+        else {
+            $("#passwordGroup").attr("class", "form-group");
+        }
+        if (Form.elements['answer'].value == '') {
+            valid = false;
+            $("#questionGroup").attr("class", "form-group has-error");
+        }
+        else {
+            $("#questionGroup").attr("class", "form-group");
+        }
+        //Submit form if valid
         if (valid) {
             $("#SignUpForm").submit(function (e) {
                 var postData = $(this).serializeArray();
                 var formURL = $(this).attr("action");
                 $.ajax(
-                {
-                    url: formURL,
-                    type: "POST",
-                    data: postData,
-                    success: function (data, textStatus, jqXHR) {
-                        if (data == '<div class="alert alert-success">Sign up complete!</div>') {
-                            document.getElementById('FormMessage').innerHTML = '';
-                            document.getElementById('SignUpForm').style.display = 'none';
-                            document.getElementById('SubmitForm').style.display = 'none';
-                            document.getElementById('divComplete').style.display = 'block';
-                        }
-                        else { document.getElementById('FormMessage').innerHTML = data; }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
-                    }
-                });
+                        {
+                            url: formURL,
+                            type: "POST",
+                            data: postData,
+                            success: function (data, textStatus, jqXHR) {
+                                if (data == '<div class="alert alert-success">Sign up complete!</div>') {
+                                    document.getElementById('FormMessage').innerHTML = '';
+                                    document.getElementById('SignUpForm').style.display = 'none';
+                                    document.getElementById('SubmitForm').style.display = 'none';
+                                    document.getElementById('divComplete').style.display = 'block';
+                                }
+                                else {
+                                    document.getElementById('FormMessage').innerHTML = data;
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
+                            }
+                        });
                 e.preventDefault();	//STOP default action
                 //e.unbind();
                 $("#SignUpForm").unbind('submit');
