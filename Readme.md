@@ -18,6 +18,8 @@ Installation Instructions:
 4. Change your accounts rank to superadmin in mysql.
 5. Additional configuration available in the other config file in Config/.
 
+Framework based on supplied code from lab 6 in mohawk college's advanced php course. Web/main.php and Application/models/userauth.php contain a lot of non original content.
+
 Some plugins used:
 JQuery: https://jquery.com/
 Bootstrap: http://getbootstrap.com/
