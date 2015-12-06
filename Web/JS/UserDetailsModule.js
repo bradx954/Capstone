@@ -1,8 +1,5 @@
 ﻿//requires byte string functions.
 $(document).ready(function () {
-    //Retrieves data from view when it loads.
-    var freespace = $('#UserDetailsFreeSpace').html();
-    var usedspace = $('#UserDetailsUsedSpace').html();
     //Converts data to human readable
     $('#UserDetailsQuota').html(getByteString($('#UserDetailsQuota').html()));
     $('#UserDetailsUsedSpace').html(getByteString($('#UserDetailsUsedSpace').html()));

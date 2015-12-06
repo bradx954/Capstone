@@ -32,6 +32,7 @@ $(document).ready(function () {
 							//Refresh data to reflect changes.
 							refreshDirectoryWindow();
 							refreshSideBarFileTree();
+							refreshStorageUsed();
 						}
 						else{showError(data);}
 					},
