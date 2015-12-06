@@ -1,13 +1,14 @@
 ﻿//requires byte string functions.
 $(document).ready(function () {
-
+    //Retrieves data from view when it loads.
     var freespace = $('#UserDetailsFreeSpace').html();
     var usedspace = $('#UserDetailsUsedSpace').html();
-
+    //Converts data to human readable
     $('#UserDetailsQuota').html(getByteString($('#UserDetailsQuota').html()));
     $('#UserDetailsUsedSpace').html(getByteString($('#UserDetailsUsedSpace').html()));
     $('#UserDetailsFreeSpace').html(getByteString($('#UserDetailsFreeSpace').html()));
-    var chart = new CanvasJS.Chart("UserDetailsChart",
+	//Adds chart with data.    
+	var chart = new CanvasJS.Chart("UserDetailsChart",
 	{
 	    title: {
 	        text: "Storage Chart"

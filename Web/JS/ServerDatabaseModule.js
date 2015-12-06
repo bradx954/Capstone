@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    //Resets the users table.
     $('#ServerDatabaseResetUsers').click(function () {
         $.ajax(
         {
@@ -14,6 +15,7 @@
             }
         });
     });
+    //Resets the avatars table.
     $('#ServerDatabaseResetAvatars').click(function () {
         $.ajax(
         {
@@ -29,6 +31,7 @@
             }
         });
     });
+    //Resets the files table.
     $('#ServerDatabaseResetFiles').click(function () {
         $.ajax(
         {
@@ -44,6 +47,7 @@
             }
         });
     });
+    //Resets folder table
     $('#ServerDatabaseResetFolders').click(function () {
         $.ajax(
         {

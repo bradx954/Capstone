@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	//Submits login request if enter is pressed.
 	$('#password').keypress(function(e){
 		if(e.which == 13) {
 			$("#SubmitLoginForm").click();
@@ -34,6 +35,7 @@ $(document).ready(function () {
         }
         return true;
     });
+    //Submits login request. Redirects to files page on success.
     $("#SubmitLoginForm").click(function () {
         document.getElementById('LoginFormMessage').innerHTML = '';
         $("#LoginForm").submit(function (e) {
@@ -58,6 +60,7 @@ $(document).ready(function () {
         });
         $('#LoginForm').submit();
     });
+    //Displays forgot password form.
     $("#loginForgotPassowrd").click(function () {
         $("#LoginFormHome").css('display', 'none');
         $("#LoginFormEmailEnter").css('display', 'block');
@@ -65,6 +68,7 @@ $(document).ready(function () {
     $("#SubmitLoginFormEmail").click(function () {
         $('#LoginFormEmail').submit();
     });
+	//If email is valid moves to next recovery step.
 	$("#LoginFormEmail").submit(function (e) {
 		var postData = $(this).serializeArray();
 		var formURL = $(this).attr("action");
@@ -90,6 +94,7 @@ $(document).ready(function () {
 		});
 		e.preventDefault();	//STOP default action
 	});
+	//Submits answer to the question to the server.
 	$("#LoginFormAnswer").submit(function (e) {
 		e.preventDefault();
 		var postData = $(this).serializeArray();
@@ -122,6 +127,7 @@ $(document).ready(function () {
     $("#SubmitLoginFormPassword").click(function () {
         $('#LoginFormPassword').submit();
     });
+	//Returns to home page after new password set.
 	$("#LoginFormPassword").submit(function (e) {
 		e.preventDefault();
 		var postData = $(this).serializeArray();

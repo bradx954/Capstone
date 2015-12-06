@@ -5,6 +5,7 @@ function showError(postError) {
   { position: "down" }
 );
 }
+//Show message to user.
 function showMessage(postMessage)
 {
     $.notify(
@@ -13,6 +14,7 @@ function showMessage(postMessage)
 );
 }
 $(document).ready(function () {
+    //Toggles the user's account status
     $('.active').click(function () {
         if ($(this).html() == 'True') {
             $.ajax(
@@ -68,6 +70,7 @@ $(document).ready(function () {
             });
         }
     });
+    //Generates an input form for changing user quota.
     $('.quota').click(function () {
         var byteSplit = $(this).html().split(' ');
         $(this).html('');
@@ -102,6 +105,7 @@ $(document).ready(function () {
             });
         });
     });
+    //Generate email edit form for user.
     $('.email').click(function () {
         var email = $(this).html();
         $(this).html('');
@@ -135,6 +139,7 @@ $(document).ready(function () {
             });
         });
     });
+    //Generate firstname edit form.
     $('.firstName').click(function () {
         var name = $(this).html();
         $(this).html('');
@@ -170,6 +175,7 @@ $(document).ready(function () {
             $.post("index.php?c=users&m=updateUserFirstName", { id: $(this).attr('id'), firstName: $('#' + $(this).attr('id') + '.inputFirstName').val() });
         });
     });
+    //Generate last name edit form for user.
     $('.lastName').click(function () {
         var name = $(this).html();
         $(this).html('');
@@ -203,6 +209,7 @@ $(document).ready(function () {
             });
         });
     });
+    //Update rank on server when changed by user.
     $('.rank').change(function () {
         $.ajax(
         {
@@ -227,6 +234,7 @@ $(document).ready(function () {
             }
         });
     });
+    //Delete user.
     $('.delete').click(function () {
         $.ajax(
         {

@@ -1,10 +1,12 @@
 ﻿$(document).ready(function ()
 {
+    //Editor for email.
     $('.EmailUserField').click(function ()
     {
         $('#UserEditFieldsMessage').html("<div class='alert alert-warning'>Warning: Editing email will effect your login credentials.</div>");
         var email = $(this).html();
         $(this).html('');
+	//Generate input form.
         $(this).after('<form name="updateEmailUserField" class="emailUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserEmail"><input type="text" name="emailUserField" id="' + $(this).attr('id') + '" class="form-control inputEmailUserField" style="width: 200px; display: inline;"><button type="submit" id="emailUserFieldSubmit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="emailUserFieldCancel">Cancel</button></form>');
         $('#' + $(this).attr('id') + '.inputEmailUserField').val(email);
         $('#emailUserFieldCancel').click(function () {
@@ -22,6 +24,7 @@
             $('#emailUserFieldSubmit').prop('disabled', false);
             return true;
         });
+	//Generate form submit function.
         $('#' + $(this).attr('id') + '.emailUserFieldUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
@@ -46,15 +49,18 @@
             });
         });
     });
+    //Editor for first name.
     $('.FirstNameUserField').click(function () {
         var fname = $(this).html();
         $(this).html('');
+	//Generate input form.
         $(this).after('<form name="updateFirstNameUserField" class="fnameUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserFirstName"><input type="text" name="fnameUserField" id="' + $(this).attr('id') + '" class="form-control inputFirstNameUserField" style="width: 200px; display: inline;"><button type="submit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="fnameUserFieldCancel">Cancel</button></form>');
         $('#' + $(this).attr('id') + '.inputFirstNameUserField').val(fname);
         $('#fnameUserFieldCancel').click(function () {
             $('#0.FirstNameUserField').html(fname);
             $('.fnameUserFieldUpdate').remove();
         });
+	//Generate form submit function.
         $('#' + $(this).attr('id') + '.fnameUserFieldUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(
@@ -79,15 +85,18 @@
             });
         });
     });
+    //Editor for last name.
     $('.LastNameUserField').click(function () {
         var lname = $(this).html();
         $(this).html('');
+	//Generate input form.
         $(this).after('<form name="updateLastNameUserField" class="lnameUserFieldUpdate" id="' + $(this).attr('id') + '" method="post" action="index.php?c=settings&m=updateUserLastName"><input type="text" name="lnameUserField" id="' + $(this).attr('id') + '" class="form-control inputLastNameUserField" style="width: 200px; display: inline;"><button type="submit" class="btn btn-primary" style="width:100px;">Save</button><button type="reset" class="btn btn-default" style="width:100px;" id="lnameUserFieldCancel">Cancel</button></form>');
         $('#' + $(this).attr('id') + '.inputLastNameUserField').val(lname);
         $('#lnameUserFieldCancel').click(function () {
             $('#0.LastNameUserField').html(lname);
             $('.lnameUserFieldUpdate').remove();
         });
+	//Generate form submit function.
         $('#' + $(this).attr('id') + '.lnameUserFieldUpdate').submit(function (event) {
             event.preventDefault();
             $.ajax(

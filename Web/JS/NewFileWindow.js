@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	//Opens directory selector.
 	$("#SelectDirectory").click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -8,11 +9,13 @@ $(document).ready(function () {
 		$('#DirectoryBrowser').modal();
 		updateDirectoryBrowserTable(0);
 	});
+	//Submits new file on enter.
 	$('#newFileName').keypress(function(e){
 		if(e.which == 13) {
 			$("#SubmitNewFile").click();
 		}
 	});
+	//Sets new file type to selected type.
 	$(".FileIcon").click(function (e) {
 		e.stopPropagation();
 		$(".FileIconSelect").removeClass("FileIconSelect");
@@ -20,6 +23,7 @@ $(document).ready(function () {
 		$("#FileTypeExtension").html($(this).attr("extension"));
 		checkNewFileValid();
 	});
+	//Submit file creation to server.		
 	$("#SubmitNewFile").click(function(e) {
 		e.stopPropagation();
 		if($(".FileIconSelect").attr('id') == "Folder")
@@ -67,6 +71,7 @@ $(document).ready(function () {
 		}
 	});
 });
+//Enables submit button.
 function checkNewFileValid()
 {
 	$("#SubmitNewFile").prop('disabled', false);

@@ -1,5 +1,7 @@
 $(document).ready(function () {
+	//Intial load for directory window.
 	refreshDirectoryWindow();
+	//Deselect on click any where that doesent have a click event handled.
 	$("body").click(function(e) {
 		if($('#sideBarSaveFile').css('display') == 'none' && $('.context-menu-list').css('display') != "block")
 		{
@@ -7,15 +9,17 @@ $(document).ready(function () {
 			displayNoneSelect();
 		}
     });
+    //Responsive side bar show button.
     $("#menu-show").click(function(e) {
         e.preventDefault();
 		e.stopPropagation();
         $("#wrapper").toggleClass("toggled");
 		$("#menu-show").css('display','none');
     });
+	//Right click menu for rows.
 	$.contextMenu({
-        selector: '.RowItem', 
-        build: function($trigger, e) {
+	selector: '.RowItem', 
+	build: function($trigger, e) {
 			var rows = $('.RowSelect');
 			if(rows.length == 0){return;}
 			else if(rows.length == 1)
@@ -45,17 +49,19 @@ $(document).ready(function () {
 					}
 				};
 			}
-            
-        }
-    });
+	    
+	}
+	});
 	//$("#DirectoryTable").tablesorter();
 });
+//Display Error to user.
 function showError(postError) {
     $.notify(
   postError,
   { position: "down" }
 );
 }
+//Display message to user.
 function showMessage(postMessage)
 {
     $.notify(
@@ -63,6 +69,7 @@ function showMessage(postMessage)
   { position: "down", className: "info" }
 );
 }
+//Refreshes the directory window with the chosen directory specified in the hidden form.
 function refreshDirectoryWindow()
 {
 	$.ajax(
@@ -76,8 +83,10 @@ function refreshDirectoryWindow()
 				$("#DirectoryTable").html('<div class="alert alert-danger">' + data + '</div>');
 			}
 			else 
-			{ 
+			{
+				//Preserves/Regenerates the table header.
 				$('#DirectoryTable').html('<thead><tr id="headrow">'+$('tr[id=headrow]').html()+'</tr></thead><tbody></tbody>');
+				//Gets folder path from folder id.
 				$.ajax(
 				{
 					url: "index.php?c=files&m=getFolderPath",
@@ -90,17 +99,21 @@ function refreshDirectoryWindow()
 						showError(data);
 					}
 				});
+				//Retireves and loops through result rows.
 				var rows = JSON.parse(data);
 				for(var x in rows)
 				{
+					//Default type for files
 					var file_type = "Unknown";
 					var file_size;
+					//Determines if row is folder.
 					if(typeof rows[x]['filesize'] === 'undefined')
 					{
 						file_type = "Folder";
 						file_size = "";
 					}
 					else{
+						//Attempts to evaluate file type from extension.
 						var extension = rows[x]['name'].split(".");
 						extension = extension[extension.length-1];
 						switch(extension.toLowerCase())
@@ -169,12 +182,14 @@ function refreshDirectoryWindow()
 						}
 						file_size = getByteString(rows[x]['filesize']);
 					}
+					//Adds row to table.
 					$('#DirectoryTable > tbody:last-child').append('<tr id="'+rows[x]['id']+'" class="'+file_type+' RowItem"><td><a href="#" id="'+rows[x]['id']+'" class="'+file_type+'"><img width="18" src="Web/Images/'+file_type+'.png"/>'+rows[x]['name']+'</a></td><td>'+file_type+'</td><td>'+file_size+'</td><td>'+rows[x]['reg_date']+'</td><td><a href="#" id="'+rows[x]['id']+'" class="delete-file-row"><img src="Web/Images/Delete-Icon.png"  style="float: right;"/></a></td></tr>');
 				}
 			}
 			$("#DirectoryTable > tbody > tr").click(function(event) {
 				event.stopPropagation();
 				});
+			//Handles the selecting of rows.
 			$("#DirectoryTable > tbody > tr").bind('mousedown', function(e) {
 				e.stopPropagation();
 				switch (e.which) {
@@ -210,6 +225,7 @@ function refreshDirectoryWindow()
 					default:
 				}
 			});
+			//Enters folder or opens file on double click.
 			$("#DirectoryTable > tbody > tr").dblclick(function(e) {
 				e.stopPropagation();
 			  if (e.ctrlKey) {return;}
@@ -218,9 +234,11 @@ function refreshDirectoryWindow()
 				$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();
 			  }
 			});
+			//Enters folder or opens file on double tap.
 			$("#DirectoryTable > tbody > tr").doubletap(function() {
 			  $('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();
 			});
+			//Deletes row with confirmation prompt.
 			$('.delete-file-row').click(function (event) {
 				event.stopPropagation();
 				var id = $(this).attr('id');
@@ -271,6 +289,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Enters folder.
 			$('a[class=Folder]').click(function (event) {
 				event.stopPropagation();
 				$('#previousDirectoy').attr('value', $('#directory').attr('value'));
@@ -278,6 +297,7 @@ function refreshDirectoryWindow()
 				$('#newDirectory').data('actual', $(this).attr('id'));
 				refreshDirectoryWindow();
 			});
+			//Opens text file in editor.
 			$('a[class=Text]').click(function (event) {
 				event.stopPropagation();
 				
@@ -303,6 +323,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Opens Bash file in editor.
 			$('a[class=Bash]').click(function (event) {
 				event.stopPropagation();
 				
@@ -328,6 +349,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Opens HTML file in editor.
 			$('a[class=HTML]').click(function (event) {
 				event.stopPropagation();
 				var id = $(this).attr('id');
@@ -352,6 +374,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Opens javascript file in editor.
 			$('a[class=Javascript]').click(function (event) {
 				event.stopPropagation();
 				var id = $(this).attr('id');
@@ -376,6 +399,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Opens css file in editor.
 			$('a[class=CSS]').click(function (event) {
 				event.stopPropagation();
 				var id = $(this).attr('id');
@@ -400,6 +424,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Opens php file in editor.
 			$('a[class=PHP]').click(function (event) {
 				event.stopPropagation();
 				var id = $(this).attr('id');
@@ -424,6 +449,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Goes to previous directory. Note: This button was removed in interface for design reasons.
 			$('#previousDirectory').click(function (e) {
 				e.stopPropagation();
 				var temp = $('#directory').attr('value');
@@ -432,6 +458,7 @@ function refreshDirectoryWindow()
 				$(this).attr('value', temp);
 				refreshDirectoryWindow();
 			});
+			//Goes to parent directory.
 			$('#upDirectory').click(function (e) {
 				e.stopPropagation();
 				$.ajax(
@@ -452,6 +479,7 @@ function refreshDirectoryWindow()
 					}
 				});
 			});
+			//Overides the plugins sorter for the size colum to work with bytestring functions
 			$.tablesorter.addParser({ 
 				// set a unique id 
 				id: 'size', 

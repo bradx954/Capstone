@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	//Submits form on enter key.
 	$('#answer').keypress(function(e){
 		if(e.which == 13) {
 			$("#SubmitForm").click();
@@ -35,6 +36,7 @@ $(document).ready(function () {
         }
         return true;
     });
+    //Checks if email is valid.
     $('#email').on('keyup', function (e) {
         $('#emailValidation').removeClass().addClass('').html('');
         var emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
@@ -44,9 +46,10 @@ $(document).ready(function () {
         }
         return true;
     });
+    //Validates and cubmits form.
     $("#SubmitForm").click(function () {
         document.getElementById('FormMessage').innerHTML = '';
-
+	//Validation checks
         var valid = true;
 
         if ($('#email').keyup() == false) { valid = false; }
@@ -61,7 +64,7 @@ $(document).ready(function () {
         else { $("#passwordGroup").attr("class", "form-group"); }
         if (Form.elements['answer'].value == '') { valid = false; $("#questionGroup").attr("class", "form-group has-error"); }
         else { $("#questionGroup").attr("class", "form-group"); }
-
+	//Submit form if valid
         if (valid) {
             $("#SignUpForm").submit(function (e) {
                 var postData = $(this).serializeArray();
@@ -94,6 +97,7 @@ $(document).ready(function () {
             document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Some fields are blank.</div>';
         }
     });
+    //Close form.
     $("#modalClose").click(function () {
         document.getElementById('FormMessage').innerHTML = '';
         document.getElementById('SignUpForm').style.display = 'block';

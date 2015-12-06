@@ -1,8 +1,12 @@
 $(document).ready(function () {
+    //Submit new avatar to server.
     $("#avatar-form").submit(function (e) {
+	//Reset error messages
         $('#createAvatarFormMessage').html('');
+	//Retrieve form.
         var postData = $(this).serializeArray();
         var formURL = $(this).attr("action");
+	//Submit request.
         $.ajax(
         {
             url: formURL,
@@ -10,11 +14,18 @@ $(document).ready(function () {
             data: { image: $("#imagePreviewLarge").attr('src') },
             success: function (data, textStatus, jqXHR) {
                 if (data == 'Avatar Updated.') {
+		    //Show success mesage to user.
                     $('#createAvatarFormMessage').html('<div class="alert alert-success">' + data + '</div>');
+		    //Update avatar in module.
                     $("#profile-avatar").attr('src', $("#imagePreviewLarge").attr('src'));
+		    //Update navbar avatar.
                     $("#avatar-icon-nav").attr('src', $("#imagePreviewLarge").attr('src'));
                 }
-                else { $('#createAvatarFormMessage').html('<div class="alert alert-danger">' + data + '</div>'); }
+                else 
+		{ 
+		    //Show error message to user.
+		    $('#createAvatarFormMessage').html('<div class="alert alert-danger">' + data + '</div>'); 
+		}
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 $('#createAvatarFormMessage').html('<div class="alert alert-danger">' + errorThrown + '</div>');
@@ -23,6 +34,7 @@ $(document).ready(function () {
         e.preventDefault();	//STOP default action
         //$("#avatar-form").unbind('submit');
     });
+    //Request deletion of avatar from server.
     $("#btnDeleteAvatar").click(function () {
         $.ajax(
         {
@@ -31,7 +43,9 @@ $(document).ready(function () {
             data: {},
             success: function (data, textStatus, jqXHR) {
                 if (data == 'Avatar Deleted.') {
+		    //Show message to user.
                     $('#deleteAvatarFormMessage').html('<div class="alert alert-success">' + data + '</div>');
+		    //Update avatars.
                     $("#profile-avatar").attr('src', "Web/Images/default-avatar.jpg");
                     $("#avatar-icon-nav").attr('src', "Web/Images/default-avatar.jpg");
                 }
@@ -43,6 +57,7 @@ $(document).ready(function () {
         });
     });
 });
+//Submits the update avatar form.
 function saveImage() {
     $('#avatar-form').submit();
 }

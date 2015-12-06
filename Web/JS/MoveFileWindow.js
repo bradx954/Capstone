@@ -1,5 +1,7 @@
 $(document).ready(function () {
+	//Stops deselecting on file when clicking within the window.
 	$('#MoveFileWindow').click(function(e){e.stopPropagation();});
+	//Brings up directory browser to select destination.
 	$("#SelectMoveDirectory").click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -9,11 +11,13 @@ $(document).ready(function () {
 		$('#DirectoryBrowser').modal();
 		updateDirectoryBrowserTable(0);
 	});
+	//Submits the directory change to server.
 	$("#SubmitMoveFile").click(function(e) {
 		e.stopPropagation();
 		var operation = $('input:radio[name=operation]:checked').val();
 		var folders = $('#DirectoryTable > tbody > .RowSelect.Folder').map(function(){return this.id;}).get();
 		var files = $('#DirectoryTable > tbody > .RowSelect').not('.Folder').map(function(){return this.id;}).get();
+		//Moves all the folders		
 		if(folders.length != 0)
 		{
 			folders.forEach(function(entry) {
@@ -25,6 +29,7 @@ $(document).ready(function () {
 					success: function (data, textStatus, jqXHR) {
 						if(data == "Folder "+operation+" completed."){
 							showMessage(data);
+							//Refresh data to reflect changes.
 							refreshDirectoryWindow();
 							refreshSideBarFileTree();
 						}
@@ -36,6 +41,7 @@ $(document).ready(function () {
 				});
 			});
 		}
+		//Moves all the files.
 		if(files.length != 0)
 		{
 			files.forEach(function(entry) {
@@ -60,6 +66,7 @@ $(document).ready(function () {
 		}
 	});
 });
+//enables submit button.
 function checkNewFileValid()
 {
 	$("#SubmitNewFile").prop('disabled', false);

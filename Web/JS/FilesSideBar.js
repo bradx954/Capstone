@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+	//Switches user when dropbox is changed.
 	$("#UserIDDropDown").change(function (e){
 		$("#userid").attr('value', $(this).val());
 		$("#directory").attr('value', 0);
@@ -6,11 +7,13 @@
 		refreshSideBarFileTree();
 		refreshStorageUsed();
 	});
+	//Displays newfile dialogue
 	$('#New').click(function (e) {
 		e.stopPropagation();
 		$('#NewFileWindow').modal();
 		$('#FormMessage').html('');
 	});
+	//If one file is selected it triggers that rows delete button. When multi is selected it trigger confirmation dialgoue and sends delete request for each item.
 	$('#DeleteFile').click(function (e) {
 		e.stopPropagation();
 		var rows = $('.RowSelect');
@@ -20,6 +23,7 @@
 		{
 			bootbox.confirm("Are you sure you want to delete these "+rows.length+" items?", function(result) {
 				if(result == true){
+					//Send delete requests
 					$('.RowSelect').each(function (i, row) {
 						if($(row).hasClass('Folder') == true)
 						{
@@ -53,22 +57,26 @@
 								}
 							});
 						}
+						//reset button display.
 						displayNoneSelect();
 					});
 				}
 			});
 		}
 	});
+	//Opens slected file in editor if its a editable file. Or opens the directory if it is a folder. Does nothing if its neither.
 	$('#OpenFile').click(function (e) {
 		e.stopPropagation();
 		var rows = $('.RowSelect');
 		if(rows.length == 1){$('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).click();}
 		else{return;}
 	});
+	//Triggers hidden input form to retrieve file.
 	$('#UploadFile').click(function (e) {
 		e.stopPropagation();
 		$('#uploadFile').click();
 	});
+	//Uploads the file to server
 	$('#uploadFile').change(function (e) {
 		e.stopPropagation();
 		var name = $('#uploadFile').prop('files')[0]['name'];
@@ -95,11 +103,13 @@
 				}
 			});
 		}
+		//Shows upload progress
 		$('progress').attr({value: 0, max: 100});
 		$('#ProgressWindow').modal('show');
 		reader.readAsDataURL($('#uploadFile').prop('files')[0]);
 		$('#uploadFileForm')[0].reset();
 	});
+	//Downloads the selected file/folder
 	$('#DownloadFile').click(function (e) {
 		e.stopPropagation();
 		if($('.RowSelect').hasClass('Folder'))
@@ -133,11 +143,13 @@
 			});
 		}
 	});
+	//Displays the move file(s)/Folder(s) dialogue.
 	$('#MoveFile').click(function (e) {
 		e.stopPropagation();
 		$('#MoveFileWindow').modal();
 		$('#MoveFileFormMessage').html('');
 	});
+	//Displays the rename file dialogue and pushes changes to server.	
 	$('#RenameFile').click(function (e) {
 		e.stopPropagation();
 		var Name = $('a#'+$('.RowSelect').attr('id')+'.'+$('.RowSelect').attr('class').split(' ')[0]).html();
@@ -168,6 +180,7 @@
 		});
 		
 	});
+	//Saves the current file and returns user to browser.	
 	$('#SaveFile').click(function (e) {
 		e.stopPropagation();
 		$.ajax(
@@ -195,6 +208,7 @@
 			}
 		});
 	});
+	//Returns user to browser discarding changes
 	$('#CancelFile').click(function (e) {
 		e.stopPropagation();
 		bootbox.confirm("Are you sure you want to discard changes?", function(result) {
@@ -209,15 +223,18 @@
 				}
 			});
 	});
+	//Responsive button for hiding side bar
 	$("#menu-hide").click(function(e) {
         e.preventDefault();
 		e.stopPropagation();
         $("#wrapper").toggleClass("toggled");
 		$("#menu-show").css('display','table');
     });
+	//Generate intial values for files tree and storage idicator.	
 	refreshSideBarFileTree();
 	refreshStorageUsed();
 });
+//Displays buttons for the code editor.
 function displayEdit()
 {
 	$('#input-filter').css('display','none');
@@ -232,6 +249,7 @@ function displayEdit()
 	$('#sideBarOpenFile').css('display','none');
 	$('#sideBarDeleteFile').css('display','none');
 }
+//Displays default button layout.
 function displayNoneSelect()
 {
 	$('#input-filter').css('display','block');
@@ -246,6 +264,7 @@ function displayNoneSelect()
 	$('#sideBarOpenFile').css('display','none');
 	$('#sideBarDeleteFile').css('display','none');
 }
+//Displays button layout for single item select.
 function displaySingleSelect()
 {
 	$('#input-filter').css('display','block');
@@ -260,6 +279,7 @@ function displaySingleSelect()
 	$('#sideBarOpenFile').css('display','block');
 	$('#sideBarDeleteFile').css('display','block');
 }
+//Displays button layout for multi item select.
 function displayMultiSelect()
 {
 	$('#input-filter').css('display','block');
@@ -274,6 +294,7 @@ function displayMultiSelect()
 	$('#sideBarOpenFile').css('display','none');
 	$('#sideBarDeleteFile').css('display','block');
 }
+//Refreshes storage info from database.
 function refreshStorageUsed()
 {
 	$.ajax(
@@ -299,6 +320,7 @@ function refreshStorageUsed()
 		}
 	});
 }
+//Refreshes folder tree from database
 function refreshSideBarFileTree()
 {
 	$.ajax(
@@ -326,6 +348,7 @@ function refreshSideBarFileTree()
 		}
 	});
 }
+//Sets the click events for child folders after they are created.
 function setBranches()
 {
 	$('.FolderOpen').click(function () {
@@ -402,6 +425,7 @@ function post(path, params, method) {
     document.body.appendChild(form);
     form.submit();
 }
+//Closes upload progress window when upload is complete.
 function progressHandlingFunction(e){
     if(e.lengthComputable){
         $('progress').attr({value:e.loaded,max:e.total});
