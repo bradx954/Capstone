@@ -23,8 +23,8 @@ $(document).ready(function () {
                         showInLegend: true,
                         legendText: "{indexLabel}",
                         dataPoints: [
-                            {y: usedspace, indexLabel: "Used Space"},
-                            {y: freespace, indexLabel: "Free Space"}
+                            {y: $('#UserDetailsUsedSpace').html(getByteString($('#UserDetailsUsedSpace').html())), indexLabel: "Used Space"},
+                            {y: $('#UserDetailsFreeSpace').html(getByteString($('#UserDetailsFreeSpace').html())), indexLabel: "Free Space"}
                         ]
                     }
                 ]
