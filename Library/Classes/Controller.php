@@ -23,7 +23,7 @@ class Controller
         }
         else
         {
-            return true;
+            return $GLOBALS['config']['acl'][$controller][$_SESSION['auth']['accesslevel']];
         }
     }
 }
