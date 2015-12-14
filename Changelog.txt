@@ -1,0 +1,2 @@
+v1.01
+    Validation improvements for sign up and password recovery forms.

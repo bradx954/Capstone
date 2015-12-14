@@ -19,8 +19,8 @@ $(document).ready(function () {
         // Must have either capitals and lowercase letters or lowercase and numbers
         var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
 
-        // Must be at least 6 characters long
-        var okRegex = new RegExp("(?=.{6,}).*", "g");
+        // Must be at least 9 characters long
+        var okRegex = new RegExp("(?=.{9,}).*", "g");
 
         if (okRegex.test($(this).val()) === false) {
             // If ok regex doesn't match the password
