@@ -21,11 +21,11 @@ $(document).ready(function () {
         var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
 
         // Must be at least 6 characters long
-        var okRegex = new RegExp("(?=.{6,}).*", "g");
+        var okRegex = new RegExp("(?=.{9,}).*", "g");
 
         if (okRegex.test($(this).val()) === false) {
             // If ok regex doesn't match the password
-            $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Password must be 6 characters long.');
+            $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Password must be 9 characters long.');
             return false;
         } else if (strongRegex.test($(this).val())) {
             // If reg ex matches strong password
@@ -40,7 +40,7 @@ $(document).ready(function () {
         return true;
     });
     //Checks if email is valid.
-    $('#email').on('keyup', function (e) {
+    $('#email').keyup(function (e) {
         $('#emailValidation').removeClass().addClass('').html('');
         var emailRegex = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
         if (emailRegex.test($(this).val()) === false) {
@@ -54,17 +54,29 @@ $(document).ready(function () {
         document.getElementById('FormMessage').innerHTML = '';
         //Validation checks
         var valid = true;
-
-        if ($('#email').keyup() == false) {
+        
+        $('#email').keyup();
+        if ($('#emailValidation').hasClass("alert-danger")) {
             valid = false;
+            document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Email invalid.</div>';
+            $("#emailGroup").attr("class", "form-group has-error");
         }
-        if ($('#password1, #password2').keyup() == false) {
+        else {
+            $("#emailGroup").attr("class", "form-group");
+        }
+        $('#password1, #password2').keyup()
+        if (!$('#passwordStrength').hasClass('alert-success')) {
             valid = false;
+            document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Password not strong enough.</div>';
+        }
+        else {
+            $("#passwordGroup").attr("class", "form-group");
         }
 
         Form = document.forms['SignUpForm'];
         if (Form.elements['email'].value == '') {
             valid = false;
+            document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Some fields are blank.</div>';
             $("#emailGroup").attr("class", "form-group has-error");
         }
         else {
@@ -73,6 +85,7 @@ $(document).ready(function () {
         if (Form.elements['fName'].value == '' || Form.elements['lName'].value == '') {
             valid = false;
             $("#nameGroup").attr("class", "form-group has-error");
+            document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Some fields are blank.</div>';
         }
         else {
             $("#nameGroup").attr("class", "form-group");
@@ -80,6 +93,7 @@ $(document).ready(function () {
         if (Form.elements['password'].value == '' || Form.elements['password2'].value == '') {
             valid = false;
             $("#passwordGroup").attr("class", "form-group has-error");
+            document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Some fields are blank.</div>';
         }
         else {
             $("#passwordGroup").attr("class", "form-group");
@@ -87,6 +101,7 @@ $(document).ready(function () {
         if (Form.elements['answer'].value == '') {
             valid = false;
             $("#questionGroup").attr("class", "form-group has-error");
+            document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Some fields are blank.</div>';
         }
         else {
             $("#questionGroup").attr("class", "form-group");
@@ -123,7 +138,7 @@ $(document).ready(function () {
             $('#SignUpForm').submit();
         }
         else {
-            document.getElementById('FormMessage').innerHTML = '<div class="alert alert-danger">Some fields are blank.</div>';
+            
         }
     });
     //Close form.
