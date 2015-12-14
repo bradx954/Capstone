@@ -49,7 +49,7 @@ $(document).ready(function () {
         }
         return true;
     });
-    //Validates and cubmits form.
+    //Validates and submits form.
     $("#SubmitForm").click(function () {
         document.getElementById('FormMessage').innerHTML = '';
         //Validation checks
@@ -77,7 +77,7 @@ $(document).ready(function () {
         else {
             $("#nameGroup").attr("class", "form-group");
         }
-        if (Form.elements['password'].value == '') {
+        if (Form.elements['password'].value == '' || Form.elements['password2'].value) {
             valid = false;
             $("#passwordGroup").attr("class", "form-group has-error");
         }
