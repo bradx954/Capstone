@@ -33,7 +33,7 @@
           <div class="" id="passwordStrength"></div>
           <div class="form-inline">
             <input type="password" class="form-control" id="password1" name="password" placeholder="Password" style="width: 49%;">
-            <input type="password" class="form-control" id="password2" placeholder="Password Confirm" style="width: 49%;">
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="Password Confirm" style="width: 49%;">
           </div>
         </div>
         <div class="form-group" id="questionGroup">
