@@ -77,7 +77,7 @@ $(document).ready(function () {
         else {
             $("#nameGroup").attr("class", "form-group");
         }
-        if (Form.elements['password'].value == '' || Form.elements['password2'].value) {
+        if (Form.elements['password'].value == '' || Form.elements['password2'].value == '') {
             valid = false;
             $("#passwordGroup").attr("class", "form-group has-error");
         }
