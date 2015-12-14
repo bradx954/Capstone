@@ -31,7 +31,6 @@ CREATE TABLE CS_Files
 (
 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(100),
-	filelocation VARCHAR(30) NOT NULL,
 	filesize BIGINT NOT NULL,
 	userid INT(6) NOT NULL,
 	folderid INT(6),
