@@ -136,6 +136,7 @@ $(document).ready(function () {
         $('#LoginFormAnswer').submit();
     });
     $("#SubmitLoginFormPassword").click(function () {
+        $('#newpassword1, #newpassword2').keyup();
         $('#LoginFormPassword').submit();
     });
     //Returns to home page after new password set.
