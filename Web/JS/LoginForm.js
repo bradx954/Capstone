@@ -141,27 +141,40 @@ $(document).ready(function () {
     //Returns to home page after new password set.
     $("#LoginFormPassword").submit(function (e) {
         e.preventDefault();
-        var postData = $(this).serializeArray();
-        var formURL = $(this).attr("action");
-        $.ajax(
-                {
-                    url: formURL,
-                    type: "POST",
-                    data: postData,
-                    success: function (data, textStatus, jqXHR) {
-                        if (data == "Password Updated.") {
-                            document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-success">' + data + '</div>';
-                            $('#LoginFormPasswordEnter').css('display', 'none');
-                            $('#LoginFormHome').css('display', 'block');
+        var valid = true;
+        $('#newpassword1, #newpassword2').keyup();
+        if (!$('#newpasswordStrength').hasClass('alert-success')) {
+            valid = false;
+            document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">Password not strong enough.</div>';
+        }
+        else {
+            $("#passwordGroup").attr("class", "form-group");
+        }
+        if (valid)
+        {
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+            $.ajax(
+                    {
+                        url: formURL,
+                        type: "POST",
+                        data: postData,
+                        success: function (data, textStatus, jqXHR) {
+                            if (data == "Password Updated.") {
+                                document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-success">' + data + '</div>';
+                                $('#LoginFormPasswordEnter').css('display', 'none');
+                                $('#LoginFormHome').css('display', 'block');
+                            }
+                            else {
+                                document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>';
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
                         }
-                        else {
-                            document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + data + '</div>';
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        document.getElementById('LoginFormMessage').innerHTML = '<div class="alert alert-danger">' + errorThrown + '</div>';
-                    }
-                });
+                    });
+        }
+        
     });
     $('#newpassword1').keypress(function (e) {
         if (e.which == 13) {
