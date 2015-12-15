@@ -1,2 +1,4 @@
 v1.01
     Validation improvements for sign up and password recovery forms.
+v1.02
+    Fixed bug with pie chart.

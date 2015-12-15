@@ -1,4 +1,4 @@
-Storacloud software application v1.01
+Storacloud software application v1.02
 Author: Brad Baago email: brad.baago@linux.com
 
 This software was developed for Mohawk college's capstone project and is subject to their licensing.

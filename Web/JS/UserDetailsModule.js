@@ -3,10 +3,14 @@
  */
 //requires byte string functions.
 $(document).ready(function () {
+    var quota = $('#UserDetailsQuota').html();
+    var usedspace = $('#UserDetailsUsedSpace').html();
+    var freespace = $('#UserDetailsFreeSpace').html();
+
     //Converts data to human readable
-    $('#UserDetailsQuota').html(getByteString($('#UserDetailsQuota').html()));
-    $('#UserDetailsUsedSpace').html(getByteString($('#UserDetailsUsedSpace').html()));
-    $('#UserDetailsFreeSpace').html(getByteString($('#UserDetailsFreeSpace').html()));
+    $('#UserDetailsQuota').html(getByteString(quota));
+    $('#UserDetailsUsedSpace').html(getByteString(usedspace));
+    $('#UserDetailsFreeSpace').html(getByteString(freespace));
     //Adds chart with data.    
     var chart = new CanvasJS.Chart("UserDetailsChart",
             {
@@ -23,8 +27,8 @@ $(document).ready(function () {
                         showInLegend: true,
                         legendText: "{indexLabel}",
                         dataPoints: [
-                            {y: $('#UserDetailsUsedSpace').html(getByteString($('#UserDetailsUsedSpace').html())), indexLabel: "Used Space"},
-                            {y: $('#UserDetailsFreeSpace').html(getByteString($('#UserDetailsFreeSpace').html())), indexLabel: "Free Space"}
+                            {y: usedspace, indexLabel: "Used Space"},
+                            {y: freespace, indexLabel: "Free Space"}
                         ]
                     }
                 ]
